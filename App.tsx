@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StatusBar } from 'expo-status-bar';
@@ -7,14 +7,25 @@ import { Text } from 'react-native';
 import HomeScreen from './src/screens/HomeScreen';
 import AppsScreen from './src/screens/AppsScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
+import SplashScreen from './SplashScreen';
 import { initNotifications } from './src/services/notificationService';
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
-  useEffect(() => {
-    initNotifications();
-  }, []);
+  const [showSplash, setShowSplash] = useState(true);
+
+  if (showSplash) {
+    return (
+      <SafeAreaProvider>
+        <StatusBar style="light" />
+        <SplashScreen onFinish={() => {
+          initNotifications();
+          setShowSplash(false);
+        }} />
+      </SafeAreaProvider>
+    );
+  }
 
   return (
     <SafeAreaProvider>
@@ -38,7 +49,7 @@ export default function App() {
             component={HomeScreen}
             options={{
               tabBarLabel: 'Főoldal',
-              tabBarIcon: ({ color }) => <Text style={{ fontSize: 20 }}>🅿️</Text>,
+              tabBarIcon: () => <Text style={{ fontSize: 20 }}>🅿️</Text>,
             }}
           />
           <Tab.Screen
@@ -46,7 +57,7 @@ export default function App() {
             component={AppsScreen}
             options={{
               tabBarLabel: 'Alkalmazások',
-              tabBarIcon: ({ color }) => <Text style={{ fontSize: 20 }}>📱</Text>,
+              tabBarIcon: () => <Text style={{ fontSize: 20 }}>📱</Text>,
             }}
           />
           <Tab.Screen
@@ -54,7 +65,7 @@ export default function App() {
             component={SettingsScreen}
             options={{
               tabBarLabel: 'Beállítások',
-              tabBarIcon: ({ color }) => <Text style={{ fontSize: 20 }}>⚙️</Text>,
+              tabBarIcon: () => <Text style={{ fontSize: 20 }}>⚙️</Text>,
             }}
           />
         </Tab.Navigator>
