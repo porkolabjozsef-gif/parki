@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import {
   View, Text, StyleSheet, Linking, Platform, TouchableOpacity, ScrollView,
 } from 'react-native';
-import Slider from '@react-native-community/slider';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { loadState, saveState } from '../services/storageService';
 
@@ -29,61 +28,46 @@ export default function SettingsScreen() {
       <ScrollView contentContainerStyle={styles.scroll}>
         <Text style={styles.title}>Beállítások</Text>
 
-        {/* Delay setting */}
         <View style={styles.card}>
           <Text style={styles.sectionLabel}>KÉSLELTETÉS</Text>
           <Text style={styles.delayText}>
             Indulás után <Text style={styles.delayHighlight}>{delay} másodperccel</Text> értesít
           </Text>
-          <Slider
-            style={styles.slider}
-            minimumValue={10}
-            maximumValue={120}
-            step={5}
-            value={delay}
-            onSlidingComplete={saveDelay}
-            minimumTrackTintColor={GREEN}
-            maximumTrackTintColor="#222"
-            thumbTintColor={GREEN}
-          />
-          <View style={styles.sliderLabels}>
-            <Text style={styles.sliderLabel}>10s</Text>
-            <Text style={styles.sliderLabel}>120s</Text>
+          <View style={styles.delayButtons}>
+            {[10, 20, 30, 45, 60, 90, 120].map(val => (
+              <TouchableOpacity
+                key={val}
+                style={[styles.delayBtn, delay === val && styles.delayBtnActive]}
+                onPress={() => saveDelay(val)}
+              >
+                <Text style={[styles.delayBtnText, delay === val && styles.delayBtnTextActive]}>
+                  {val}s
+                </Text>
+              </TouchableOpacity>
+            ))}
           </View>
         </View>
 
-        {/* Permissions */}
         <View style={styles.card}>
           <Text style={styles.sectionLabel}>ENGEDÉLYEK</Text>
-          <TouchableOpacity
-            style={styles.permBtn}
-            onPress={() => Linking.openSettings()}
-          >
+          <TouchableOpacity style={styles.permBtn} onPress={() => Linking.openSettings()}>
             <View>
               <Text style={styles.permTitle}>Értesítési hozzáférés</Text>
-              <Text style={styles.permSub}>
-                Szükséges a parkoló appok értesítéseinek figyeléséhez
-              </Text>
+              <Text style={styles.permSub}>Szükséges a parkoló appok értesítéseinek figyeléséhez</Text>
             </View>
             <Text style={styles.permArrow}>›</Text>
           </TouchableOpacity>
           {Platform.OS === 'android' && (
-            <TouchableOpacity
-              style={[styles.permBtn, { marginTop: 8 }]}
-              onPress={() => Linking.openSettings()}
-            >
+            <TouchableOpacity style={[styles.permBtn, { marginTop: 8 }]} onPress={() => Linking.openSettings()}>
               <View>
                 <Text style={styles.permTitle}>Akkumulátor optimalizálás</Text>
-                <Text style={styles.permSub}>
-                  Tiltsa le a Parki-ra, hogy háttérben működjön
-                </Text>
+                <Text style={styles.permSub}>Tiltsa le a Parki-ra, hogy háttérben működjön</Text>
               </View>
               <Text style={styles.permArrow}>›</Text>
             </TouchableOpacity>
           )}
         </View>
 
-        {/* About */}
         <View style={styles.card}>
           <Text style={styles.sectionLabel}>NÉVJEGY</Text>
           <Text style={styles.aboutName}>
@@ -107,23 +91,16 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: BG },
   scroll: { padding: 24, gap: 16 },
   title: { fontSize: 22, fontWeight: '800', color: '#fff', marginBottom: 8 },
-  card: {
-    padding: 20, borderRadius: 16,
-    backgroundColor: CARD, borderWidth: 1, borderColor: BORDER,
-    gap: 12,
-  },
-  sectionLabel: {
-    fontSize: 11, fontWeight: '700', letterSpacing: 1.5, color: '#444',
-  },
+  card: { padding: 20, borderRadius: 16, backgroundColor: CARD, borderWidth: 1, borderColor: BORDER, gap: 12 },
+  sectionLabel: { fontSize: 11, fontWeight: '700', letterSpacing: 1.5, color: '#444' },
   delayText: { color: '#888', fontSize: 15 },
   delayHighlight: { color: GREEN, fontWeight: '700' },
-  slider: { width: '100%', marginVertical: -8 },
-  sliderLabels: { flexDirection: 'row', justifyContent: 'space-between' },
-  sliderLabel: { color: '#333', fontSize: 12 },
-  permBtn: {
-    flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',
-    padding: 14, borderRadius: 12, backgroundColor: '#111',
-  },
+  delayButtons: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
+  delayBtn: { paddingHorizontal: 14, paddingVertical: 8, borderRadius: 10, backgroundColor: '#1A1A1A', borderWidth: 1, borderColor: '#222' },
+  delayBtnActive: { backgroundColor: GREEN, borderColor: GREEN },
+  delayBtnText: { color: '#888', fontSize: 13, fontWeight: '600' },
+  delayBtnTextActive: { color: '#000' },
+  permBtn: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 14, borderRadius: 12, backgroundColor: '#111' },
   permTitle: { color: '#fff', fontWeight: '600', fontSize: 14 },
   permSub: { color: '#444', fontSize: 12, marginTop: 2, maxWidth: '90%' },
   permArrow: { color: '#444', fontSize: 20 },
