@@ -6,18 +6,13 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.porki.parki",
       "infoPlist": {
         "NSMotionUsageDescription": "A Parki az autós mozgás érzékelésére használja.",
-        "UIBackgroundModes": [
-          "fetch",
-          "remote-notification"
-        ]
+        "UIBackgroundModes": ["fetch", "remote-notification"]
       }
     },
     "android": {
@@ -41,10 +36,11 @@
       [
         "expo-notifications",
         {
+          "icon": "./assets/icon.png",
           "color": "#00E5A0",
           "sounds": []
         }
-      ],
+      ]
     ],
     "extra": {
       "eas": {
