@@ -1,16 +1,40 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useRef, useEffect } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Animated } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { sendParkingReminder } from '../services/notificationService';
 
+const GREEN = '#00E5A0';
+
 export default function HomeScreen() {
+  const pulseAnim = useRef(new Animated.Value(1)).current;
+
+  useEffect(() => {
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(pulseAnim, { toValue: 1.08, duration: 1000, useNativeDriver: true }),
+        Animated.timing(pulseAnim, { toValue: 0.92, duration: 1000, useNativeDriver: true }),
+      ])
+    ).start();
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.center}>
         <Text style={styles.logo}>Par<Text style={styles.accent}>ki</Text></Text>
         <Text style={styles.sub}>Parkolás emlékeztető</Text>
-        <TouchableOpacity style={styles.btn} onPress={() => sendParkingReminder('Parkl', 'hu.parkl.android')}>
-          <Text style={styles.btnText}>🔔 Teszt értesítés</Text>
+
+        <Animated.View style={[styles.indicator, { transform: [{ scale: pulseAnim }] }]}>
+          <Text style={styles.indicatorEmoji}>🔍</Text>
+          <Text style={styles.indicatorLabel}>FIGYELÉS AKTÍV</Text>
+        </Animated.View>
+
+        <Text style={styles.info}>Automatikusan figyeli a parkolási értesítéseket</Text>
+
+        <TouchableOpacity
+          style={styles.testBtn}
+          onPress={() => sendParkingReminder('Parkl', 'hu.parkl.android')}
+        >
+          <Text style={styles.testBtnText}>🔔 Teszt értesítés</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -19,10 +43,19 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#000' },
-  center: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 20 },
-  logo: { fontSize: 48, fontWeight: '800', color: '#fff' },
-  accent: { color: '#00E5A0' },
-  sub: { fontSize: 14, color: '#444' },
-  btn: { padding: 16, borderRadius: 12, backgroundColor: '#1A1A1A', borderWidth: 1, borderColor: '#333' },
-  btnText: { color: '#fff', fontSize: 15 },
+  center: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 24 },
+  logo: { fontSize: 42, fontWeight: '800', color: '#fff', letterSpacing: -1 },
+  accent: { color: GREEN },
+  sub: { fontSize: 14, color: '#444', marginTop: -16 },
+  indicator: {
+    width: 160, height: 160, borderRadius: 80,
+    borderWidth: 2, borderColor: GREEN,
+    backgroundColor: 'rgba(0,229,160,0.08)',
+    alignItems: 'center', justifyContent: 'center', gap: 8,
+  },
+  indicatorEmoji: { fontSize: 44 },
+  indicatorLabel: { fontSize: 10, fontWeight: '700', letterSpacing: 1.5, color: GREEN },
+  info: { fontSize: 13, color: '#444', textAlign: 'center', paddingHorizontal: 40 },
+  testBtn: { padding: 12, borderRadius: 10, borderWidth: 1, borderColor: '#1A1A1A' },
+  testBtnText: { color: '#333', fontSize: 13 },
 });

@@ -11,6 +11,25 @@ const BG = '#000000';
 const CARD = '#0D0D0D';
 const BORDER = '#1A1A1A';
 
+const APP_COLORS: Record<string, string> = {
+  'hu.parkl.android': '#1A6BFF',
+  'com.easypark.android': '#FF6B00',
+  'com.parkmobile.android': '#6B00FF',
+  'com.flowbird.android': '#00BFFF',
+  'hu.mol.move': '#FF0000',
+  'com.mypermit.android': '#00AA44',
+  'com.vodafone.easyrider': '#00B8D4',
+  'com.otpmobil.simple.phoenix': '#3DAA2E',
+};
+
+function getAppColor(pkg: string) {
+  return APP_COLORS[pkg] || '#555';
+}
+
+function getAppInitials(name: string) {
+  return name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+}
+
 export default function AppsScreen() {
   const [apps, setApps] = useState<WatchedApp[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
@@ -35,32 +54,49 @@ export default function AppsScreen() {
   };
 
   const deleteApp = (pkg: string) => {
-    Alert.alert('Törlés', 'Biztosan törli ezt az alkalmazást?', [
+    Alert.alert('Törlés', 'Biztosan törli?', [
       { text: 'Mégse', style: 'cancel' },
-      {
-        text: 'Törlés', style: 'destructive',
-        onPress: async () => {
-          await persist(apps.filter(a => a.packageName !== pkg));
-        },
-      },
+      { text: 'Törlés', style: 'destructive', onPress: async () => {
+        await persist(apps.filter(a => a.packageName !== pkg));
+      }},
     ]);
   };
 
   const addApp = async () => {
     if (!newName.trim() || !newPackage.trim()) return;
     if (apps.some(a => a.packageName === newPackage.trim())) {
-      Alert.alert('Már létezik', 'Ez az alkalmazás már a listában van.');
+      Alert.alert('Már létezik');
       return;
     }
-    const updated = [...apps, {
-      packageName: newPackage.trim(),
-      displayName: newName.trim(),
-      enabled: true,
-    }];
-    await persist(updated);
+    await persist([...apps, { packageName: newPackage.trim(), displayName: newName.trim(), enabled: true }]);
     setNewName('');
     setNewPackage('');
     setModalVisible(false);
+  };
+
+  const renderItem = ({ item }: { item: WatchedApp }) => {
+    const color = getAppColor(item.packageName);
+    return (
+      <TouchableOpacity
+        style={[styles.gridItem, !item.enabled && styles.gridItemDisabled]}
+        onPress={() => toggleApp(item.packageName)}
+        onLongPress={() => deleteApp(item.packageName)}
+        activeOpacity={0.7}
+      >
+        {/* Ikon kör */}
+        <View style={[styles.iconCircle, { backgroundColor: item.enabled ? color + '22' : '#111', borderColor: item.enabled ? color : '#222' }]}>
+          <Text style={[styles.iconText, { color: item.enabled ? color : '#444' }]}>
+            {getAppInitials(item.displayName)}
+          </Text>
+        </View>
+        {/* Név */}
+        <Text style={[styles.appName, !item.enabled && styles.appNameOff]} numberOfLines={2}>
+          {item.displayName}
+        </Text>
+        {/* Aktív jelző */}
+        {item.enabled && <View style={[styles.activeDot, { backgroundColor: color }]} />}
+      </TouchableOpacity>
+    );
   };
 
   return (
@@ -72,51 +108,23 @@ export default function AppsScreen() {
         </TouchableOpacity>
       </View>
 
-      <View style={styles.infoCard}>
-        <Text style={styles.infoText}>
-          Kapcsolja be azokat az alkalmazásokat, amelyekkel parkolni szokott.
-        </Text>
-      </View>
+      <Text style={styles.hint}>Koppints a ki/bekapcsoláshoz · Hosszan tartva törölhető</Text>
 
       <FlatList
         data={apps}
         keyExtractor={a => a.packageName}
-        contentContainerStyle={styles.list}
-        renderItem={({ item }) => (
-          <View style={[styles.appCard, item.enabled && styles.appCardActive]}>
-            <View style={[styles.appIcon, item.enabled && styles.appIconActive]}>
-              <Text style={{ fontSize: 20 }}>🅿️</Text>
-            </View>
-            <View style={styles.appInfo}>
-              <Text style={[styles.appName, !item.enabled && styles.appNameOff]}>
-                {item.displayName}
-              </Text>
-              <Text style={styles.appPkg} numberOfLines={1}>{item.packageName}</Text>
-            </View>
-            <Switch
-              value={item.enabled}
-              onValueChange={() => toggleApp(item.packageName)}
-              trackColor={{ false: '#222', true: 'rgba(0,229,160,0.3)' }}
-              thumbColor={item.enabled ? GREEN : '#444'}
-            />
-            <TouchableOpacity
-              style={styles.deleteBtn}
-              onPress={() => deleteApp(item.packageName)}
-            >
-              <Text style={styles.deleteBtnText}>🗑</Text>
-            </TouchableOpacity>
-          </View>
-        )}
+        numColumns={3}
+        contentContainerStyle={styles.grid}
+        renderItem={renderItem}
       />
 
-      {/* Add app modal */}
       <Modal visible={modalVisible} transparent animationType="slide">
         <View style={styles.modalOverlay}>
           <View style={styles.modalCard}>
             <Text style={styles.modalTitle}>Alkalmazás hozzáadása</Text>
             <TextInput
               style={styles.input}
-              placeholder="Alkalmazás neve (pl. Parkl)"
+              placeholder="Név (pl. Parkl)"
               placeholderTextColor="#444"
               value={newName}
               onChangeText={setNewName}
@@ -130,10 +138,7 @@ export default function AppsScreen() {
               autoCapitalize="none"
             />
             <View style={styles.modalBtns}>
-              <TouchableOpacity
-                style={styles.modalCancelBtn}
-                onPress={() => setModalVisible(false)}
-              >
+              <TouchableOpacity style={styles.modalCancelBtn} onPress={() => setModalVisible(false)}>
                 <Text style={styles.modalCancelText}>Mégse</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.modalAddBtn} onPress={addApp}>
@@ -149,64 +154,35 @@ export default function AppsScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: BG },
-  header: {
-    flexDirection: 'row', justifyContent: 'space-between',
-    alignItems: 'center', padding: 24, paddingBottom: 12,
-  },
+  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 20, paddingBottom: 8 },
   title: { fontSize: 22, fontWeight: '800', color: '#fff' },
-  addBtn: {
-    paddingHorizontal: 16, paddingVertical: 8,
-    borderRadius: 10, backgroundColor: 'rgba(0,229,160,0.1)',
-    borderWidth: 1, borderColor: 'rgba(0,229,160,0.2)',
-  },
+  addBtn: { paddingHorizontal: 14, paddingVertical: 8, borderRadius: 10, backgroundColor: 'rgba(0,229,160,0.1)', borderWidth: 1, borderColor: 'rgba(0,229,160,0.2)' },
   addBtnText: { color: GREEN, fontWeight: '700', fontSize: 14 },
-  infoCard: {
-    marginHorizontal: 16, marginBottom: 8,
-    padding: 14, borderRadius: 12,
-    backgroundColor: CARD, borderWidth: 1, borderColor: BORDER,
+  hint: { fontSize: 12, color: '#333', paddingHorizontal: 20, paddingBottom: 12 },
+  grid: { padding: 12 },
+  gridItem: {
+    flex: 1, margin: 6, aspectRatio: 0.85,
+    backgroundColor: CARD, borderRadius: 16,
+    borderWidth: 1, borderColor: BORDER,
+    alignItems: 'center', justifyContent: 'center',
+    padding: 12, gap: 8,
   },
-  infoText: { color: '#555', fontSize: 13 },
-  list: { padding: 16, gap: 8 },
-  appCard: {
-    flexDirection: 'row', alignItems: 'center',
-    padding: 14, borderRadius: 14,
-    backgroundColor: CARD, borderWidth: 1, borderColor: BORDER,
-    gap: 12,
+  gridItemDisabled: { opacity: 0.4 },
+  iconCircle: {
+    width: 56, height: 56, borderRadius: 28,
+    borderWidth: 2, alignItems: 'center', justifyContent: 'center',
   },
-  appCardActive: { borderColor: 'rgba(0,229,160,0.15)' },
-  appIcon: {
-    width: 44, height: 44, borderRadius: 12,
-    backgroundColor: '#111', alignItems: 'center', justifyContent: 'center',
-  },
-  appIconActive: { backgroundColor: 'rgba(0,229,160,0.08)' },
-  appInfo: { flex: 1 },
-  appName: { color: '#fff', fontWeight: '600', fontSize: 15 },
+  iconText: { fontSize: 18, fontWeight: '800' },
+  appName: { fontSize: 12, fontWeight: '600', color: '#fff', textAlign: 'center' },
   appNameOff: { color: '#444' },
-  appPkg: { color: '#333', fontSize: 11, marginTop: 2 },
-  deleteBtn: { padding: 4 },
-  deleteBtnText: { fontSize: 16 },
-  modalOverlay: {
-    flex: 1, backgroundColor: 'rgba(0,0,0,0.8)',
-    justifyContent: 'flex-end',
-  },
-  modalCard: {
-    backgroundColor: '#111', borderTopLeftRadius: 24, borderTopRightRadius: 24,
-    padding: 24, gap: 16,
-  },
+  activeDot: { width: 6, height: 6, borderRadius: 3, position: 'absolute', top: 10, right: 10 },
+  modalOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.8)', justifyContent: 'flex-end' },
+  modalCard: { backgroundColor: '#111', borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: 24, gap: 16 },
   modalTitle: { color: '#fff', fontSize: 18, fontWeight: '700' },
-  input: {
-    backgroundColor: '#1A1A1A', borderRadius: 12, padding: 14,
-    color: '#fff', fontSize: 14, borderWidth: 1, borderColor: '#222',
-  },
+  input: { backgroundColor: '#1A1A1A', borderRadius: 12, padding: 14, color: '#fff', fontSize: 14, borderWidth: 1, borderColor: '#222' },
   modalBtns: { flexDirection: 'row', gap: 12 },
-  modalCancelBtn: {
-    flex: 1, padding: 14, borderRadius: 12,
-    backgroundColor: '#1A1A1A', alignItems: 'center',
-  },
+  modalCancelBtn: { flex: 1, padding: 14, borderRadius: 12, backgroundColor: '#1A1A1A', alignItems: 'center' },
   modalCancelText: { color: '#888', fontWeight: '600' },
-  modalAddBtn: {
-    flex: 1, padding: 14, borderRadius: 12,
-    backgroundColor: GREEN, alignItems: 'center',
-  },
+  modalAddBtn: { flex: 1, padding: 14, borderRadius: 12, backgroundColor: GREEN, alignItems: 'center' },
   modalAddText: { color: '#000', fontWeight: '700' },
 });
