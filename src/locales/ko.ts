@@ -19,9 +19,9 @@ export default {
   aboutDesc: '범용 주차 알림. 활성 주차 알림을 모니터링하고 중지를 잊은 경우 경고합니다.',
   privacy: '🔒 데이터 수집 없음 · 등록 불필요 · 완전 오프라인',
   language: '언어',
-  notifTitle: '🅿️ 주차 중!',
+  notifTitle: '주차 중!',
   notifBody: '{app} – 중지하는 것을 잊지 마세요!',
-  stop: '🅿️ 정지',
+  stop: '정지',
   ok: '✓ 확인',
   appNameLabel: '이름 (예: Parkl)',
   packageNameLabel: '패키지 이름 (예: hu.parkl.android)',
@@ -46,4 +46,6 @@ export default {
   syncError: '목록을 다운로드할 수 없습니다',
   fillAllFields: '모든 필드를 채워주세요!',
   submitFooterSub: '주차 앱이 없나요? 커뮤니티에 제출하세요!',
+  notifStop: '중지',
+  notifOk: '확인',
 };

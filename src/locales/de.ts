@@ -19,9 +19,9 @@ export default {
   aboutDesc: 'Universelle Parkerinnerung. Überwacht aktive Parkbenachrichtigungen und warnt, wenn vergessen wurde zu stoppen.',
   privacy: '🔒 Keine Datenerfassung · Keine Registrierung · Vollständig offline',
   language: 'SPRACHE',
-  notifTitle: '🅿️ Parken läuft!',
+  notifTitle: 'Parken läuft!',
   notifBody: '{app} – Vergessen Sie nicht zu stoppen!',
-  stop: '🅿️ Stop',
+  stop: 'Stop',
   ok: '✓ OK',
   appNameLabel: 'Name (z.B. Parkl)',
   packageNameLabel: 'Paketname (z.B. hu.parkl.android)',
@@ -46,4 +46,6 @@ export default {
   syncError: 'Liste konnte nicht heruntergeladen werden',
   fillAllFields: 'Bitte alle Felder ausfüllen!',
   submitFooterSub: 'Fehlt eine Park-App? Reiche sie der Community ein!',
+  notifStop: 'Stopp',
+  notifOk: 'OK',
 };

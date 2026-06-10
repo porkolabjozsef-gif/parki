@@ -19,9 +19,9 @@ export default {
   aboutDesc: 'تذكير وقوف عالمي. يراقب إشعارات الوقوف النشطة وينبهك إذا نسيت الإيقاف.',
   privacy: '🔒 لا جمع بيانات · لا تسجيل · دون اتصال تماماً',
   language: 'اللغة',
-  notifTitle: '🅿️ الوقوف جارٍ!',
+  notifTitle: 'الوقوف جارٍ!',
   notifBody: '{app} – لا تنسَ الإيقاف!',
-  stop: '🅿️ إيقاف',
+  stop: 'إيقاف',
   ok: '✓ موافق',
   appNameLabel: 'الاسم (مثل Parkl)',
   packageNameLabel: 'اسم الحزمة (مثل hu.parkl.android)',
@@ -46,4 +46,6 @@ export default {
   syncError: 'تعذر تنزيل القائمة',
   fillAllFields: 'يرجى ملء جميع الحقول!',
   submitFooterSub: 'هل تفتقد تطبيق وقوف؟ أرسله إلى المجتمع!',
+  notifStop: 'إيقاف',
+  notifOk: 'حسناً',
 };

@@ -19,9 +19,9 @@ export default {
   aboutDesc: 'Universel parkeringspåmindelse. Overvåger aktive notifikationer og advarer hvis du glemmer at stoppe.',
   privacy: '🔒 Ingen dataindsamling · Ingen registrering · Fuldstændig offline',
   language: 'SPROG',
-  notifTitle: '🅿️ Parkering i gang!',
+  notifTitle: 'Parkering i gang!',
   notifBody: '{app} – Glem ikke at stoppe!',
-  stop: '🅿️ Stop',
+  stop: 'Stop',
   ok: '✓ OK',
   appNameLabel: 'Navn (f.eks. Parkl)',
   packageNameLabel: 'Pakkenavn (f.eks. hu.parkl.android)',
@@ -46,4 +46,6 @@ export default {
   syncError: 'Kunne ikke downloade listen',
   fillAllFields: 'Udfyld venligst alle felter!',
   submitFooterSub: 'Mangler der en parkeringsapp? Indsend den til fællesskabet!',
+  notifStop: 'Stop',
+  notifOk: 'OK',
 };

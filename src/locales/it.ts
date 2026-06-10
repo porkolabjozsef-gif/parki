@@ -19,9 +19,9 @@ export default {
   aboutDesc: 'Promemoria universale per il parcheggio. Monitora le notifiche attive e avvisa se hai dimenticato di fermare.',
   privacy: '🔒 Nessuna raccolta dati · Nessuna registrazione · Completamente offline',
   language: 'LINGUA',
-  notifTitle: '🅿️ Parcheggio in corso!',
+  notifTitle: 'Parcheggio in corso!',
   notifBody: '{app} – Non dimenticare di fermare!',
-  stop: '🅿️ Stop',
+  stop: 'Stop',
   ok: '✓ OK',
   appNameLabel: 'Nome (es. Parkl)',
   packageNameLabel: 'Nome pacchetto (es. hu.parkl.android)',
@@ -46,4 +46,6 @@ export default {
   syncError: 'Impossibile scaricare la lista',
   fillAllFields: 'Per favore compila tutti i campi!',
   submitFooterSub: 'Manca un\'app di parcheggio? Inviala alla comunità!',
+  notifStop: 'Ferma',
+  notifOk: 'OK',
 };

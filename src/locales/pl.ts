@@ -19,9 +19,9 @@ export default {
   aboutDesc: 'Uniwersalne przypomnienie o parkowaniu. Monitoruje aktywne powiadomienia i ostrzega jeśli zapomnisz zatrzymać.',
   privacy: '🔒 Brak zbierania danych · Brak rejestracji · Całkowicie offline',
   language: 'JĘZYK',
-  notifTitle: '🅿️ Parkowanie w toku!',
+  notifTitle: 'Parkowanie w toku!',
   notifBody: '{app} – Nie zapomnij zatrzymać!',
-  stop: '🅿️ Stop',
+  stop: 'Stop',
   ok: '✓ OK',
   appNameLabel: 'Nazwa (np. Parkl)',
   packageNameLabel: 'Nazwa pakietu (np. hu.parkl.android)',
@@ -46,4 +46,6 @@ export default {
   syncError: 'Nie udało się pobrać listy',
   fillAllFields: 'Proszę wypełnić wszystkie pola!',
   submitFooterSub: 'Brakuje aplikacji parkingowej? Zgłoś ją społeczności!',
+  notifStop: 'Zatrzymaj',
+  notifOk: 'OK',
 };

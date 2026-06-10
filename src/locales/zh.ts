@@ -19,9 +19,9 @@ export default {
   aboutDesc: '通用停车提醒。监控活跃的停车通知，如果忘记停止则提醒您。',
   privacy: '🔒 不收集数据 · 无需注册 · 完全离线',
   language: '语言',
-  notifTitle: '🅿️ 停车进行中！',
+  notifTitle: '停车进行中！',
   notifBody: '{app} – 别忘了停止！',
-  stop: '🅿️ 停止',
+  stop: '停止',
   ok: '✓ 好的',
   appNameLabel: '名称（例如 Parkl）',
   packageNameLabel: '包名（例如 hu.parkl.android）',
@@ -46,4 +46,6 @@ export default {
   syncError: '无法下载列表',
   fillAllFields: '请填写所有字段！',
   submitFooterSub: '缺少停车应用？提交给社区！',
+  notifStop: '停止',
+  notifOk: '好',
 };

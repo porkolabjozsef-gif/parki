@@ -19,9 +19,9 @@ export default {
   aboutDesc: 'Memento universal de parcare. Monitorizează notificările active și avertizează dacă uitați să opriți.',
   privacy: '🔒 Fără colectare de date · Fără înregistrare · Complet offline',
   language: 'LIMBĂ',
-  notifTitle: '🅿️ Parcare în curs!',
+  notifTitle: 'Parcare în curs!',
   notifBody: '{app} – Nu uitați să opriți!',
-  stop: '🅿️ Stop',
+  stop: 'Stop',
   ok: '✓ OK',
   appNameLabel: 'Nume (ex. Parkl)',
   packageNameLabel: 'Nume pachet (ex. hu.parkl.android)',
@@ -46,4 +46,6 @@ export default {
   syncError: 'Nu s-a putut descărca lista',
   fillAllFields: 'Vă rugăm completați toate câmpurile!',
   submitFooterSub: 'Lipsește o aplicație de parcare? Trimite-o comunității!',
+  notifStop: 'Oprește',
+  notifOk: 'OK',
 };

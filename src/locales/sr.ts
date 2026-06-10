@@ -19,9 +19,9 @@ export default {
   aboutDesc: 'Univerzalni podsetnik za parkiranje. Prati aktivna obaveštenja i upozorava ako zaboravite da zaustavite.',
   privacy: '🔒 Bez prikupljanja podataka · Bez registracije · Potpuno offline',
   language: 'JEZIK',
-  notifTitle: '🅿️ Parkiranje u toku!',
+  notifTitle: 'Parkiranje u toku!',
   notifBody: '{app} – Ne zaboravite da zaustavite!',
-  stop: '🅿️ Stop',
+  stop: 'Stop',
   ok: '✓ OK',
   appNameLabel: 'Naziv (npr. Parkl)',
   packageNameLabel: 'Naziv paketa (npr. hu.parkl.android)',
@@ -46,4 +46,6 @@ export default {
   syncError: 'Nije moguće preuzeti listu',
   fillAllFields: 'Molimo popunite sva polja!',
   submitFooterSub: 'Nedostaje aplikacija za parkiranje? Pošalji je zajednici!',
+  notifStop: 'Zaustavi',
+  notifOk: 'U redu',
 };

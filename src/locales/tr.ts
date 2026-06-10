@@ -19,9 +19,9 @@ export default {
   aboutDesc: 'Evrensel park hatırlatıcı. Aktif park bildirimlerini izler ve durdurmayı unutursanız uyarır.',
   privacy: '🔒 Veri toplamaz · Kayıt gerektirmez · Tamamen çevrimdışı',
   language: 'DİL',
-  notifTitle: '🅿️ Park devam ediyor!',
+  notifTitle: 'Park devam ediyor!',
   notifBody: '{app} – Durdurmayı unutma!',
-  stop: '🅿️ Durdur',
+  stop: 'Durdur',
   ok: '✓ Tamam',
   appNameLabel: 'İsim (örn. Parkl)',
   packageNameLabel: 'Paket adı (örn. hu.parkl.android)',
@@ -46,4 +46,6 @@ export default {
   syncError: 'Liste indirilemedi',
   fillAllFields: 'Lütfen tüm alanları doldurun!',
   submitFooterSub: 'Eksik bir park uygulaması mı var? Topluluğa gönder!',
+  notifStop: 'Durdur',
+  notifOk: 'Tamam',
 };

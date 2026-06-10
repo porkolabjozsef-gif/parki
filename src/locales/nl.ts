@@ -19,9 +19,9 @@ export default {
   aboutDesc: 'Universele parkeerherinnering. Bewaakt actieve parkeermeldingen en waarschuwt als u vergeet te stoppen.',
   privacy: '🔒 Geen gegevensverzameling · Geen registratie · Volledig offline',
   language: 'TAAL',
-  notifTitle: '🅿️ Parkeren bezig!',
+  notifTitle: 'Parkeren bezig!',
   notifBody: '{app} – Vergeet niet te stoppen!',
-  stop: '🅿️ Stop',
+  stop: 'Stop',
   ok: '✓ OK',
   appNameLabel: 'Naam (bijv. Parkl)',
   packageNameLabel: 'Pakketnaam (bijv. hu.parkl.android)',
@@ -46,4 +46,6 @@ export default {
   syncError: 'Kan de lijst niet downloaden',
   fillAllFields: 'Vul alle velden in!',
   submitFooterSub: 'Mist er een parkeerapp? Dien hem in bij de community!',
+  notifStop: 'Stop',
+  notifOk: 'OK',
 };

@@ -19,9 +19,9 @@ export default {
   aboutDesc: 'Univerzális parkolás emlékeztető. Figyeli az aktív parkolási értesítéseket és szól, ha elfelejtette leállítani.',
   privacy: '🔒 Nem gyűjt adatot · Nincs regisztráció · Teljesen offline',
   language: 'NYELV',
-  notifTitle: '🅿️ Folyamatban lévő parkolás!',
+  notifTitle: 'Folyamatban lévő parkolás!',
   notifBody: '{app} – Ne felejtse el leállítani!',
-  stop: '🅿️ Stop',
+  stop: 'Stop',
   ok: '✓ Rendben',
   appNameLabel: 'Név (pl. Parkl)',
   packageNameLabel: 'Csomagnév (pl. hu.parkl.android)',
@@ -46,4 +46,6 @@ export default {
   syncSuccess: 'alkalmazás betöltve',
   syncError: 'Nem sikerült letölteni a listát',
   fillAllFields: 'Töltsd ki az összes mezőt!',
+  notifStop: 'Leállítás',
+  notifOk: 'Rendben',
 };

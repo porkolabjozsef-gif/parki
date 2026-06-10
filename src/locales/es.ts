@@ -19,9 +19,9 @@ export default {
   aboutDesc: 'Recordatorio universal de aparcamiento. Monitorea notificaciones activas y avisa si olvidaste detener.',
   privacy: '🔒 Sin recopilación de datos · Sin registro · Completamente offline',
   language: 'IDIOMA',
-  notifTitle: '🅿️ ¡Aparcamiento en curso!',
+  notifTitle: '¡Aparcamiento en curso!',
   notifBody: '{app} – ¡No olvides detener!',
-  stop: '🅿️ Stop',
+  stop: 'Stop',
   ok: '✓ OK',
   appNameLabel: 'Nombre (p.ej. Parkl)',
   packageNameLabel: 'Nombre del paquete (p.ej. hu.parkl.android)',
@@ -46,4 +46,6 @@ export default {
   syncError: 'No se pudo descargar la lista',
   fillAllFields: '¡Por favor rellena todos los campos!',
   submitFooterSub: '¿Falta una app de aparcamiento? ¡Envíala a la comunidad!',
+  notifStop: 'Detener',
+  notifOk: 'OK',
 };

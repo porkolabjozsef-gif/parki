@@ -19,9 +19,9 @@ export default {
   aboutDesc: 'Rappel universel de stationnement. Surveille les notifications actives et vous avertit si vous oubliez d\'arrêter.',
   privacy: '🔒 Pas de collecte de données · Pas d\'inscription · Entièrement hors ligne',
   language: 'LANGUE',
-  notifTitle: '🅿️ Stationnement en cours!',
+  notifTitle: 'Stationnement en cours!',
   notifBody: '{app} – N\'oubliez pas d\'arrêter!',
-  stop: '🅿️ Arrêter',
+  stop: 'Arrêter',
   ok: '✓ OK',
   appNameLabel: 'Nom (ex. Parkl)',
   packageNameLabel: 'Nom du package (ex. hu.parkl.android)',
@@ -46,4 +46,6 @@ export default {
   syncError: 'Impossible de télécharger la liste',
   fillAllFields: 'Veuillez remplir tous les champs!',
   submitFooterSub: 'Une app de stationnement manque? Soumettez-la à la communauté!',
+  notifStop: 'Arrêter',
+  notifOk: 'OK',
 };

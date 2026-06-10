@@ -19,9 +19,9 @@ export default {
   aboutDesc: 'Univerzálna pripomienka parkovania. Monitoruje aktívne upozornenia a varuje ak zabudnete zastaviť.',
   privacy: '🔒 Bez zberu dát · Bez registrácie · Úplne offline',
   language: 'JAZYK',
-  notifTitle: '🅿️ Parkovanie prebieha!',
+  notifTitle: 'Parkovanie prebieha!',
   notifBody: '{app} – Nezabudnite zastaviť!',
-  stop: '🅿️ Stop',
+  stop: 'Stop',
   ok: '✓ OK',
   appNameLabel: 'Názov (napr. Parkl)',
   packageNameLabel: 'Názov balíka (napr. hu.parkl.android)',
@@ -46,4 +46,6 @@ export default {
   syncError: 'Nepodarilo sa stiahnuť zoznam',
   fillAllFields: 'Prosím vyplňte všetky polia!',
   submitFooterSub: 'Chýba parkovacia aplikácia? Pošli ju komunite!',
+  notifStop: 'Zastaviť',
+  notifOk: 'OK',
 };

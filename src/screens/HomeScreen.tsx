@@ -1,7 +1,6 @@
 import React, { useRef, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Animated } from 'react-native';
+import { View, Text, StyleSheet, Animated } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { sendParkingReminder } from '../services/notificationService';
 import { useLanguage } from '../services/languageContext';
 
 const GREEN = '#00E5A0';
@@ -31,13 +30,6 @@ export default function HomeScreen() {
         </Animated.View>
 
         <Text style={styles.info}>{t('monitoringInfo')}</Text>
-
-        <TouchableOpacity
-          style={styles.testBtn}
-          onPress={() => sendParkingReminder('Parkl', 'net.parkl.androidclient')}
-        >
-          <Text style={styles.testBtnText}>{t('testNotification')}</Text>
-        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -58,6 +50,4 @@ const styles = StyleSheet.create({
   indicatorEmoji: { fontSize: 44 },
   indicatorLabel: { fontSize: 10, fontWeight: '700', letterSpacing: 1.5, color: GREEN },
   info: { fontSize: 13, color: '#444', textAlign: 'center', paddingHorizontal: 40 },
-  testBtn: { padding: 12, borderRadius: 10, borderWidth: 1, borderColor: '#1A1A1A' },
-  testBtnText: { color: '#333', fontSize: 13 },
 });

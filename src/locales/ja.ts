@@ -19,9 +19,9 @@ export default {
   aboutDesc: 'ユニバーサル駐車リマインダー。アクティブな駐車通知を監視し、停止を忘れた場合に警告します。',
   privacy: '🔒 データ収集なし · 登録不要 · 完全オフライン',
   language: '言語',
-  notifTitle: '🅿️ 駐車中！',
+  notifTitle: '駐車中！',
   notifBody: '{app} – 停止を忘れずに！',
-  stop: '🅿️ 停止',
+  stop: '停止',
   ok: '✓ OK',
   appNameLabel: '名前（例：Parkl）',
   packageNameLabel: 'パッケージ名（例：hu.parkl.android）',
@@ -46,4 +46,6 @@ export default {
   syncError: 'リストをダウンロードできませんでした',
   fillAllFields: 'すべてのフィールドを入力してください！',
   submitFooterSub: '駐車アプリが見つかりませんか？コミュニティに送信しましょう！',
+  notifStop: '停止',
+  notifOk: 'OK',
 };

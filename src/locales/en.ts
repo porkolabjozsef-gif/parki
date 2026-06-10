@@ -19,9 +19,9 @@ export default {
   aboutDesc: 'Universal parking reminder. Monitors active parking notifications and alerts you if you forget to stop.',
   privacy: '🔒 No data collection · No registration · Fully offline',
   language: 'LANGUAGE',
-  notifTitle: '🅿️ Parking in progress!',
+  notifTitle: 'Parking in progress!',
   notifBody: '{app} – Don\'t forget to stop!',
-  stop: '🅿️ Stop',
+  stop: 'Stop',
   ok: '✓ OK',
   appNameLabel: 'Name (e.g. Parkl)',
   packageNameLabel: 'Package name (e.g. hu.parkl.android)',
@@ -46,4 +46,6 @@ export default {
   syncError: 'Failed to download the list',
   fillAllFields: 'Please fill in all fields!',
   submitFooterSub: 'Missing a parking app? Submit it to the community!',
+  notifStop: 'Stop',
+  notifOk: 'OK',
 };

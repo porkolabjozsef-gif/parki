@@ -19,9 +19,9 @@ export default {
   aboutDesc: 'Universaali pysäköintimuistutus. Seuraa aktiivisia ilmoituksia ja varoittaa jos unohdat pysäyttää.',
   privacy: '🔒 Ei tiedonkeruuta · Ei rekisteröitymistä · Täysin offline',
   language: 'KIELI',
-  notifTitle: '🅿️ Pysäköinti käynnissä!',
+  notifTitle: 'Pysäköinti käynnissä!',
   notifBody: '{app} – Älä unohda pysäyttää!',
-  stop: '🅿️ Pysäytä',
+  stop: 'Pysäytä',
   ok: '✓ OK',
   appNameLabel: 'Nimi (esim. Parkl)',
   packageNameLabel: 'Paketin nimi (esim. hu.parkl.android)',
@@ -46,4 +46,6 @@ export default {
   syncError: 'Listan lataaminen epäonnistui',
   fillAllFields: 'Täytä kaikki kentät!',
   submitFooterSub: 'Puuttuuko pysäköintisovellus? Lähetä se yhteisölle!',
+  notifStop: 'Lopeta',
+  notifOk: 'OK',
 };

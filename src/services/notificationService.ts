@@ -1,6 +1,6 @@
 import * as Notifications from 'expo-notifications';
 import { Platform, Linking } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { t } from './i18nService';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -10,18 +10,36 @@ Notifications.setNotificationHandler({
   }),
 });
 
+// Parkolás-kulcsszavak több nyelven (keywordFilter-es appokhoz)
+export const PARKING_KEYWORDS = [
+  'parkol', 'parkolás', 'parkolas', 'parking', 'park',
+  'zóna', 'zona', 'zone', 'rendszám', 'rendszam', 'plate',
+  'mobilparkolás', 'mobilparkolas', 'díjfizetés', 'dijfizetes',
+  'stop', 'leállít', 'leallit', 'elindítva', 'elinditva',
+];
+
+/**
+ * Eldönti, hogy egy adott értesítésre riasszunk-e.
+ * - keywordFilter nélküli app: minden értesítésére riaszt
+ * - keywordFilter-es app (pl. Yettel): csak ha a szöveg parkolás-kulcsszót tartalmaz
+ */
+export function shouldAlert(keywordFilter: boolean | undefined, title?: string, body?: string): boolean {
+  if (!keywordFilter) return true;
+  const text = `${title || ''} ${body || ''}`.toLowerCase();
+  return PARKING_KEYWORDS.some(kw => text.includes(kw));
+}
+
 // Értesítés gomb kezelése
 Notifications.addNotificationResponseReceivedListener(response => {
   const actionId = response.actionIdentifier;
   const packageName = response.notification.request.content.data?.packageName as string;
 
   if (actionId === 'STOP' && packageName) {
-    // Megnyitja a parkoló appot
     Linking.openURL(`intent://#Intent;package=${packageName};scheme=parki;end`).catch(() => {
-      Linking.openURL(`market://details?id=${packageName}`);
+      Linking.openURL(`market://details?id=${packageName}`).catch(() => {});
     });
   }
-  // 'RENDBEN' esetén nem csinálunk semmit - szándékos elmenetel
+  // 'OK' (szándékos elmenetel) esetén nem csinálunk semmit
 });
 
 export async function initNotifications() {
@@ -33,35 +51,36 @@ export async function initNotifications() {
   }
 
   if (Platform.OS === 'android') {
-    // Értesítési kategória a gombokkal
     await Notifications.setNotificationCategoryAsync('PARKING', [
       {
         identifier: 'STOP',
-        buttonTitle: '🅿️ Stop',
+        buttonTitle: `🅿️ ${t('notifStop')}`,
         options: { opensAppToForeground: true },
       },
       {
-        identifier: 'RENDBEN',
-        buttonTitle: '✓ Rendben',
+        identifier: 'OK',
+        buttonTitle: `✓ ${t('notifOk')}`,
         options: { opensAppToForeground: false },
       },
     ]);
 
     await Notifications.setNotificationChannelAsync('parki_reminder', {
-      name: 'Parkolás emlékeztető',
+      name: 'Parki',
       importance: Notifications.AndroidImportance.HIGH,
       vibrationPattern: [0, 500, 200, 500],
       lightColor: '#00E5A0',
       sound: 'default',
     });
   }
+
+  return finalStatus;
 }
 
 export async function sendParkingReminder(appName: string, packageName: string) {
   await Notifications.scheduleNotificationAsync({
     content: {
-      title: '🅿️ Folyamatban lévő parkolás!',
-      body: `${appName} – Ne felejtse el leállítani!`,
+      title: `🅿️ ${t('notifTitle')}`,
+      body: t('notifBody', { app: appName }),
       sound: 'default',
       categoryIdentifier: 'PARKING',
       data: { packageName },
@@ -71,33 +90,3 @@ export async function sendParkingReminder(appName: string, packageName: string) 
     trigger: null,
   });
 }
-
-export async function getWatchedApps(): Promise<string[]> {
-  const raw = await AsyncStorage.getItem('watchedApps');
-  if (!raw) return defaultPackages;
-  return JSON.parse(raw);
-}
-
-export async function saveWatchedApps(packages: string[]) {
-  await AsyncStorage.setItem('watchedApps', JSON.stringify(packages));
-}
-
-export const defaultPackages = [
-  'hu.parkl.android',
-  'com.easypark.android',
-  'com.parkmobile.android',
-  'com.flowbird.android',
-  'hu.mol.move',
-  'com.mypermit.android',
-  'com.vodafone.easyrider',
-];
-
-export const knownParkingApps = [
-  { package: 'hu.parkl.android', name: 'Parkl' },
-  { package: 'com.easypark.android', name: 'EasyPark' },
-  { package: 'com.parkmobile.android', name: 'ParkMobile' },
-  { package: 'com.flowbird.android', name: 'Flowbird' },
-  { package: 'hu.mol.move', name: 'MOL Move' },
-  { package: 'com.mypermit.android', name: 'MyPermit' },
-  { package: 'com.vodafone.easyrider', name: 'One Easy Rider' },
-];

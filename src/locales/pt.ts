@@ -19,9 +19,9 @@ export default {
   aboutDesc: 'Lembrete universal de estacionamento. Monitora notificações ativas e avisa se você esquecer de parar.',
   privacy: '🔒 Sem coleta de dados · Sem registro · Totalmente offline',
   language: 'IDIOMA',
-  notifTitle: '🅿️ Estacionamento em andamento!',
+  notifTitle: 'Estacionamento em andamento!',
   notifBody: '{app} – Não esqueça de parar!',
-  stop: '🅿️ Parar',
+  stop: 'Parar',
   ok: '✓ OK',
   appNameLabel: 'Nome (ex. Parkl)',
   packageNameLabel: 'Nome do pacote (ex. hu.parkl.android)',
@@ -46,4 +46,6 @@ export default {
   syncError: 'Falha ao baixar a lista',
   fillAllFields: 'Por favor preencha todos os campos!',
   submitFooterSub: 'Falta um app de estacionamento? Envie-o para a comunidade!',
+  notifStop: 'Parar',
+  notifOk: 'OK',
 };
