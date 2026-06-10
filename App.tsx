@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StatusBar } from 'expo-status-bar';
@@ -7,25 +7,12 @@ import { Text } from 'react-native';
 import HomeScreen from './src/screens/HomeScreen';
 import AppsScreen from './src/screens/AppsScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
-import SplashScreen from './SplashScreen';
 import { initNotifications } from './src/services/notificationService';
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
-  const [showSplash, setShowSplash] = useState(true);
-
-  if (showSplash) {
-    return (
-      <SafeAreaProvider>
-        <StatusBar style="light" />
-        <SplashScreen onFinish={() => {
-          initNotifications();
-          setShowSplash(false);
-        }} />
-      </SafeAreaProvider>
-    );
-  }
+  React.useEffect(() => { initNotifications(); }, []);
 
   return (
     <SafeAreaProvider>
@@ -34,40 +21,14 @@ export default function App() {
         <Tab.Navigator
           screenOptions={{
             headerShown: false,
-            tabBarStyle: {
-              backgroundColor: '#0D0D0D',
-              borderTopColor: '#1A1A1A',
-              height: 60,
-              paddingBottom: 8,
-            },
+            tabBarStyle: { backgroundColor: '#0D0D0D', borderTopColor: '#1A1A1A', height: 60, paddingBottom: 8 },
             tabBarActiveTintColor: '#00E5A0',
             tabBarInactiveTintColor: '#444',
           }}
         >
-          <Tab.Screen
-            name="Home"
-            component={HomeScreen}
-            options={{
-              tabBarLabel: 'Főoldal',
-              tabBarIcon: () => <Text style={{ fontSize: 20 }}>🅿️</Text>,
-            }}
-          />
-          <Tab.Screen
-            name="Apps"
-            component={AppsScreen}
-            options={{
-              tabBarLabel: 'Alkalmazások',
-              tabBarIcon: () => <Text style={{ fontSize: 20 }}>📱</Text>,
-            }}
-          />
-          <Tab.Screen
-            name="Settings"
-            component={SettingsScreen}
-            options={{
-              tabBarLabel: 'Beállítások',
-              tabBarIcon: () => <Text style={{ fontSize: 20 }}>⚙️</Text>,
-            }}
-          />
+          <Tab.Screen name="Home" component={HomeScreen} options={{ tabBarLabel: 'Főoldal', tabBarIcon: () => <Text style={{ fontSize: 20 }}>🅿️</Text> }} />
+          <Tab.Screen name="Apps" component={AppsScreen} options={{ tabBarLabel: 'Alkalmazások', tabBarIcon: () => <Text style={{ fontSize: 20 }}>📱</Text> }} />
+          <Tab.Screen name="Settings" component={SettingsScreen} options={{ tabBarLabel: 'Beállítások', tabBarIcon: () => <Text style={{ fontSize: 20 }}>⚙️</Text> }} />
         </Tab.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
