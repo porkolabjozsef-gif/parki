@@ -2,11 +2,13 @@ import React, { useRef, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Animated } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { sendParkingReminder } from '../services/notificationService';
+import { useLanguage } from '../services/languageContext';
 
 const GREEN = '#00E5A0';
 
 export default function HomeScreen() {
   const pulseAnim = useRef(new Animated.Value(1)).current;
+  const { t, currentLang } = useLanguage();
 
   useEffect(() => {
     Animated.loop(
@@ -21,20 +23,20 @@ export default function HomeScreen() {
     <SafeAreaView style={styles.container}>
       <View style={styles.center}>
         <Text style={styles.logo}>Par<Text style={styles.accent}>ki</Text></Text>
-        <Text style={styles.sub}>Parkolás emlékeztető</Text>
+        <Text style={styles.sub}>{t('appSub')}</Text>
 
         <Animated.View style={[styles.indicator, { transform: [{ scale: pulseAnim }] }]}>
           <Text style={styles.indicatorEmoji}>🔍</Text>
-          <Text style={styles.indicatorLabel}>FIGYELÉS AKTÍV</Text>
+          <Text style={styles.indicatorLabel}>{t('monitoring')}</Text>
         </Animated.View>
 
-        <Text style={styles.info}>Automatikusan figyeli a parkolási értesítéseket</Text>
+        <Text style={styles.info}>{t('monitoringInfo')}</Text>
 
         <TouchableOpacity
           style={styles.testBtn}
-          onPress={() => sendParkingReminder('Parkl', 'hu.parkl.android')}
+          onPress={() => sendParkingReminder('Parkl', 'net.parkl.androidclient')}
         >
-          <Text style={styles.testBtnText}>🔔 Teszt értesítés</Text>
+          <Text style={styles.testBtnText}>{t('testNotification')}</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

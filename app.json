@@ -13,7 +13,7 @@
       "supportsTablet": false,
       "bundleIdentifier": "com.porki.parki",
       "infoPlist": {
-        "NSMotionUsageDescription": "A Parki az aut\u00f3s mozg\u00e1s \u00e9rz\u00e9kel\u00e9s\u00e9re haszn\u00e1lja.",
+        "NSMotionUsageDescription": "A Parki az autós mozgás érzékelésére használja.",
         "UIBackgroundModes": [
           "fetch",
           "remote-notification"
@@ -35,7 +35,8 @@
       ]
     },
     "plugins": [
-      "expo-notifications"
+      "expo-notifications",
+      "expo-localization"
     ],
     "extra": {
       "eas": {

@@ -7,11 +7,14 @@ import { Text } from 'react-native';
 import HomeScreen from './src/screens/HomeScreen';
 import AppsScreen from './src/screens/AppsScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
+import { LanguageProvider, useLanguage } from './src/services/languageContext';
 
 const Tab = createBottomTabNavigator();
 
 function Navigation() {
   const insets = useSafeAreaInsets();
+  const { t } = useLanguage();
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -26,9 +29,9 @@ function Navigation() {
         tabBarInactiveTintColor: '#444',
       }}
     >
-      <Tab.Screen name="Home" component={HomeScreen} options={{ tabBarLabel: 'Főoldal', tabBarIcon: () => <Text style={{ fontSize: 20 }}>🅿️</Text> }} />
-      <Tab.Screen name="Apps" component={AppsScreen} options={{ tabBarLabel: 'Alkalmazások', tabBarIcon: () => <Text style={{ fontSize: 20 }}>📱</Text> }} />
-      <Tab.Screen name="Settings" component={SettingsScreen} options={{ tabBarLabel: 'Beállítások', tabBarIcon: () => <Text style={{ fontSize: 20 }}>⚙️</Text> }} />
+      <Tab.Screen name="Home" component={HomeScreen} options={{ tabBarLabel: t('home'), tabBarIcon: () => <Text style={{ fontSize: 20 }}>🅿️</Text> }} />
+      <Tab.Screen name="Apps" component={AppsScreen} options={{ tabBarLabel: t('apps'), tabBarIcon: () => <Text style={{ fontSize: 20 }}>📱</Text> }} />
+      <Tab.Screen name="Settings" component={SettingsScreen} options={{ tabBarLabel: t('settings'), tabBarIcon: () => <Text style={{ fontSize: 20 }}>⚙️</Text> }} />
     </Tab.Navigator>
   );
 }
@@ -36,10 +39,12 @@ function Navigation() {
 export default function App() {
   return (
     <SafeAreaProvider>
-      <StatusBar style="light" />
-      <NavigationContainer>
-        <Navigation />
-      </NavigationContainer>
+      <LanguageProvider>
+        <StatusBar style="light" />
+        <NavigationContainer>
+          <Navigation />
+        </NavigationContainer>
+      </LanguageProvider>
     </SafeAreaProvider>
   );
 }

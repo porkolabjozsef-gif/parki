@@ -1,20 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import {
-  View, Text, StyleSheet, Linking, Platform, TouchableOpacity, ScrollView,
+  View, Text, StyleSheet, Linking, Platform,
+  TouchableOpacity, ScrollView, FlatList, Modal,
+  Alert, ActivityIndicator,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { loadState, saveState } from '../services/storageService';
+import { LANGUAGES } from '../services/i18nService';
+import { useLanguage } from '../services/languageContext';
+import { fetchCommunityList, getLastSync } from '../services/communityService';
 
 const GREEN = '#00E5A0';
 const BG = '#000000';
 const CARD = '#0D0D0D';
 const BORDER = '#1A1A1A';
 
+const SORTED_LANGUAGES = [...LANGUAGES].sort((a, b) => a.name.localeCompare(b.name));
+
 export default function SettingsScreen() {
   const [delay, setDelay] = useState(30);
+  const [langModal, setLangModal] = useState(false);
+  const [syncing, setSyncing] = useState(false);
+  const [lastSync, setLastSync] = useState<string | null>(null);
+  const { t, currentLang, changeLanguage } = useLanguage();
 
   useEffect(() => {
     loadState().then(s => setDelay(s.delaySeconds));
+    getLastSync().then(setLastSync);
   }, []);
 
   const saveDelay = async (val: number) => {
@@ -23,16 +35,37 @@ export default function SettingsScreen() {
     await saveState({ ...state, delaySeconds: val });
   };
 
+  const handleSync = async () => {
+    setSyncing(true);
+    const apps = await fetchCommunityList();
+    setSyncing(false);
+    if (apps.length > 0) {
+      const sync = await getLastSync();
+      setLastSync(sync);
+      Alert.alert('✓', `${apps.length} ${t('syncSuccess')}`);
+    } else {
+      Alert.alert('', t('syncError'));
+    }
+  };
+
+  const currentLangObj = LANGUAGES.find(l => l.code === currentLang);
+
+  const formatSync = (iso: string) => {
+    try {
+      const d = new Date(iso);
+      return `${d.toLocaleDateString()} ${d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+    } catch { return iso; }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scroll}>
-        <Text style={styles.title}>Beállítások</Text>
+        <Text style={styles.title}>{t('settings')}</Text>
 
+        {/* Késleltetés */}
         <View style={styles.card}>
-          <Text style={styles.sectionLabel}>KÉSLELTETÉS</Text>
-          <Text style={styles.delayText}>
-            Indulás után <Text style={styles.delayHighlight}>{delay} másodperccel</Text> értesít
-          </Text>
+          <Text style={styles.sectionLabel}>{t('delay')}</Text>
+          <Text style={styles.delayText}>{t('delayText', { delay })}</Text>
           <View style={styles.delayButtons}>
             {[10, 20, 30, 45, 60, 90, 120].map(val => (
               <TouchableOpacity
@@ -48,41 +81,96 @@ export default function SettingsScreen() {
           </View>
         </View>
 
+        {/* Nyelv */}
         <View style={styles.card}>
-          <Text style={styles.sectionLabel}>ENGEDÉLYEK</Text>
+          <Text style={styles.sectionLabel}>{t('language')}</Text>
+          <TouchableOpacity style={styles.langSelector} onPress={() => setLangModal(true)}>
+            <Text style={styles.langFlag}>{currentLangObj?.flag}</Text>
+            <Text style={styles.langName}>{currentLangObj?.name}</Text>
+            <Text style={styles.langArrow}>›</Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* Közösségi lista */}
+        <View style={styles.card}>
+          <Text style={styles.sectionLabel}>{t('communityList')}</Text>
+          {lastSync && (
+            <Text style={styles.syncText}>{t('lastSync')}: {formatSync(lastSync)}</Text>
+          )}
+          <TouchableOpacity style={styles.communityBtn} onPress={handleSync} disabled={syncing}>
+            {syncing
+              ? <ActivityIndicator color="#000" />
+              : <Text style={styles.communityBtnText}>{t('refreshList')}</Text>
+            }
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => Linking.openURL('https://github.com/porkolabjozsef-gif/parki')}>
+            <Text style={styles.githubLink}>github.com/porkolabjozsef-gif/parki ›</Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* Engedélyek */}
+        <View style={styles.card}>
+          <Text style={styles.sectionLabel}>{t('permissions')}</Text>
           <TouchableOpacity style={styles.permBtn} onPress={() => Linking.openSettings()}>
-            <View>
-              <Text style={styles.permTitle}>Értesítési hozzáférés</Text>
-              <Text style={styles.permSub}>Szükséges a parkoló appok értesítéseinek figyeléséhez</Text>
+            <View style={styles.permInfo}>
+              <Text style={styles.permTitle}>{t('notificationAccess')}</Text>
+              <Text style={styles.permSub}>{t('notificationAccessSub')}</Text>
             </View>
             <Text style={styles.permArrow}>›</Text>
           </TouchableOpacity>
           {Platform.OS === 'android' && (
             <TouchableOpacity style={[styles.permBtn, { marginTop: 8 }]} onPress={() => Linking.openSettings()}>
-              <View>
-                <Text style={styles.permTitle}>Akkumulátor optimalizálás</Text>
-                <Text style={styles.permSub}>Tiltsa le a Parki-ra, hogy háttérben működjön</Text>
+              <View style={styles.permInfo}>
+                <Text style={styles.permTitle}>{t('batteryOptimization')}</Text>
+                <Text style={styles.permSub}>{t('batteryOptimizationSub')}</Text>
               </View>
               <Text style={styles.permArrow}>›</Text>
             </TouchableOpacity>
           )}
         </View>
 
+        {/* Névjegy */}
         <View style={styles.card}>
-          <Text style={styles.sectionLabel}>NÉVJEGY</Text>
+          <Text style={styles.sectionLabel}>{t('about')}</Text>
           <Text style={styles.aboutName}>
             Par<Text style={{ color: GREEN }}>ki</Text>
             {'  '}
             <Text style={styles.aboutVersion}>v1.0.0</Text>
           </Text>
-          <Text style={styles.aboutDesc}>
-            Univerzális parkolás emlékeztető. Figyeli az aktív parkolási értesítéseket és szól, ha elfelejtette leállítani.
-          </Text>
-          <Text style={styles.aboutPrivacy}>
-            🔒 Nem gyűjt adatot · Nincs regisztráció · Teljesen offline
-          </Text>
+          <Text style={styles.aboutDesc}>{t('aboutDesc')}</Text>
+          <Text style={styles.aboutPrivacy}>{t('privacy')}</Text>
         </View>
       </ScrollView>
+
+      {/* Nyelvválasztó modal */}
+      <Modal visible={langModal} transparent animationType="slide">
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalCard}>
+            <Text style={styles.modalTitle}>{t('language')}</Text>
+            <FlatList
+              data={SORTED_LANGUAGES}
+              keyExtractor={l => l.code}
+              numColumns={2}
+              contentContainerStyle={styles.langGrid}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  style={[styles.langItem, item.code === currentLang && styles.langItemActive]}
+                  onPress={async () => { await changeLanguage(item.code); setLangModal(false); }}
+                >
+                  <Text style={styles.langItemFlag}>{item.flag}</Text>
+                  <Text style={[styles.langItemName, item.code === currentLang && styles.langItemNameActive]}>
+                    {item.name}
+                  </Text>
+                  {item.code === currentLang && <Text style={styles.langCheck}>✓</Text>}
+                </TouchableOpacity>
+              )}
+            />
+            <TouchableOpacity style={styles.modalClose} onPress={() => setLangModal(false)}>
+              <Text style={styles.modalCloseText}>{t('cancel')}</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 }
@@ -94,18 +182,38 @@ const styles = StyleSheet.create({
   card: { padding: 20, borderRadius: 16, backgroundColor: CARD, borderWidth: 1, borderColor: BORDER, gap: 12 },
   sectionLabel: { fontSize: 11, fontWeight: '700', letterSpacing: 1.5, color: '#444' },
   delayText: { color: '#888', fontSize: 15 },
-  delayHighlight: { color: GREEN, fontWeight: '700' },
   delayButtons: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   delayBtn: { paddingHorizontal: 14, paddingVertical: 8, borderRadius: 10, backgroundColor: '#1A1A1A', borderWidth: 1, borderColor: '#222' },
   delayBtnActive: { backgroundColor: GREEN, borderColor: GREEN },
   delayBtnText: { color: '#888', fontSize: 13, fontWeight: '600' },
   delayBtnTextActive: { color: '#000' },
+  langSelector: { flexDirection: 'row', alignItems: 'center', padding: 14, borderRadius: 12, backgroundColor: '#111', gap: 12 },
+  langFlag: { fontSize: 24 },
+  langName: { flex: 1, color: '#fff', fontSize: 16, fontWeight: '600' },
+  langArrow: { color: '#444', fontSize: 20 },
+  syncText: { fontSize: 12, color: '#444' },
+  communityBtn: { padding: 14, borderRadius: 12, backgroundColor: GREEN, alignItems: 'center' },
+  communityBtnText: { color: '#000', fontWeight: '700', fontSize: 14 },
+  githubLink: { color: '#333', fontSize: 12, textAlign: 'center' },
   permBtn: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 14, borderRadius: 12, backgroundColor: '#111' },
+  permInfo: { flex: 1 },
   permTitle: { color: '#fff', fontWeight: '600', fontSize: 14 },
-  permSub: { color: '#444', fontSize: 12, marginTop: 2, maxWidth: '90%' },
+  permSub: { color: '#444', fontSize: 12, marginTop: 2 },
   permArrow: { color: '#444', fontSize: 20 },
   aboutName: { fontSize: 20, fontWeight: '800', color: '#fff' },
   aboutVersion: { fontSize: 14, color: '#444', fontWeight: '400' },
   aboutDesc: { color: '#666', fontSize: 14, lineHeight: 20 },
   aboutPrivacy: { color: '#333', fontSize: 12 },
+  modalOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.85)', justifyContent: 'flex-end' },
+  modalCard: { backgroundColor: '#111', borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: 24, maxHeight: '85%' },
+  modalTitle: { color: '#fff', fontSize: 18, fontWeight: '700', marginBottom: 16 },
+  langGrid: { gap: 8 },
+  langItem: { flex: 1, margin: 4, flexDirection: 'row', alignItems: 'center', padding: 12, borderRadius: 12, backgroundColor: '#1A1A1A', borderWidth: 1, borderColor: '#222', gap: 8 },
+  langItemActive: { borderColor: GREEN, backgroundColor: 'rgba(0,229,160,0.08)' },
+  langItemFlag: { fontSize: 20 },
+  langItemName: { flex: 1, color: '#888', fontSize: 13, fontWeight: '600' },
+  langItemNameActive: { color: GREEN },
+  langCheck: { color: GREEN, fontWeight: '700' },
+  modalClose: { marginTop: 16, padding: 16, borderRadius: 12, backgroundColor: '#1A1A1A', alignItems: 'center' },
+  modalCloseText: { color: '#888', fontWeight: '600', fontSize: 15 },
 });
