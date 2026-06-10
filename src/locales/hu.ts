@@ -50,4 +50,5 @@ export default {
   notifOk: 'Rendben',
   parkingActive: 'PARKOLÁS AKTÍV',
   parkingAt: 'Folyamatban: {{app}}',
+  parkingInProgress: 'FOLYAMATBAN',
 };

@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Animated } from 'react-native';
+import { View, Text, StyleSheet, Animated, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLanguage } from '../services/languageContext';
 import { getActiveParkingInfo } from '../services/monitorService';
@@ -10,7 +10,7 @@ const ORANGE = '#FF9500';
 export default function HomeScreen() {
   const pulseAnim = useRef(new Animated.Value(1)).current;
   const { t, currentLang } = useLanguage();
-  const [parking, setParking] = useState<{ appName: string; startedAt: number } | null>(null);
+  const [parking, setParking] = useState<{ appName: string; startedAt: number; iconUrl?: string } | null>(null);
   const [, tick] = useState(0);
 
   useEffect(() => {
@@ -22,7 +22,6 @@ export default function HomeScreen() {
     ).start();
   }, []);
 
-  // Aktív parkolás figyelése + eltelt idő frissítése
   useEffect(() => {
     const update = async () => {
       try { setParking(await getActiveParkingInfo()); } catch (_) {}
@@ -59,7 +58,19 @@ export default function HomeScreen() {
         </Animated.View>
 
         {active ? (
-          <Text style={styles.info}>{t('parkingAt', { app: parking!.appName })}</Text>
+          <View style={styles.parkingCard}>
+            {parking!.iconUrl ? (
+              <Image source={{ uri: parking!.iconUrl }} style={styles.cardIcon} />
+            ) : (
+              <View style={styles.cardIconFallback}>
+                <Text style={styles.cardIconFallbackText}>{parking!.appName.charAt(0)}</Text>
+              </View>
+            )}
+            <View style={styles.cardText}>
+              <Text style={styles.cardLabel}>{t('parkingInProgress')}</Text>
+              <Text style={styles.cardAppName}>{parking!.appName}</Text>
+            </View>
+          </View>
         ) : (
           <Text style={styles.info}>{t('monitoringInfo')}</Text>
         )}
@@ -83,4 +94,18 @@ const styles = StyleSheet.create({
   indicatorLabel: { fontSize: 10, fontWeight: '700', letterSpacing: 1.5 },
   timer: { fontSize: 24, fontWeight: '800', color: '#fff', marginTop: 4, fontVariant: ['tabular-nums'] },
   info: { fontSize: 13, color: '#444', textAlign: 'center', paddingHorizontal: 40 },
+  parkingCard: {
+    flexDirection: 'row', alignItems: 'center', gap: 14,
+    backgroundColor: '#0D0D0D', borderWidth: 1, borderColor: 'rgba(255,149,0,0.3)',
+    borderRadius: 16, padding: 16, paddingRight: 24,
+  },
+  cardIcon: { width: 48, height: 48, borderRadius: 12 },
+  cardIconFallback: {
+    width: 48, height: 48, borderRadius: 12, backgroundColor: 'rgba(255,149,0,0.15)',
+    alignItems: 'center', justifyContent: 'center',
+  },
+  cardIconFallbackText: { color: ORANGE, fontSize: 22, fontWeight: '800' },
+  cardText: { gap: 2 },
+  cardLabel: { fontSize: 11, fontWeight: '700', letterSpacing: 1, color: ORANGE },
+  cardAppName: { fontSize: 20, fontWeight: '800', color: '#fff' },
 });

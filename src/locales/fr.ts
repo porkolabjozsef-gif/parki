@@ -50,4 +50,5 @@ export default {
   notifOk: 'OK',
   parkingActive: 'STATIONNEMENT ACTIF',
   parkingAt: 'En cours: {{app}}',
+  parkingInProgress: 'EN COURS',
 };

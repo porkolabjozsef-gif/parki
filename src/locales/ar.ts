@@ -50,4 +50,5 @@ export default {
   notifOk: 'حسناً',
   parkingActive: 'وقوف نشط',
   parkingAt: 'جارٍ: {{app}}',
+  parkingInProgress: 'جارٍ',
 };

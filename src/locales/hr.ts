@@ -50,4 +50,5 @@ export default {
   notifOk: 'U redu',
   parkingActive: 'PARKIRANJE AKTIVNO',
   parkingAt: 'U tijeku: {{app}}',
+  parkingInProgress: 'U TIJEKU',
 };

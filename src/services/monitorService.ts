@@ -15,6 +15,7 @@ interface ActiveParking {
   startedAt: number;
   intentionalLeave: boolean; // "Rendben" megnyomva
   reminded: boolean;
+  iconUrl?: string;
 }
 
 let listenerSub: { remove: () => void } | null = null;
@@ -75,6 +76,7 @@ async function handleNotification(event: NotificationData, apps: WatchedApp[]) {
       startedAt: Date.now(),
       intentionalLeave: false,
       reminded: false,
+      iconUrl: app.iconUrl,
     };
     await setActiveParking(parking);
   } catch (_) {
@@ -82,6 +84,7 @@ async function handleNotification(event: NotificationData, apps: WatchedApp[]) {
     await setActiveParking({
       packageName: app.packageName, appName: app.displayName,
       lat: 0, lng: 0, startedAt: Date.now(), intentionalLeave: false, reminded: false,
+      iconUrl: app.iconUrl,
     });
   }
 }
@@ -133,10 +136,10 @@ export async function markIntentionalLeave() {
 }
 
 // Aktív parkolás lekérdezése a UI számára
-export async function getActiveParkingInfo(): Promise<{ appName: string; startedAt: number } | null> {
+export async function getActiveParkingInfo(): Promise<{ appName: string; startedAt: number; iconUrl?: string } | null> {
   const p = await getActiveParking();
   if (!p) return null;
-  return { appName: p.appName, startedAt: p.startedAt };
+  return { appName: p.appName, startedAt: p.startedAt, iconUrl: p.iconUrl };
 }
 
 // Parkolás leállítása (Stop vagy manuális)

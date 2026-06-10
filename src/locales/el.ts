@@ -50,4 +50,5 @@ export default {
   notifOk: 'Εντάξει',
   parkingActive: 'ΣΤΑΘΜΕΥΣΗ ΕΝΕΡΓΗ',
   parkingAt: 'Σε εξέλιξη: {{app}}',
+  parkingInProgress: 'ΣΕ ΕΞΕΛΙΞΗ',
 };

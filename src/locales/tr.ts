@@ -50,4 +50,5 @@ export default {
   notifOk: 'Tamam',
   parkingActive: 'PARK AKTİF',
   parkingAt: 'Devam ediyor: {{app}}',
+  parkingInProgress: 'DEVAM EDIYOR',
 };
