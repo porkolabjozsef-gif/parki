@@ -48,4 +48,6 @@ export default {
   submitFooterSub: 'Falta um app de estacionamento? Envie-o para a comunidade!',
   notifStop: 'Parar',
   notifOk: 'OK',
+  parkingActive: 'ESTACIONAMENTO ATIVO',
+  parkingAt: 'Em curso: {{app}}',
 };

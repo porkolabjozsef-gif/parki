@@ -48,4 +48,6 @@ export default {
   submitFooterSub: 'Puuttuuko pysäköintisovellus? Lähetä se yhteisölle!',
   notifStop: 'Lopeta',
   notifOk: 'OK',
+  parkingActive: 'PYSÄKÖINTI AKTIIVINEN',
+  parkingAt: 'Käynnissä: {{app}}',
 };

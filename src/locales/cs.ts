@@ -48,4 +48,6 @@ export default {
   submitFooterSub: 'Chybí parkovací aplikace? Pošli ji komunitě!',
   notifStop: 'Zastavit',
   notifOk: 'OK',
+  parkingActive: 'PARKOVÁNÍ AKTIVNÍ',
+  parkingAt: 'Probíhá: {{app}}',
 };

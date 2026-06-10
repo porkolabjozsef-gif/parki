@@ -48,4 +48,6 @@ export default {
   submitFooterSub: 'Nedostaje aplikacija za parkiranje? Pošalji je zajednici!',
   notifStop: 'Zaustavi',
   notifOk: 'U redu',
+  parkingActive: 'PARKIRANJE AKTIVNO',
+  parkingAt: 'U toku: {{app}}',
 };

@@ -48,4 +48,6 @@ export default {
   submitFooterSub: 'هل تفتقد تطبيق وقوف؟ أرسله إلى المجتمع!',
   notifStop: 'إيقاف',
   notifOk: 'حسناً',
+  parkingActive: 'وقوف نشط',
+  parkingAt: 'جارٍ: {{app}}',
 };

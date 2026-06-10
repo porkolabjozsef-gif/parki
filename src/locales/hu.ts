@@ -48,4 +48,6 @@ export default {
   fillAllFields: 'Töltsd ki az összes mezőt!',
   notifStop: 'Leállítás',
   notifOk: 'Rendben',
+  parkingActive: 'PARKOLÁS AKTÍV',
+  parkingAt: 'Folyamatban: {{app}}',
 };

@@ -48,4 +48,6 @@ export default {
   submitFooterSub: 'Eksik bir park uygulaması mı var? Topluluğa gönder!',
   notifStop: 'Durdur',
   notifOk: 'Tamam',
+  parkingActive: 'PARK AKTİF',
+  parkingAt: 'Devam ediyor: {{app}}',
 };

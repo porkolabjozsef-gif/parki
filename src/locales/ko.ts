@@ -48,4 +48,6 @@ export default {
   submitFooterSub: '주차 앱이 없나요? 커뮤니티에 제출하세요!',
   notifStop: '중지',
   notifOk: '확인',
+  parkingActive: '주차 활성',
+  parkingAt: '진행 중: {{app}}',
 };

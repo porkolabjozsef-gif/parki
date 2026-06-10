@@ -48,4 +48,6 @@ export default {
   submitFooterSub: 'Λείπει μια εφαρμογή στάθμευσης; Υπόβαλέ την στην κοινότητα!',
   notifStop: 'Διακοπή',
   notifOk: 'Εντάξει',
+  parkingActive: 'ΣΤΑΘΜΕΥΣΗ ΕΝΕΡΓΗ',
+  parkingAt: 'Σε εξέλιξη: {{app}}',
 };

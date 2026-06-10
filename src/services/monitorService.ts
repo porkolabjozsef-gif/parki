@@ -132,6 +132,13 @@ export async function markIntentionalLeave() {
   }
 }
 
+// Aktív parkolás lekérdezése a UI számára
+export async function getActiveParkingInfo(): Promise<{ appName: string; startedAt: number } | null> {
+  const p = await getActiveParking();
+  if (!p) return null;
+  return { appName: p.appName, startedAt: p.startedAt };
+}
+
 // Parkolás leállítása (Stop vagy manuális)
 export async function clearActiveParking() {
   await setActiveParking(null);

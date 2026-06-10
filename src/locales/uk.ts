@@ -48,4 +48,6 @@ export default {
   submitFooterSub: 'Бракує паркувального застосунку? Надішліть його спільноті!',
   notifStop: 'Зупинити',
   notifOk: 'OK',
+  parkingActive: 'ПАРКУВАННЯ АКТИВНЕ',
+  parkingAt: 'Триває: {{app}}',
 };

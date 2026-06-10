@@ -48,4 +48,6 @@ export default {
   submitFooterSub: 'Lipsește o aplicație de parcare? Trimite-o comunității!',
   notifStop: 'Oprește',
   notifOk: 'OK',
+  parkingActive: 'PARCARE ACTIVĂ',
+  parkingAt: 'În curs: {{app}}',
 };

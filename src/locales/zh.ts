@@ -48,4 +48,6 @@ export default {
   submitFooterSub: '缺少停车应用？提交给社区！',
   notifStop: '停止',
   notifOk: '好',
+  parkingActive: '停车进行中',
+  parkingAt: '进行中: {{app}}',
 };

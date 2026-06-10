@@ -48,4 +48,6 @@ export default {
   submitFooterSub: 'Mist er een parkeerapp? Dien hem in bij de community!',
   notifStop: 'Stop',
   notifOk: 'OK',
+  parkingActive: 'PARKEREN ACTIEF',
+  parkingAt: 'Bezig: {{app}}',
 };

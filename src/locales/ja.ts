@@ -48,4 +48,6 @@ export default {
   submitFooterSub: '駐車アプリが見つかりませんか？コミュニティに送信しましょう！',
   notifStop: '停止',
   notifOk: 'OK',
+  parkingActive: '駐車中',
+  parkingAt: '進行中: {{app}}',
 };
