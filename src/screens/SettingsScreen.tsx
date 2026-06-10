@@ -9,6 +9,7 @@ import { loadState, saveState } from '../services/storageService';
 import { LANGUAGES } from '../services/i18nService';
 import { useLanguage } from '../services/languageContext';
 import { fetchCommunityList, getLastSync } from '../services/communityService';
+import { openNotificationAccessSettings, isNotificationAccessGranted } from '../services/monitorService';
 
 const GREEN = '#00E5A0';
 const BG = '#000000';
@@ -21,12 +22,14 @@ export default function SettingsScreen() {
   const [delay, setDelay] = useState(30);
   const [langModal, setLangModal] = useState(false);
   const [syncing, setSyncing] = useState(false);
+  const [notifAccess, setNotifAccess] = useState(false);
   const [lastSync, setLastSync] = useState<string | null>(null);
   const { t, currentLang, changeLanguage } = useLanguage();
 
   useEffect(() => {
     loadState().then(s => setDelay(s.delaySeconds));
     getLastSync().then(setLastSync);
+    try { setNotifAccess(isNotificationAccessGranted()); } catch (_) {}
   }, []);
 
   const saveDelay = async (val: number) => {
@@ -111,12 +114,12 @@ export default function SettingsScreen() {
         {/* Engedélyek */}
         <View style={styles.card}>
           <Text style={styles.sectionLabel}>{t('permissions')}</Text>
-          <TouchableOpacity style={styles.permBtn} onPress={() => Linking.openSettings()}>
+          <TouchableOpacity style={styles.permBtn} onPress={() => { openNotificationAccessSettings(); setTimeout(() => { try { setNotifAccess(isNotificationAccessGranted()); } catch (_) {} }, 1000); }}>
             <View style={styles.permInfo}>
               <Text style={styles.permTitle}>{t('notificationAccess')}</Text>
               <Text style={styles.permSub}>{t('notificationAccessSub')}</Text>
             </View>
-            <Text style={styles.permArrow}>›</Text>
+            <Text style={notifAccess ? styles.permOk : styles.permWarn}>{notifAccess ? '✓' : '!'}</Text>
           </TouchableOpacity>
           {Platform.OS === 'android' && (
             <TouchableOpacity style={[styles.permBtn, { marginTop: 8 }]} onPress={() => Linking.openSettings()}>
@@ -200,6 +203,8 @@ const styles = StyleSheet.create({
   permTitle: { color: '#fff', fontWeight: '600', fontSize: 14 },
   permSub: { color: '#444', fontSize: 12, marginTop: 2 },
   permArrow: { color: '#444', fontSize: 20 },
+  permOk: { color: '#00E5A0', fontSize: 18, fontWeight: '800' },
+  permWarn: { color: '#FFB020', fontSize: 18, fontWeight: '800', width: 24, height: 24, textAlign: 'center', borderRadius: 12, borderWidth: 2, borderColor: '#FFB020' },
   aboutName: { fontSize: 20, fontWeight: '800', color: '#fff' },
   aboutVersion: { fontSize: 14, color: '#444', fontWeight: '400' },
   aboutDesc: { color: '#666', fontSize: 14, lineHeight: 20 },
