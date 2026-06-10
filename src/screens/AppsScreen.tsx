@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-  View, Text, StyleSheet, TouchableOpacity,
+  View, Text, StyleSheet, TouchableOpacity, Image,
   FlatList, TextInput, Modal, Alert, ScrollView,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -38,6 +38,7 @@ function getAppInitials(name: string) {
 
 export default function AppsScreen() {
   const [apps, setApps] = useState<WatchedApp[]>([]);
+  const [failedIcons, setFailedIcons] = useState<Record<string, boolean>>({});
   const [submitModal, setSubmitModal] = useState(false);
   const [appName, setAppName] = useState('');
   const [storeUrl, setStoreUrl] = useState('');
@@ -89,8 +90,11 @@ export default function AppsScreen() {
     setCountry('HU');
   };
 
+  const sortedApps = [...apps].sort((a, b) => a.displayName.localeCompare(b.displayName, 'hu'));
+
   const renderItem = ({ item }: { item: WatchedApp }) => {
     const color = getAppColor(item.packageName);
+    const showIcon = item.iconUrl && !failedIcons[item.packageName];
     return (
       <TouchableOpacity
         style={[styles.gridItem, !item.enabled && styles.gridItemDisabled]}
@@ -98,11 +102,21 @@ export default function AppsScreen() {
         onLongPress={() => deleteApp(item.packageName)}
         activeOpacity={0.7}
       >
-        <View style={[styles.iconCircle, { backgroundColor: item.enabled ? color + '22' : '#111', borderColor: item.enabled ? color : '#222' }]}>
-          <Text style={[styles.iconText, { color: item.enabled ? color : '#444' }]}>
-            {getAppInitials(item.displayName)}
-          </Text>
-        </View>
+        {showIcon ? (
+          <View style={[styles.iconImageWrap, { borderColor: item.enabled ? color : '#222' }]}>
+            <Image
+              source={{ uri: item.iconUrl }}
+              style={styles.iconImage}
+              onError={() => setFailedIcons(prev => ({ ...prev, [item.packageName]: true }))}
+            />
+          </View>
+        ) : (
+          <View style={[styles.iconCircle, { backgroundColor: item.enabled ? color + '22' : '#111', borderColor: item.enabled ? color : '#222' }]}>
+            <Text style={[styles.iconText, { color: item.enabled ? color : '#444' }]}>
+              {getAppInitials(item.displayName)}
+            </Text>
+          </View>
+        )}
         <Text style={[styles.appName, !item.enabled && styles.appNameOff]} numberOfLines={2}>
           {item.displayName}
         </Text>
@@ -120,9 +134,10 @@ export default function AppsScreen() {
       <Text style={styles.hint}>{t('tapToToggle')}</Text>
 
       <FlatList
-        data={apps}
+        data={sortedApps}
         keyExtractor={a => a.packageName}
         numColumns={3}
+        columnWrapperStyle={styles.row}
         contentContainerStyle={styles.grid}
         renderItem={renderItem}
         ListFooterComponent={
@@ -133,7 +148,6 @@ export default function AppsScreen() {
         }
       />
 
-      {/* Közösségi beküldés modal */}
       <Modal visible={submitModal} transparent animationType="slide">
         <View style={styles.modalOverlay}>
           <View style={styles.modalCard}>
@@ -198,8 +212,9 @@ const styles = StyleSheet.create({
   title: { fontSize: 22, fontWeight: '800', color: '#fff' },
   hint: { fontSize: 12, color: '#333', paddingHorizontal: 20, paddingBottom: 12 },
   grid: { padding: 12 },
+  row: { justifyContent: 'flex-start' },
   gridItem: {
-    flex: 1, margin: 6, aspectRatio: 0.85,
+    width: '30%', margin: '1.5%', aspectRatio: 0.85,
     backgroundColor: CARD, borderRadius: 16,
     borderWidth: 1, borderColor: BORDER,
     alignItems: 'center', justifyContent: 'center',
@@ -211,6 +226,12 @@ const styles = StyleSheet.create({
     borderWidth: 2, alignItems: 'center', justifyContent: 'center',
   },
   iconText: { fontSize: 18, fontWeight: '800' },
+  iconImageWrap: {
+    width: 56, height: 56, borderRadius: 14,
+    borderWidth: 2, overflow: 'hidden',
+    alignItems: 'center', justifyContent: 'center',
+  },
+  iconImage: { width: '100%', height: '100%' },
   appName: { fontSize: 12, fontWeight: '600', color: '#fff', textAlign: 'center' },
   appNameOff: { color: '#444' },
   activeDot: { width: 6, height: 6, borderRadius: 3, position: 'absolute', top: 10, right: 10 },
