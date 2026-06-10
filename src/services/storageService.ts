@@ -19,6 +19,7 @@ const DEFAULT_APPS: WatchedApp[] = [
   { packageName: 'com.flowbird.android', displayName: 'Flowbird', enabled: true },
   { packageName: 'hu.mol.move', displayName: 'MOL Move', enabled: true },
   { packageName: 'com.mypermit.android', displayName: 'MyPermit', enabled: true },
+  { packageName: 'com.vodafone.easyrider', displayName: 'One Easy Rider', enabled: true },
 ];
 
 const KEY = 'parki_state';

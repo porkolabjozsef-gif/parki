@@ -1,5 +1,5 @@
 import * as Notifications from 'expo-notifications';
-import { Platform } from 'react-native';
+import { Platform, Linking } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 Notifications.setNotificationHandler({
@@ -8,6 +8,20 @@ Notifications.setNotificationHandler({
     shouldPlaySound: true,
     shouldSetBadge: false,
   }),
+});
+
+// Értesítés gomb kezelése
+Notifications.addNotificationResponseReceivedListener(response => {
+  const actionId = response.actionIdentifier;
+  const packageName = response.notification.request.content.data?.packageName as string;
+
+  if (actionId === 'STOP' && packageName) {
+    // Megnyitja a parkoló appot
+    Linking.openURL(`intent://#Intent;package=${packageName};scheme=parki;end`).catch(() => {
+      Linking.openURL(`market://details?id=${packageName}`);
+    });
+  }
+  // 'RENDBEN' esetén nem csinálunk semmit - szándékos elmenetel
 });
 
 export async function initNotifications() {
@@ -19,6 +33,20 @@ export async function initNotifications() {
   }
 
   if (Platform.OS === 'android') {
+    // Értesítési kategória a gombokkal
+    await Notifications.setNotificationCategoryAsync('PARKING', [
+      {
+        identifier: 'STOP',
+        buttonTitle: '🅿️ Stop',
+        options: { opensAppToForeground: true },
+      },
+      {
+        identifier: 'RENDBEN',
+        buttonTitle: '✓ Rendben',
+        options: { opensAppToForeground: false },
+      },
+    ]);
+
     await Notifications.setNotificationChannelAsync('parki_reminder', {
       name: 'Parkolás emlékeztető',
       importance: Notifications.AndroidImportance.HIGH,
@@ -29,12 +57,14 @@ export async function initNotifications() {
   }
 }
 
-export async function sendParkingReminder(appName: string) {
+export async function sendParkingReminder(appName: string, packageName: string) {
   await Notifications.scheduleNotificationAsync({
     content: {
-      title: '🅿️ Parkolás aktív!',
-      body: `${appName} – Ne felejtse el leállítani a parkolást!`,
+      title: '🅿️ Folyamatban lévő parkolás!',
+      body: `${appName} – Ne felejtse el leállítani!`,
       sound: 'default',
+      categoryIdentifier: 'PARKING',
+      data: { packageName },
       priority: Notifications.AndroidNotificationPriority.HIGH,
       color: '#00E5A0',
     },
@@ -59,6 +89,7 @@ export const defaultPackages = [
   'com.flowbird.android',
   'hu.mol.move',
   'com.mypermit.android',
+  'com.vodafone.easyrider',
 ];
 
 export const knownParkingApps = [
@@ -68,4 +99,5 @@ export const knownParkingApps = [
   { package: 'com.flowbird.android', name: 'Flowbird' },
   { package: 'hu.mol.move', name: 'MOL Move' },
   { package: 'com.mypermit.android', name: 'MyPermit' },
+  { package: 'com.vodafone.easyrider', name: 'One Easy Rider' },
 ];
