@@ -6,13 +6,18 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.porki.parki",
       "infoPlist": {
-        "NSMotionUsageDescription": "A Parki az autós mozgás érzékelésére használja.",
-        "UIBackgroundModes": ["fetch", "remote-notification"]
+        "NSMotionUsageDescription": "A Parki az aut\u00f3s mozg\u00e1s \u00e9rz\u00e9kel\u00e9s\u00e9re haszn\u00e1lja.",
+        "UIBackgroundModes": [
+          "fetch",
+          "remote-notification"
+        ]
       }
     },
     "android": {
@@ -37,6 +42,10 @@
         "projectId": "977e0cf6-b479-48c4-807d-845cea48dbf4"
       }
     },
-    "owner": "porki23"
+    "owner": "porki23",
+    "splash": {
+      "backgroundColor": "#000000",
+      "resizeMode": "contain"
+    }
   }
 }
