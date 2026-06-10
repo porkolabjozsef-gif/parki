@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StatusBar } from 'expo-status-bar';
@@ -8,6 +8,8 @@ import HomeScreen from './src/screens/HomeScreen';
 import AppsScreen from './src/screens/AppsScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
 import { LanguageProvider, useLanguage } from './src/services/languageContext';
+import { initNotifications } from './src/services/notificationService';
+import { startMonitoring } from './src/services/monitorService';
 
 const Tab = createBottomTabNavigator();
 
@@ -37,6 +39,17 @@ function Navigation() {
 }
 
 export default function App() {
+  useEffect(() => {
+    (async () => {
+      try {
+        await initNotifications();
+        await startMonitoring();
+      } catch (e) {
+        console.log('Monitoring init error:', e);
+      }
+    })();
+  }, []);
+
   return (
     <SafeAreaProvider>
       <LanguageProvider>

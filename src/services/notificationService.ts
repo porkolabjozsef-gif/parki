@@ -35,11 +35,15 @@ Notifications.addNotificationResponseReceivedListener(response => {
   const packageName = response.notification.request.content.data?.packageName as string;
 
   if (actionId === 'STOP' && packageName) {
+    // Parkolás leállítása + parkoló app megnyitása
+    import('./monitorService').then(m => m.clearActiveParking());
     Linking.openURL(`intent://#Intent;package=${packageName};scheme=parki;end`).catch(() => {
       Linking.openURL(`market://details?id=${packageName}`).catch(() => {});
     });
+  } else if (actionId === 'OK') {
+    // Szándékos elmenetel - ne riasszon újra, amíg vissza nem tér
+    import('./monitorService').then(m => m.markIntentionalLeave());
   }
-  // 'OK' (szándékos elmenetel) esetén nem csinálunk semmit
 });
 
 export async function initNotifications() {
