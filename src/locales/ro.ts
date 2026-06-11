@@ -51,4 +51,5 @@ export default {
   parkingActive: 'PARCARE ACTIVĂ',
   parkingAt: 'În curs: {{app}}',
   parkingInProgress: 'ÎN CURS',
+  stopParking: 'Oprește parcarea',
 };

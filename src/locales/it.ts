@@ -51,4 +51,5 @@ export default {
   parkingActive: 'PARCHEGGIO ATTIVO',
   parkingAt: 'In corso: {{app}}',
   parkingInProgress: 'IN CORSO',
+  stopParking: 'Ferma parcheggio',
 };

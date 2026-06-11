@@ -51,4 +51,5 @@ export default {
   parkingActive: 'PARKOLÁS AKTÍV',
   parkingAt: 'Folyamatban: {{app}}',
   parkingInProgress: 'FOLYAMATBAN',
+  stopParking: 'Parkolás leállítása',
 };

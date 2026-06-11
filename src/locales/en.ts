@@ -51,4 +51,5 @@ export default {
   parkingActive: 'PARKING ACTIVE',
   parkingAt: 'In progress: {{app}}',
   parkingInProgress: 'IN PROGRESS',
+  stopParking: 'Stop parking',
 };

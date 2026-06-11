@@ -51,4 +51,5 @@ export default {
   parkingActive: '停车进行中',
   parkingAt: '进行中: {{app}}',
   parkingInProgress: '进行中',
+  stopParking: '停止停车',
 };

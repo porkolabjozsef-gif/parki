@@ -51,4 +51,5 @@ export default {
   parkingActive: 'ΣΤΑΘΜΕΥΣΗ ΕΝΕΡΓΗ',
   parkingAt: 'Σε εξέλιξη: {{app}}',
   parkingInProgress: 'ΣΕ ΕΞΕΛΙΞΗ',
+  stopParking: 'Διακοπή στάθμευσης',
 };

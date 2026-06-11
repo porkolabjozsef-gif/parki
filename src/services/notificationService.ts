@@ -29,17 +29,35 @@ export function shouldAlert(keywordFilter: boolean | undefined, title?: string, 
   return PARKING_KEYWORDS.some(kw => text.includes(kw));
 }
 
-// Értesítés gomb kezelése
+// Parkoló alkalmazás megnyitása csomagnév alapján
+export async function openParkingApp(packageName: string) {
+  // Android launch intent a csomagnévhez
+  const intentUrl = `intent://launch/#Intent;package=${packageName};action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;end`;
+  try {
+    await Linking.openURL(intentUrl);
+  } catch (_) {
+    try {
+      await Linking.sendIntent('android.intent.action.MAIN', [
+        { key: 'package', value: packageName },
+      ]);
+    } catch (_) {
+      Linking.openURL(`market://details?id=${packageName}`).catch(() => {});
+    }
+  }
+}
+
+// Értesítés gomb / kattintás kezelése
 Notifications.addNotificationResponseReceivedListener(response => {
   const actionId = response.actionIdentifier;
   const packageName = response.notification.request.content.data?.packageName as string;
 
-  if (actionId === 'STOP' && packageName) {
-    // Parkolás leállítása + parkoló app megnyitása
+  // STOP gomb VAGY az értesítésre kattintás (DEFAULT) → app megnyitása + parkolás leállítása
+  const isStop = actionId === 'STOP';
+  const isDefault = actionId === Notifications.DEFAULT_ACTION_IDENTIFIER;
+
+  if ((isStop || isDefault) && packageName) {
     import('./monitorService').then(m => m.clearActiveParking());
-    Linking.openURL(`intent://#Intent;package=${packageName};scheme=parki;end`).catch(() => {
-      Linking.openURL(`market://details?id=${packageName}`).catch(() => {});
-    });
+    openParkingApp(packageName);
   } else if (actionId === 'OK') {
     // Szándékos elmenetel - ne riasszon újra, amíg vissza nem tér
     import('./monitorService').then(m => m.markIntentionalLeave());

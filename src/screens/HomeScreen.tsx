@@ -1,8 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Animated, Image } from 'react-native';
+import { View, Text, StyleSheet, Animated, Image, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLanguage } from '../services/languageContext';
-import { getActiveParkingInfo } from '../services/monitorService';
+import { getActiveParkingInfo, clearActiveParking } from '../services/monitorService';
+import { openParkingApp } from '../services/notificationService';
 
 const GREEN = '#00E5A0';
 const ORANGE = '#FF9500';
@@ -10,7 +11,7 @@ const ORANGE = '#FF9500';
 export default function HomeScreen() {
   const pulseAnim = useRef(new Animated.Value(1)).current;
   const { t, currentLang } = useLanguage();
-  const [parking, setParking] = useState<{ appName: string; startedAt: number; iconUrl?: string } | null>(null);
+  const [parking, setParking] = useState<{ appName: string; startedAt: number; iconUrl?: string; packageName?: string } | null>(null);
   const [, tick] = useState(0);
 
   useEffect(() => {
@@ -22,15 +23,24 @@ export default function HomeScreen() {
     ).start();
   }, []);
 
+  const refresh = async () => {
+    try { setParking(await getActiveParkingInfo()); } catch (_) {}
+    tick(n => n + 1);
+  };
+
   useEffect(() => {
-    const update = async () => {
-      try { setParking(await getActiveParkingInfo()); } catch (_) {}
-      tick(n => n + 1);
-    };
-    update();
-    const iv = setInterval(update, 2000);
+    refresh();
+    const iv = setInterval(refresh, 2000);
     return () => clearInterval(iv);
   }, []);
+
+  const handleStop = async () => {
+    if (parking?.packageName) {
+      await openParkingApp(parking.packageName);
+    }
+    await clearActiveParking();
+    await refresh();
+  };
 
   const elapsed = parking ? Math.floor((Date.now() - parking.startedAt) / 1000) : 0;
   const mins = Math.floor(elapsed / 60);
@@ -58,19 +68,25 @@ export default function HomeScreen() {
         </Animated.View>
 
         {active ? (
-          <View style={styles.parkingCard}>
-            {parking!.iconUrl ? (
-              <Image source={{ uri: parking!.iconUrl }} style={styles.cardIcon} />
-            ) : (
-              <View style={styles.cardIconFallback}>
-                <Text style={styles.cardIconFallbackText}>{parking!.appName.charAt(0)}</Text>
+          <>
+            <View style={styles.parkingCard}>
+              {parking!.iconUrl ? (
+                <Image source={{ uri: parking!.iconUrl }} style={styles.cardIcon} />
+              ) : (
+                <View style={styles.cardIconFallback}>
+                  <Text style={styles.cardIconFallbackText}>{parking!.appName.charAt(0)}</Text>
+                </View>
+              )}
+              <View style={styles.cardText}>
+                <Text style={styles.cardLabel}>{t('parkingInProgress')}</Text>
+                <Text style={styles.cardAppName}>{parking!.appName}</Text>
               </View>
-            )}
-            <View style={styles.cardText}>
-              <Text style={styles.cardLabel}>{t('parkingInProgress')}</Text>
-              <Text style={styles.cardAppName}>{parking!.appName}</Text>
             </View>
-          </View>
+
+            <TouchableOpacity style={styles.stopBtn} onPress={handleStop} activeOpacity={0.8}>
+              <Text style={styles.stopBtnText}>{t('stopParking')}</Text>
+            </TouchableOpacity>
+          </>
         ) : (
           <Text style={styles.info}>{t('monitoringInfo')}</Text>
         )}
@@ -108,4 +124,9 @@ const styles = StyleSheet.create({
   cardText: { gap: 2 },
   cardLabel: { fontSize: 11, fontWeight: '700', letterSpacing: 1, color: ORANGE },
   cardAppName: { fontSize: 20, fontWeight: '800', color: '#fff' },
+  stopBtn: {
+    backgroundColor: ORANGE, paddingVertical: 16, paddingHorizontal: 40,
+    borderRadius: 14, marginTop: 4,
+  },
+  stopBtnText: { color: '#000', fontSize: 16, fontWeight: '800' },
 });

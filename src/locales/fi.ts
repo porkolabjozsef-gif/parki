@@ -51,4 +51,5 @@ export default {
   parkingActive: 'PYSÄKÖINTI AKTIIVINEN',
   parkingAt: 'Käynnissä: {{app}}',
   parkingInProgress: 'KÄYNNISSÄ',
+  stopParking: 'Lopeta pysäköinti',
 };
