@@ -1,6 +1,7 @@
 import * as Notifications from 'expo-notifications';
 import { Platform, Linking } from 'react-native';
 import { t } from './i18nService';
+import * as IntentLauncher from 'expo-intent-launcher';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -29,21 +30,18 @@ export function shouldAlert(keywordFilter: boolean | undefined, title?: string, 
   return PARKING_KEYWORDS.some(kw => text.includes(kw));
 }
 
-// Parkoló alkalmazás megnyitása csomagnév alapján
+// Parkoló alkalmazás megnyitása csomagnév alapján (natív intent)
 export async function openParkingApp(packageName: string) {
-  // Android launch intent a csomagnévhez
-  const intentUrl = `intent://launch/#Intent;package=${packageName};action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;end`;
   try {
-    await Linking.openURL(intentUrl);
-  } catch (_) {
-    try {
-      await Linking.sendIntent('android.intent.action.MAIN', [
-        { key: 'package', value: packageName },
-      ]);
-    } catch (_) {
-      Linking.openURL(`market://details?id=${packageName}`).catch(() => {});
-    }
-  }
+    await IntentLauncher.startActivityAsync('android.intent.action.MAIN', {
+      packageName: packageName,
+      category: 'android.intent.category.LAUNCHER',
+    });
+    return;
+  } catch (_) {}
+  // Fallback: Play Áruház
+  Linking.openURL(`market://details?id=${packageName}`).catch(() => {});
+}`).catch(() => {});
 }
 
 // Értesítés gomb / kattintás kezelése

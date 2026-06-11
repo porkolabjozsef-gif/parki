@@ -16,6 +16,7 @@
     "expo": "~54.0.0",
     "expo-android-notification-listener-service": "^1.1.0",
     "expo-dev-client": "~6.0.21",
+    "expo-intent-launcher": "~13.0.8",
     "expo-localization": "~17.0.9",
     "expo-location": "~19.0.8",
     "expo-notifications": "~0.32.17",
