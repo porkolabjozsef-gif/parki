@@ -10,6 +10,7 @@ import { LANGUAGES } from '../services/i18nService';
 import { useLanguage } from '../services/languageContext';
 import { fetchCommunityList, getLastSync } from '../services/communityService';
 import { openNotificationAccessSettings, isNotificationAccessGranted } from '../services/monitorService';
+import * as IntentLauncher from 'expo-intent-launcher';
 
 const GREEN = '#00E5A0';
 const BG = '#000000';
@@ -122,7 +123,7 @@ export default function SettingsScreen() {
             <Text style={notifAccess ? styles.permOk : styles.permWarn}>{notifAccess ? '✓' : '!'}</Text>
           </TouchableOpacity>
           {Platform.OS === 'android' && (
-            <TouchableOpacity style={[styles.permBtn, { marginTop: 8 }]} onPress={() => Linking.openSettings()}>
+            <TouchableOpacity style={[styles.permBtn, { marginTop: 8 }]} onPress={() => IntentLauncher.startActivityAsync('android.settings.IGNORE_BATTERY_OPTIMIZATION_SETTINGS')}>
               <View style={styles.permInfo}>
                 <Text style={styles.permTitle}>{t('batteryOptimization')}</Text>
                 <Text style={styles.permSub}>{t('batteryOptimizationSub')}</Text>
