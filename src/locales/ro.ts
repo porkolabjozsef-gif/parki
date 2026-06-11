@@ -54,4 +54,6 @@ export default {
   stopParking: 'Oprește parcarea',
   openInMaps: 'Deschideți în hărți?',
   open: 'Deschide',
+  notifAccessWarn: 'Accesul la notificări nu este activat — necesar pentru monitorizare.',
+  enable: 'Activează',
 };

@@ -54,4 +54,6 @@ export default {
   stopParking: 'Stopp parkering',
   openInMaps: 'Åpne i kart?',
   open: 'Åpne',
+  notifAccessWarn: 'Varseltilgang ikke aktivert — kreves for overvåking.',
+  enable: 'Aktiver',
 };

@@ -54,4 +54,6 @@ export default {
   stopParking: 'Zaustavi parkiranje',
   openInMaps: 'Otvoriti u kartama?',
   open: 'Otvori',
+  notifAccessWarn: 'Pristup obavijestima nije omogućen — potreban za praćenje.',
+  enable: 'Omogući',
 };

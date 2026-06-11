@@ -54,4 +54,6 @@ export default {
   stopParking: 'Arrêter le stationnement',
   openInMaps: 'Ouvrir dans les cartes?',
   open: 'Ouvrir',
+  notifAccessWarn: 'L\'accès aux notifications n\'est pas activé — requis pour la surveillance.',
+  enable: 'Activer',
 };

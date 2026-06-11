@@ -54,4 +54,6 @@ export default {
   stopParking: 'Stoppa parkering',
   openInMaps: 'Öppna i kartor?',
   open: 'Öppna',
+  notifAccessWarn: 'Aviseringsåtkomst inte aktiverad — krävs för övervakning.',
+  enable: 'Aktivera',
 };

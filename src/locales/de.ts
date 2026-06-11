@@ -54,4 +54,6 @@ export default {
   stopParking: 'Parken beenden',
   openInMaps: 'In Karten öffnen?',
   open: 'Öffnen',
+  notifAccessWarn: 'Benachrichtigungszugriff nicht aktiviert — für die Überwachung erforderlich.',
+  enable: 'Aktivieren',
 };

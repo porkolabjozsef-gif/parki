@@ -54,4 +54,6 @@ export default {
   stopParking: 'Parar estacionamento',
   openInMaps: 'Abrir nos mapas?',
   open: 'Abrir',
+  notifAccessWarn: 'Acesso a notificações desativado — necessário para monitorização.',
+  enable: 'Ativar',
 };

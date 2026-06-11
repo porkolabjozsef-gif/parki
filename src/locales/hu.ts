@@ -54,4 +54,6 @@ export default {
   stopParking: 'Parkolás leállítása',
   openInMaps: 'Megnyitja térképen?',
   open: 'Megnyitás',
+  notifAccessWarn: 'Az értesítés-hozzáférés nincs engedélyezve — a figyeléshez szükséges.',
+  enable: 'Bekapcsolás',
 };

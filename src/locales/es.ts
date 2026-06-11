@@ -54,4 +54,6 @@ export default {
   stopParking: 'Detener aparcamiento',
   openInMaps: '¿Abrir en mapas?',
   open: 'Abrir',
+  notifAccessWarn: 'Acceso a notificaciones desactivado — necesario para la supervisión.',
+  enable: 'Activar',
 };

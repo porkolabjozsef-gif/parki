@@ -54,4 +54,6 @@ export default {
   stopParking: 'Stop parking',
   openInMaps: 'Open in maps?',
   open: 'Open',
+  notifAccessWarn: 'Notification access is not enabled — required for monitoring.',
+  enable: 'Enable',
 };

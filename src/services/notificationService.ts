@@ -32,14 +32,12 @@ export function shouldAlert(keywordFilter: boolean | undefined, title?: string, 
 
 // Parkoló alkalmazás megnyitása csomagnév alapján (natív intent)
 export async function openParkingApp(packageName: string) {
+  // openApplication → közvetlenül az adott appot indítja (getLaunchIntentForPackage, nincs választó)
   try {
-    await IntentLauncher.startActivityAsync('android.intent.action.MAIN', {
-      packageName: packageName,
-      category: 'android.intent.category.LAUNCHER',
-    });
+    IntentLauncher.openApplication(packageName);
     return;
   } catch (_) {}
-  // Fallback: Play Áruház
+  // Fallback: Play Áruház (ha az app nincs telepítve)
   Linking.openURL(`market://details?id=${packageName}`).catch(() => {});
 }
 

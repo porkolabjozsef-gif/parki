@@ -54,4 +54,6 @@ export default {
   stopParking: '駐車を停止',
   openInMaps: '地図で開きますか？',
   open: '開く',
+  notifAccessWarn: '通知アクセスが無効です — 監視に必要です。',
+  enable: '有効にする',
 };

@@ -54,4 +54,6 @@ export default {
   stopParking: 'Zatrzymaj parkowanie',
   openInMaps: 'Otworzyć w mapach?',
   open: 'Otwórz',
+  notifAccessWarn: 'Dostęp do powiadomień wyłączony — wymagany do monitorowania.',
+  enable: 'Włącz',
 };

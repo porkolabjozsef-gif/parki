@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, Linking, Platform } from 'react-native';
+import { Alert, Linking, Platform, View, Text, StyleSheet } from 'react-native';
 import { WebView } from 'react-native-webview';
 import { useLanguage } from '../services/languageContext';
 
@@ -7,30 +7,27 @@ interface Props {
   lat: number;
   lng: number;
   label?: string;
+  elapsedStr?: string;
 }
 
-export default function ParkingMap({ lat, lng, label }: Props) {
+export default function ParkingMap({ lat, lng, label, elapsedStr }: Props) {
   const { t } = useLanguage();
 
   const openInMaps = () => {
-    Alert.alert(
-      t('openInMaps'),
-      '',
-      [
-        { text: t('cancel'), style: 'cancel' },
-        {
-          text: t('open'),
-          onPress: () => {
-            const geoUrl = Platform.select({
-              android: `geo:${lat},${lng}?q=${lat},${lng}(${encodeURIComponent(label || 'Parking')})`,
-              ios: `maps:0,0?q=${lat},${lng}`,
-              default: `geo:${lat},${lng}`,
-            });
-            Linking.openURL(geoUrl!).catch(() => {});
-          },
+    Alert.alert(t('openInMaps'), '', [
+      { text: t('cancel'), style: 'cancel' },
+      {
+        text: t('open'),
+        onPress: () => {
+          const geoUrl = Platform.select({
+            android: `geo:${lat},${lng}?q=${lat},${lng}(${encodeURIComponent(label || 'Parking')})`,
+            ios: `maps:0,0?q=${lat},${lng}`,
+            default: `geo:${lat},${lng}`,
+          });
+          Linking.openURL(geoUrl!).catch(() => {});
         },
-      ]
-    );
+      },
+    ]);
   };
 
   const html = `
@@ -43,11 +40,16 @@ export default function ParkingMap({ lat, lng, label }: Props) {
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <style>
     html, body, #map { margin: 0; padding: 0; height: 100%; width: 100%; background: #0D0D0D; }
-    .leaflet-control-attribution { font-size: 8px; opacity: 0.5; }
-    .parking-pin {
-      background: #FF9500; width: 20px; height: 20px; border-radius: 50% 50% 50% 0;
-      transform: rotate(-45deg); border: 2px solid #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-      cursor: pointer;
+    .leaflet-control-attribution { font-size: 7px; opacity: 0.4; }
+    .pin-wrap {
+      width: 30px; height: 42px; cursor: pointer;
+      display: flex; align-items: flex-start; justify-content: center;
+    }
+    .pin-drop {
+      width: 30px; height: 30px;
+      background: #1A6BFF; border: 3px solid #fff;
+      border-radius: 50% 50% 50% 0; transform: rotate(-45deg);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.5);
     }
   </style>
 </head>
@@ -58,25 +60,43 @@ export default function ParkingMap({ lat, lng, label }: Props) {
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19, attribution: '© OSM'
     }).addTo(map);
-    var icon = L.divIcon({ className: '', html: '<div class="parking-pin"></div>', iconSize: [20,20], iconAnchor: [10,20] });
-    var marker = L.marker([${lat}, ${lng}], { icon: icon }).addTo(map);
-    marker.on('click', function() {
-      window.ReactNativeWebView.postMessage('pin-click');
+    var icon = L.divIcon({
+      className: '',
+      html: '<div class="pin-wrap"><div class="pin-drop"></div></div>',
+      iconSize: [30, 42], iconAnchor: [15, 42]
     });
+    var marker = L.marker([${lat}, ${lng}], { icon: icon }).addTo(map);
+    marker.on('click', function() { window.ReactNativeWebView.postMessage('pin-click'); });
   </script>
 </body>
 </html>`;
 
   return (
-    <WebView
-      source={{ html }}
-      style={{ flex: 1, backgroundColor: '#0D0D0D' }}
-      scrollEnabled={false}
-      onMessage={(event) => {
-        if (event.nativeEvent.data === 'pin-click') openInMaps();
-      }}
-      javaScriptEnabled
-      domStorageEnabled
-    />
+    <View style={styles.wrap}>
+      <WebView
+        source={{ html }}
+        style={styles.webview}
+        scrollEnabled={false}
+        onMessage={(e) => { if (e.nativeEvent.data === 'pin-click') openInMaps(); }}
+        javaScriptEnabled
+        domStorageEnabled
+      />
+      {elapsedStr ? (
+        <View style={styles.timeOverlay} pointerEvents="none">
+          <Text style={styles.timeText}>🅿️ {elapsedStr}</Text>
+        </View>
+      ) : null}
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  wrap: { flex: 1, backgroundColor: '#0D0D0D' },
+  webview: { flex: 1, backgroundColor: '#0D0D0D' },
+  timeOverlay: {
+    position: 'absolute', bottom: 0, left: 0, right: 0,
+    backgroundColor: 'rgba(0,0,0,0.55)', paddingVertical: 10,
+    alignItems: 'center',
+  },
+  timeText: { color: '#fff', fontSize: 22, fontWeight: '800', fontVariant: ['tabular-nums'] },
+});

@@ -54,4 +54,6 @@ export default {
   stopParking: 'Parkı durdur',
   openInMaps: 'Haritada açılsın mı?',
   open: 'Aç',
+  notifAccessWarn: 'Bildirim erişimi etkin değil — izleme için gerekli.',
+  enable: 'Etkinleştir',
 };

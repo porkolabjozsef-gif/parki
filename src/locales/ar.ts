@@ -54,4 +54,6 @@ export default {
   stopParking: 'إيقاف الوقوف',
   openInMaps: 'فتح في الخرائط؟',
   open: 'فتح',
+  notifAccessWarn: 'الوصول إلى الإشعارات غير مفعّل — مطلوب للمراقبة.',
+  enable: 'تفعيل',
 };

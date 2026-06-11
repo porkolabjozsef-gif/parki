@@ -54,4 +54,6 @@ export default {
   stopParking: '停止停车',
   openInMaps: '在地图中打开？',
   open: '打开',
+  notifAccessWarn: '通知访问未启用 — 监控所需。',
+  enable: '启用',
 };

@@ -54,4 +54,6 @@ export default {
   stopParking: 'Zastavit parkování',
   openInMaps: 'Otevřít v mapách?',
   open: 'Otevřít',
+  notifAccessWarn: 'Přístup k oznámením není povolen — nutný pro sledování.',
+  enable: 'Povolit',
 };

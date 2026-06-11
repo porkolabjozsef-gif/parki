@@ -54,4 +54,6 @@ export default {
   stopParking: 'Parkeren stoppen',
   openInMaps: 'Openen in kaarten?',
   open: 'Openen',
+  notifAccessWarn: 'Meldingstoegang niet ingeschakeld — vereist voor monitoring.',
+  enable: 'Inschakelen',
 };
