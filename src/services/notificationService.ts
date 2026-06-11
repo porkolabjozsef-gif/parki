@@ -41,7 +41,6 @@ export async function openParkingApp(packageName: string) {
   } catch (_) {}
   // Fallback: Play Áruház
   Linking.openURL(`market://details?id=${packageName}`).catch(() => {});
-}`).catch(() => {});
 }
 
 // Értesítés gomb / kattintás kezelése
