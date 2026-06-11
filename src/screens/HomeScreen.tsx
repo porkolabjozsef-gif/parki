@@ -75,24 +75,7 @@ export default function HomeScreen() {
               <Text style={[styles.indicatorLabel, { color: GREEN }]}>{t('monitoring')}</Text>
             </Animated.View>
             <Text style={styles.info}>{t('monitoringInfo')}</Text>
-            <TouchableOpacity
-              style={styles.testBtn}
-              onPress={async () => {
-                try {
-                  await Location.requestForegroundPermissionsAsync();
-                  const loc = await Location.getCurrentPositionAsync({});
-                  await AsyncStorage.setItem('parki_active_parking', JSON.stringify({
-                    packageName: 'net.parkl.androidclient', appName: 'Parkl',
-                    lat: loc.coords.latitude, lng: loc.coords.longitude,
-                    startedAt: Date.now(), intentionalLeave: false, reminded: false,
-                    iconUrl: 'https://play-lh.googleusercontent.com/P9Xv6QIfoZ2WF7NcWD9AKhBNYFe3xirGLuc2rJTDfP6qTKJU68UpE4FcUT7MUCadvS8=s96',
-                  }));
-                  await refresh();
-                } catch (e) { console.log('teszt hiba', e); }
-              }}
-            >
-              <Text style={styles.testBtnText}>TESZT: parkolás itt</Text>
-            </TouchableOpacity>
+
           </>
         )}
 

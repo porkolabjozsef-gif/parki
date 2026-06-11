@@ -31,14 +31,21 @@ export function shouldAlert(keywordFilter: boolean | undefined, title?: string, 
 }
 
 // Parkoló alkalmazás megnyitása csomagnév alapján (natív intent)
+// Egyes appoknak a className eltér a packageName.MainActivity sémától
+const CLASS_NAME_OVERRIDES: Record<string, string> = {
+  'net.parkl.androidclient': 'net.parkl.MainActivity',
+};
+
 export async function openParkingApp(packageName: string) {
-  // openApplication → közvetlenül az adott appot indítja (getLaunchIntentForPackage, nincs választó)
   try {
-    IntentLauncher.openApplication(packageName);
-    return;
-  } catch (_) {}
-  // Fallback: Play Áruház (ha az app nincs telepítve)
-  Linking.openURL(`market://details?id=${packageName}`).catch(() => {});
+    const params: any = { packageName, flags: 0x10000000 };
+    if (CLASS_NAME_OVERRIDES[packageName]) {
+      params.className = CLASS_NAME_OVERRIDES[packageName];
+    }
+    await IntentLauncher.startActivityAsync('android.intent.action.MAIN', params);
+  } catch (_) {
+    Linking.openURL(`market://details?id=${packageName}`).catch(() => {});
+  }
 }
 
 // Értesítés gomb / kattintás kezelése
