@@ -3,7 +3,7 @@ import {
   View, Text, StyleSheet, TouchableOpacity, Image,
   FlatList, TextInput, Modal, Alert, ScrollView,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { loadState, saveState, WatchedApp } from '../services/storageService';
 import { useLanguage } from '../services/languageContext';
 import { submitNewApp, extractPackageFromUrl } from '../services/communityService';
@@ -39,6 +39,7 @@ function getAppInitials(name: string) {
 export default function AppsScreen() {
   const [apps, setApps] = useState<WatchedApp[]>([]);
   const [failedIcons, setFailedIcons] = useState<Record<string, boolean>>({});
+  const insets = useSafeAreaInsets();
   const [submitModal, setSubmitModal] = useState(false);
   const [appName, setAppName] = useState('');
   const [storeUrl, setStoreUrl] = useState('');
@@ -150,7 +151,7 @@ export default function AppsScreen() {
 
       <Modal visible={submitModal} transparent animationType="slide">
         <View style={styles.modalOverlay}>
-          <View style={styles.modalCard}>
+          <View style={[styles.modalCard, { paddingBottom: 24 + insets.bottom }]}>
             <Text style={styles.modalTitle}>{t('submitTitle')}</Text>
             <Text style={styles.submitGuide}>{t('submitGuide')}</Text>
 
@@ -243,7 +244,7 @@ const styles = StyleSheet.create({
   submitFooterText: { color: GREEN, fontWeight: '700', fontSize: 14 },
   submitFooterSub: { color: '#444', fontSize: 12, textAlign: 'center' },
   modalOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.85)', justifyContent: 'flex-end' },
-  modalCard: { backgroundColor: '#111', borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: 24, maxHeight: '90%', gap: 12 },
+  modalCard: { backgroundColor: '#111', borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: 24, paddingBottom: 24, maxHeight: '90%', gap: 12 },
   modalTitle: { color: '#fff', fontSize: 18, fontWeight: '700' },
   submitGuide: { color: '#555', fontSize: 13, lineHeight: 22, backgroundColor: '#0A0A0A', padding: 12, borderRadius: 10 },
   input: { backgroundColor: '#1A1A1A', borderRadius: 12, padding: 14, color: '#fff', fontSize: 14, borderWidth: 1, borderColor: '#222' },
