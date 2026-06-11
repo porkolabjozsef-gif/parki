@@ -74,12 +74,12 @@ export async function initNotifications() {
     await Notifications.setNotificationCategoryAsync('PARKING', [
       {
         identifier: 'STOP',
-        buttonTitle: `🅿️ ${t('notifStop')}`,
+        buttonTitle: t('notifStop'),
         options: { opensAppToForeground: true },
       },
       {
         identifier: 'OK',
-        buttonTitle: `✓ ${t('notifOk')}`,
+        buttonTitle: t('notifOk'),
         options: { opensAppToForeground: false },
       },
     ]);
@@ -99,7 +99,7 @@ export async function initNotifications() {
 export async function sendParkingReminder(appName: string, packageName: string) {
   await Notifications.scheduleNotificationAsync({
     content: {
-      title: `🅿️ ${t('notifTitle')}`,
+      title: t('notifTitle'),
       body: t('notifBody', { app: appName }),
       sound: 'default',
       categoryIdentifier: 'PARKING',
