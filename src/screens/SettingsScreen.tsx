@@ -48,6 +48,10 @@ export default function SettingsScreen() {
     setBtLoading(true);
     setBtModal(true);
     try {
+      if (Platform.OS === 'android') {
+        const { PermissionsAndroid } = require('react-native');
+        await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.BLUETOOTH_CONNECT);
+      }
       const paired = await RNBluetoothClassic.getBondedDevices();
       setBtDevices(paired.map(d => ({ name: d.name || d.address, address: d.address })));
     } catch (e) {
