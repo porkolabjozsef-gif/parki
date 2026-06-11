@@ -167,8 +167,8 @@ export default function SettingsScreen() {
           {Platform.OS === 'android' && (
             <TouchableOpacity style={[styles.permBtn, { marginTop: 8 }]} onPress={openBtPicker}>
               <View style={styles.permInfo}>
-                <Text style={styles.permTitle}>🚗 Autó Bluetooth eszköz</Text>
-                <Text style={styles.permSub}>{carDevice ?? 'Nincs kiválasztva'}</Text>
+                <Text style={styles.permTitle}>{t('carDeviceTitle')}</Text>
+                <Text style={styles.permSub}>{carDevice ?? t('carDeviceNotSelected')}</Text>
               </View>
               <Text style={styles.permArrow}>›</Text>
             </TouchableOpacity>
@@ -179,7 +179,7 @@ export default function SettingsScreen() {
         <Modal visible={btModal} transparent animationType="slide">
           <View style={styles.modalOverlay}>
             <View style={styles.modalCard}>
-              <Text style={styles.modalTitle}>Válassz Bluetooth eszközt</Text>
+              <Text style={styles.modalTitle}>{t('carDeviceSelectTitle')}</Text>
               {btLoading && <ActivityIndicator color={GREEN} />}
               {btDevices.map(d => (
                 <TouchableOpacity key={d.address} style={styles.btDeviceBtn} onPress={() => selectBtDevice(d.name)}>
@@ -191,7 +191,7 @@ export default function SettingsScreen() {
                 <Text style={{ color: '#666', textAlign: 'center' }}>Nincs párosított eszköz</Text>
               )}
               <TouchableOpacity style={[styles.btDeviceBtn, { marginTop: 8 }]} onPress={() => selectBtDevice(null)}>
-                <Text style={{ color: '#ff4444' }}>Törlés / Kikapcsolás</Text>
+                <Text style={{ color: '#ff4444' }}>{t('carDeviceRemove')}</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => setBtModal(false)} style={{ marginTop: 8, alignItems: 'center' }}>
                 <Text style={{ color: '#666' }}>Mégse</Text>
