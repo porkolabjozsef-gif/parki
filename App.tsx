@@ -10,6 +10,8 @@ import SettingsScreen from './src/screens/SettingsScreen';
 import { LanguageProvider, useLanguage } from './src/services/languageContext';
 import { initNotifications } from './src/services/notificationService';
 import { startMonitoring } from './src/services/monitorService';
+import { startBluetoothMonitor, setCarDeviceName } from './src/services/bluetoothService';
+import { loadState } from './src/services/storageService';
 
 const Tab = createBottomTabNavigator();
 
@@ -44,6 +46,9 @@ export default function App() {
       try {
         await initNotifications();
         await startMonitoring();
+        const state = await loadState();
+        setCarDeviceName(state.carDeviceName ?? null);
+        startBluetoothMonitor();
       } catch (e) {
         console.log('Monitoring init error:', e);
       }

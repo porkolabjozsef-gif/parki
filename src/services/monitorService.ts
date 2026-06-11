@@ -3,6 +3,8 @@ import * as Location from 'expo-location';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { loadState, WatchedApp } from './storageService';
 import { sendParkingReminder, shouldAlert } from './notificationService';
+import { getCarDeviceName } from './bluetoothService';
+import RNBluetoothClassic from 'react-native-bluetooth-classic';
 
 const GEOFENCE_RADIUS = 200; // méter
 const PARKING_KEY = 'parki_active_parking';
@@ -115,6 +117,24 @@ async function checkGeofence() {
     }
   } else {
     left = Date.now() - parking.startedAt > delayMs;
+  }
+
+  // Elhagyta a helyet + autó BT csatlakozva → automatikus leállítás
+  if (left && !parking.intentionalLeave) {
+    const carName = getCarDeviceName();
+    if (carName) {
+      try {
+        const paired = await RNBluetoothClassic.getBondedDevices();
+        const connected = await Promise.all(paired.map(d => d.isConnected()));
+        const carConnected = paired.some((d, i) =>
+          connected[i] && d.name?.toLowerCase().includes(carName.toLowerCase())
+        );
+        if (carConnected) {
+          await clearActiveParking();
+          return;
+        }
+      } catch (_) {}
+    }
   }
 
   // Elhagyta a helyet, nem szándékos, még nem emlékeztettük, és letelt a késleltetés

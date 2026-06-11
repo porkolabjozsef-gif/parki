@@ -11,6 +11,8 @@ import { useLanguage } from '../services/languageContext';
 import { fetchCommunityList, getLastSync } from '../services/communityService';
 import { openNotificationAccessSettings, isNotificationAccessGranted } from '../services/monitorService';
 import * as IntentLauncher from 'expo-intent-launcher';
+import RNBluetoothClassic from 'react-native-bluetooth-classic';
+import { setCarDeviceName, getCarDeviceName } from '../services/bluetoothService';
 
 const GREEN = '#00E5A0';
 const BG = '#000000';
@@ -24,14 +26,43 @@ export default function SettingsScreen() {
   const [langModal, setLangModal] = useState(false);
   const [syncing, setSyncing] = useState(false);
   const [notifAccess, setNotifAccess] = useState(false);
+  const [btModal, setBtModal] = useState(false);
+  const [btDevices, setBtDevices] = useState<{name: string, address: string}[]>([]);
+  const [carDevice, setCarDevice] = useState<string | null>(null);
+  const [btLoading, setBtLoading] = useState(false);
   const [lastSync, setLastSync] = useState<string | null>(null);
   const { t, currentLang, changeLanguage } = useLanguage();
 
   useEffect(() => {
-    loadState().then(s => setDelay(s.delaySeconds));
+    loadState().then(s => {
+      setDelay(s.delaySeconds);
+      const saved = s.carDeviceName ?? null;
+      setCarDevice(saved);
+      setCarDeviceName(saved);
+    });
     getLastSync().then(setLastSync);
     try { setNotifAccess(isNotificationAccessGranted()); } catch (_) {}
   }, []);
+
+  const openBtPicker = async () => {
+    setBtLoading(true);
+    setBtModal(true);
+    try {
+      const paired = await RNBluetoothClassic.getBondedDevices();
+      setBtDevices(paired.map(d => ({ name: d.name || d.address, address: d.address })));
+    } catch (e) {
+      setBtDevices([]);
+    }
+    setBtLoading(false);
+  };
+
+  const selectBtDevice = async (name: string | null) => {
+    setCarDevice(name);
+    setCarDeviceName(name);
+    const state = await loadState();
+    await saveState({ ...state, carDeviceName: name });
+    setBtModal(false);
+  };
 
   const saveDelay = async (val: number) => {
     setDelay(val);
@@ -131,7 +162,43 @@ export default function SettingsScreen() {
               <Text style={styles.permArrow}>›</Text>
             </TouchableOpacity>
           )}
+
+          {/* Autó Bluetooth eszköz */}
+          {Platform.OS === 'android' && (
+            <TouchableOpacity style={[styles.permBtn, { marginTop: 8 }]} onPress={openBtPicker}>
+              <View style={styles.permInfo}>
+                <Text style={styles.permTitle}>🚗 Autó Bluetooth eszköz</Text>
+                <Text style={styles.permSub}>{carDevice ?? 'Nincs kiválasztva'}</Text>
+              </View>
+              <Text style={styles.permArrow}>›</Text>
+            </TouchableOpacity>
+          )}
         </View>
+
+        {/* BT eszköz választó modal */}
+        <Modal visible={btModal} transparent animationType="slide">
+          <View style={styles.modalOverlay}>
+            <View style={styles.modalCard}>
+              <Text style={styles.modalTitle}>Válassz Bluetooth eszközt</Text>
+              {btLoading && <ActivityIndicator color={GREEN} />}
+              {btDevices.map(d => (
+                <TouchableOpacity key={d.address} style={styles.btDeviceBtn} onPress={() => selectBtDevice(d.name)}>
+                  <Text style={styles.btDeviceName}>{d.name}</Text>
+                  <Text style={styles.btDeviceAddr}>{d.address}</Text>
+                </TouchableOpacity>
+              ))}
+              {!btLoading && btDevices.length === 0 && (
+                <Text style={{ color: '#666', textAlign: 'center' }}>Nincs párosított eszköz</Text>
+              )}
+              <TouchableOpacity style={[styles.btDeviceBtn, { marginTop: 8 }]} onPress={() => selectBtDevice(null)}>
+                <Text style={{ color: '#ff4444' }}>Törlés / Kikapcsolás</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => setBtModal(false)} style={{ marginTop: 8, alignItems: 'center' }}>
+                <Text style={{ color: '#666' }}>Mégse</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
 
         {/* Névjegy */}
         <View style={styles.card}>
@@ -222,4 +289,7 @@ const styles = StyleSheet.create({
   langCheck: { color: GREEN, fontWeight: '700' },
   modalClose: { marginTop: 16, padding: 16, borderRadius: 12, backgroundColor: '#1A1A1A', alignItems: 'center' },
   modalCloseText: { color: '#888', fontWeight: '600', fontSize: 15 },
+  btDeviceBtn: { padding: 14, borderRadius: 10, backgroundColor: "#161616", marginTop: 8 },
+  btDeviceName: { color: "#fff", fontSize: 15, fontWeight: "600" },
+  btDeviceAddr: { color: "#555", fontSize: 12, marginTop: 2 },
 });

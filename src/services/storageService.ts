@@ -13,6 +13,7 @@ export interface AppState {
   isMonitoring: boolean;
   delaySeconds: number;
   watchedApps: WatchedApp[];
+  carDeviceName: string | null;
 }
 
 const ICON = (id: string) => `https://play-lh.googleusercontent.com/${id}=s96`;
@@ -41,6 +42,7 @@ export async function loadState(): Promise<AppState> {
     isMonitoring: true,
     delaySeconds: 30,
     watchedApps: DEFAULT_APPS,
+    carDeviceName: null,
   };
 }
 
