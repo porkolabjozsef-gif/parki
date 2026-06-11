@@ -52,4 +52,6 @@ export default {
   parkingAt: 'Em curso: {{app}}',
   parkingInProgress: 'EM CURSO',
   stopParking: 'Parar estacionamento',
+  openInMaps: 'Abrir nos mapas?',
+  open: 'Abrir',
 };

@@ -52,4 +52,6 @@ export default {
   parkingAt: 'În curs: {{app}}',
   parkingInProgress: 'ÎN CURS',
   stopParking: 'Oprește parcarea',
+  openInMaps: 'Deschideți în hărți?',
+  open: 'Deschide',
 };

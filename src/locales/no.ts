@@ -52,4 +52,6 @@ export default {
   parkingAt: 'Pågår: {{app}}',
   parkingInProgress: 'PÅGÅR',
   stopParking: 'Stopp parkering',
+  openInMaps: 'Åpne i kart?',
+  open: 'Åpne',
 };

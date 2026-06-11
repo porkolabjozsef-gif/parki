@@ -52,4 +52,6 @@ export default {
   parkingAt: 'I gang: {{app}}',
   parkingInProgress: 'I GANG',
   stopParking: 'Stop parkering',
+  openInMaps: 'Åbn i kort?',
+  open: 'Åbn',
 };

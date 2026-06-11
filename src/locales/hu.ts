@@ -52,4 +52,6 @@ export default {
   parkingAt: 'Folyamatban: {{app}}',
   parkingInProgress: 'FOLYAMATBAN',
   stopParking: 'Parkolás leállítása',
+  openInMaps: 'Megnyitja térképen?',
+  open: 'Megnyitás',
 };

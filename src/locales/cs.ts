@@ -52,4 +52,6 @@ export default {
   parkingAt: 'Probíhá: {{app}}',
   parkingInProgress: 'PROBÍHÁ',
   stopParking: 'Zastavit parkování',
+  openInMaps: 'Otevřít v mapách?',
+  open: 'Otevřít',
 };

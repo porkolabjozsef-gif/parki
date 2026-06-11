@@ -52,4 +52,6 @@ export default {
   parkingAt: 'Käynnissä: {{app}}',
   parkingInProgress: 'KÄYNNISSÄ',
   stopParking: 'Lopeta pysäköinti',
+  openInMaps: 'Avataanko kartoissa?',
+  open: 'Avaa',
 };

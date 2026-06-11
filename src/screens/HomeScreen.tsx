@@ -1,17 +1,21 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Animated, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Animated, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLanguage } from '../services/languageContext';
 import { getActiveParkingInfo, clearActiveParking } from '../services/monitorService';
 import { openParkingApp } from '../services/notificationService';
+import ParkingMap from '../components/ParkingMap';
 
 const GREEN = '#00E5A0';
 const ORANGE = '#FF9500';
 
+const BIG = 220;
+const SMALL = Math.round(BIG * 0.65);
+
 export default function HomeScreen() {
   const pulseAnim = useRef(new Animated.Value(1)).current;
   const { t, currentLang } = useLanguage();
-  const [parking, setParking] = useState<{ appName: string; startedAt: number; iconUrl?: string; packageName?: string } | null>(null);
+  const [parking, setParking] = useState<{ appName: string; startedAt: number; iconUrl?: string; packageName: string; lat: number; lng: number } | null>(null);
   const [, tick] = useState(0);
 
   useEffect(() => {
@@ -35,9 +39,7 @@ export default function HomeScreen() {
   }, []);
 
   const handleStop = async () => {
-    if (parking?.packageName) {
-      await openParkingApp(parking.packageName);
-    }
+    if (parking?.packageName) await openParkingApp(parking.packageName);
     await clearActiveParking();
     await refresh();
   };
@@ -48,47 +50,53 @@ export default function HomeScreen() {
   const elapsedStr = `${mins}:${secs.toString().padStart(2, '0')}`;
 
   const active = !!parking;
-  const color = active ? ORANGE : GREEN;
+  const hasGps = active && (parking!.lat !== 0 || parking!.lng !== 0);
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.center}>
-        <Text style={styles.logo}>Par<Text style={[styles.accent, { color }]}>ki</Text></Text>
+        <Text style={styles.logo}>Par<Text style={[styles.accent, { color: active ? ORANGE : GREEN }]}>ki</Text></Text>
         <Text style={styles.sub}>{t('appSub')}</Text>
 
-        <Animated.View style={[
-          styles.indicator,
-          { borderColor: color, backgroundColor: active ? 'rgba(255,149,0,0.08)' : 'rgba(0,229,160,0.08)', transform: [{ scale: pulseAnim }] },
-        ]}>
-          <Text style={styles.indicatorEmoji}>{active ? '🅿️' : '🔍'}</Text>
-          <Text style={[styles.indicatorLabel, { color }]}>
-            {active ? t('parkingActive') : t('monitoring')}
-          </Text>
-          {active && <Text style={styles.timer}>{elapsedStr}</Text>}
-        </Animated.View>
-
-        {active ? (
+        {!active && (
           <>
-            <View style={styles.parkingCard}>
-              {parking!.iconUrl ? (
-                <Image source={{ uri: parking!.iconUrl }} style={styles.cardIcon} />
+            <Animated.View style={[styles.circleBase, styles.monitorCircle, { transform: [{ scale: pulseAnim }] }]}>
+              <Text style={styles.indicatorEmoji}>🔍</Text>
+              <Text style={[styles.indicatorLabel, { color: GREEN }]}>{t('monitoring')}</Text>
+            </Animated.View>
+            <Text style={styles.info}>{t('monitoringInfo')}</Text>
+          </>
+        )}
+
+        {active && (
+          <>
+            <View style={styles.mapArea}>
+              {hasGps ? (
+                <View style={styles.mapCircle}>
+                  <ParkingMap lat={parking!.lat} lng={parking!.lng} label={parking!.appName} />
+                </View>
               ) : (
-                <View style={styles.cardIconFallback}>
-                  <Text style={styles.cardIconFallbackText}>{parking!.appName.charAt(0)}</Text>
+                <View style={[styles.circleBase, styles.noGpsCircle]}>
+                  <Text style={styles.indicatorEmoji}>🅿️</Text>
+                  <Text style={[styles.indicatorLabel, { color: ORANGE }]}>{t('parkingActive')}</Text>
                 </View>
               )}
-              <View style={styles.cardText}>
-                <Text style={styles.cardLabel}>{t('parkingInProgress')}</Text>
-                <Text style={styles.cardAppName}>{parking!.appName}</Text>
+
+              {/* Kis kör jobbra fent: P + idő */}
+              <View style={styles.smallCircle}>
+                <Text style={styles.smallEmoji}>🅿️</Text>
+                <Text style={styles.smallTimer}>{elapsedStr}</Text>
               </View>
             </View>
 
-            <TouchableOpacity style={styles.stopBtn} onPress={handleStop} activeOpacity={0.8}>
+            <View style={styles.appRow}>
+              <Text style={styles.appNameText}>{parking!.appName}</Text>
+            </View>
+
+            <TouchableOpacity style={styles.stopBtn} onPress={handleStop} activeOpacity={0.85}>
               <Text style={styles.stopBtnText}>{t('stopParking')}</Text>
             </TouchableOpacity>
           </>
-        ) : (
-          <Text style={styles.info}>{t('monitoringInfo')}</Text>
         )}
       </View>
     </SafeAreaView>
@@ -97,36 +105,34 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#000' },
-  center: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 24 },
+  center: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 20 },
   logo: { fontSize: 42, fontWeight: '800', color: '#fff', letterSpacing: -1 },
   accent: { color: GREEN },
   sub: { fontSize: 14, color: '#444', marginTop: -16 },
-  indicator: {
-    width: 180, height: 180, borderRadius: 90,
-    borderWidth: 2,
-    alignItems: 'center', justifyContent: 'center', gap: 6,
+  circleBase: {
+    width: BIG, height: BIG, borderRadius: BIG / 2,
+    borderWidth: 2, alignItems: 'center', justifyContent: 'center', gap: 6,
   },
+  monitorCircle: { borderColor: GREEN, backgroundColor: 'rgba(0,229,160,0.08)' },
+  noGpsCircle: { borderColor: ORANGE, backgroundColor: 'rgba(255,149,0,0.08)' },
   indicatorEmoji: { fontSize: 44 },
   indicatorLabel: { fontSize: 10, fontWeight: '700', letterSpacing: 1.5 },
-  timer: { fontSize: 24, fontWeight: '800', color: '#fff', marginTop: 4, fontVariant: ['tabular-nums'] },
   info: { fontSize: 13, color: '#444', textAlign: 'center', paddingHorizontal: 40 },
-  parkingCard: {
-    flexDirection: 'row', alignItems: 'center', gap: 14,
-    backgroundColor: '#0D0D0D', borderWidth: 1, borderColor: 'rgba(255,149,0,0.3)',
-    borderRadius: 16, padding: 16, paddingRight: 24,
+  mapArea: { width: BIG, height: BIG, alignItems: 'center', justifyContent: 'center' },
+  mapCircle: {
+    width: BIG, height: BIG, borderRadius: BIG / 2, overflow: 'hidden',
+    borderWidth: 2, borderColor: ORANGE, backgroundColor: '#0D0D0D',
   },
-  cardIcon: { width: 48, height: 48, borderRadius: 12 },
-  cardIconFallback: {
-    width: 48, height: 48, borderRadius: 12, backgroundColor: 'rgba(255,149,0,0.15)',
-    alignItems: 'center', justifyContent: 'center',
+  smallCircle: {
+    position: 'absolute', top: -SMALL * 0.15, right: -SMALL * 0.15,
+    width: SMALL, height: SMALL, borderRadius: SMALL / 2,
+    backgroundColor: '#0D0D0D', borderWidth: 2, borderColor: ORANGE,
+    alignItems: 'center', justifyContent: 'center', gap: 2,
   },
-  cardIconFallbackText: { color: ORANGE, fontSize: 22, fontWeight: '800' },
-  cardText: { gap: 2 },
-  cardLabel: { fontSize: 11, fontWeight: '700', letterSpacing: 1, color: ORANGE },
-  cardAppName: { fontSize: 20, fontWeight: '800', color: '#fff' },
-  stopBtn: {
-    backgroundColor: ORANGE, paddingVertical: 16, paddingHorizontal: 40,
-    borderRadius: 14, marginTop: 4,
-  },
+  smallEmoji: { fontSize: 24 },
+  smallTimer: { fontSize: 26, fontWeight: '800', color: '#fff', fontVariant: ['tabular-nums'] },
+  appRow: { marginTop: 4 },
+  appNameText: { fontSize: 18, fontWeight: '800', color: '#fff' },
+  stopBtn: { backgroundColor: ORANGE, paddingVertical: 16, paddingHorizontal: 40, borderRadius: 14, marginTop: 4 },
   stopBtnText: { color: '#000', fontSize: 16, fontWeight: '800' },
 });

@@ -52,4 +52,6 @@ export default {
   parkingAt: 'W toku: {{app}}',
   parkingInProgress: 'W TOKU',
   stopParking: 'Zatrzymaj parkowanie',
+  openInMaps: 'Otworzyć w mapach?',
+  open: 'Otwórz',
 };

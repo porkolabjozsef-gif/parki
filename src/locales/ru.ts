@@ -52,4 +52,6 @@ export default {
   parkingAt: 'В процессе: {{app}}',
   parkingInProgress: 'В ПРОЦЕССЕ',
   stopParking: 'Остановить парковку',
+  openInMaps: 'Открыть в картах?',
+  open: 'Открыть',
 };

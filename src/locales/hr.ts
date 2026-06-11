@@ -52,4 +52,6 @@ export default {
   parkingAt: 'U tijeku: {{app}}',
   parkingInProgress: 'U TIJEKU',
   stopParking: 'Zaustavi parkiranje',
+  openInMaps: 'Otvoriti u kartama?',
+  open: 'Otvori',
 };

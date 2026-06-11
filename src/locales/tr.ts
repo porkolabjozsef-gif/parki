@@ -52,4 +52,6 @@ export default {
   parkingAt: 'Devam ediyor: {{app}}',
   parkingInProgress: 'DEVAM EDIYOR',
   stopParking: 'Parkı durdur',
+  openInMaps: 'Haritada açılsın mı?',
+  open: 'Aç',
 };

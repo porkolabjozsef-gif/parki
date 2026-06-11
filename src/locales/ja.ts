@@ -52,4 +52,6 @@ export default {
   parkingAt: '進行中: {{app}}',
   parkingInProgress: '進行中',
   stopParking: '駐車を停止',
+  openInMaps: '地図で開きますか？',
+  open: '開く',
 };

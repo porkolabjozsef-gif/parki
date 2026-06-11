@@ -52,4 +52,6 @@ export default {
   parkingAt: 'Σε εξέλιξη: {{app}}',
   parkingInProgress: 'ΣΕ ΕΞΕΛΙΞΗ',
   stopParking: 'Διακοπή στάθμευσης',
+  openInMaps: 'Άνοιγμα στους χάρτες;',
+  open: 'Άνοιγμα',
 };

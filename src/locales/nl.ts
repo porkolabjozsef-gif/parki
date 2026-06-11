@@ -52,4 +52,6 @@ export default {
   parkingAt: 'Bezig: {{app}}',
   parkingInProgress: 'BEZIG',
   stopParking: 'Parkeren stoppen',
+  openInMaps: 'Openen in kaarten?',
+  open: 'Openen',
 };
