@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Animated, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Animated, TouchableOpacity, AppState } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLanguage } from '../services/languageContext';
 import { getActiveParkingInfo, clearActiveParking, isNotificationAccessGranted, openNotificationAccessSettings } from '../services/monitorService';
@@ -40,6 +40,13 @@ export default function HomeScreen() {
     refresh();
     const iv = setInterval(refresh, 2000);
     return () => clearInterval(iv);
+  }, []);
+
+  useEffect(() => {
+    const sub = AppState.addEventListener('change', state => {
+      if (state === 'active') refresh();
+    });
+    return () => sub.remove();
   }, []);
 
   const handleStop = async () => {
