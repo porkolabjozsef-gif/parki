@@ -7,6 +7,7 @@ import { openParkingApp } from '../services/notificationService';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Location from 'expo-location';
 import ParkingMap from '../components/ParkingMap';
+import { useThemeContext } from '../services/themeContext';
 
 const GREEN = '#00E5A0';
 const ORANGE = '#FF9500';
@@ -17,6 +18,8 @@ const SMALL = Math.round(BIG * 0.65);
 export default function HomeScreen() {
   const pulseAnim = useRef(new Animated.Value(1)).current;
   const { t, currentLang } = useLanguage();
+  const { theme } = useThemeContext();
+  const styles = useStyles(theme);
   const [parking, setParking] = useState<{ appName: string; startedAt: number; iconUrl?: string; packageName: string; lat: number; lng: number } | null>(null);
   const [, tick] = useState(0);
   const [notifAccess, setNotifAccess] = useState(true);
@@ -116,34 +119,34 @@ export default function HomeScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#000' },
+const useStyles = (theme: any) => StyleSheet.create({
+  container: { flex: 1, backgroundColor: theme.bg },
   warnBar: { position: 'absolute', top: 10, left: 16, right: 16, backgroundColor: 'rgba(255,176,32,0.12)', borderWidth: 1, borderColor: '#FFB020', borderRadius: 12, padding: 14, gap: 8 },
   warnText: { color: '#FFB020', fontSize: 13, fontWeight: '600', textAlign: 'center' },
-  warnBtn: { color: '#000', backgroundColor: '#FFB020', fontSize: 13, fontWeight: '800', textAlign: 'center', paddingVertical: 8, borderRadius: 8, overflow: 'hidden' },
+  warnBtn: { color: '#000', backgroundColor: theme.orange, fontSize: 13, fontWeight: '800', textAlign: 'center', paddingVertical: 8, borderRadius: 8, overflow: 'hidden' },
   center: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 20 },
-  logo: { fontSize: 42, fontWeight: '800', color: '#fff', letterSpacing: -1 },
+  logo: { fontSize: 42, fontWeight: '800', color: theme.text, letterSpacing: -1 },
   accent: { color: GREEN },
-  sub: { fontSize: 14, color: '#444', marginTop: -16 },
+  sub: { fontSize: 14, color: theme.textFaint, marginTop: -16 },
   circleBase: {
     width: BIG, height: BIG, borderRadius: BIG / 2,
     borderWidth: 2, alignItems: 'center', justifyContent: 'center', gap: 6,
   },
   monitorCircle: { borderColor: GREEN, backgroundColor: 'rgba(0,229,160,0.08)' },
   noGpsCircle: { borderColor: ORANGE, backgroundColor: 'rgba(255,149,0,0.08)' },
-  noGpsTimer: { fontSize: 26, fontWeight: '800', color: '#fff', marginTop: 4, fontVariant: ['tabular-nums'] },
+  noGpsTimer: { fontSize: 26, fontWeight: '800', color: theme.text, marginTop: 4, fontVariant: ['tabular-nums'] },
   indicatorEmoji: { fontSize: 44 },
   indicatorLabel: { fontSize: 10, fontWeight: '700', letterSpacing: 1.5 },
-  info: { fontSize: 13, color: '#444', textAlign: 'center', paddingHorizontal: 40 },
+  info: { fontSize: 13, color: theme.textFaint, textAlign: 'center', paddingHorizontal: 40 },
   mapArea: { width: BIG, height: BIG, alignItems: 'center', justifyContent: 'center' },
   mapCircle: {
     width: BIG, height: BIG, borderRadius: BIG / 2, overflow: 'hidden',
     borderWidth: 2, borderColor: ORANGE, backgroundColor: '#0D0D0D',
   },
   appRow: { marginTop: 4 },
-  appNameText: { fontSize: 18, fontWeight: '800', color: '#fff' },
-  testBtn: { marginTop: 12, padding: 10, borderRadius: 10, borderWidth: 1, borderColor: '#333' },
-  testBtnText: { color: '#666', fontSize: 12 },
+  appNameText: { fontSize: 18, fontWeight: '800', color: theme.text },
+  testBtn: { marginTop: 12, padding: 10, borderRadius: 10, borderWidth: 1, borderColor: theme.textFaintest },
+  testBtnText: { color: theme.textMuted, fontSize: 12 },
   stopBtn: { backgroundColor: ORANGE, paddingVertical: 16, paddingHorizontal: 40, borderRadius: 14, marginTop: 4 },
   stopBtnText: { color: '#000', fontSize: 16, fontWeight: '800' },
 });

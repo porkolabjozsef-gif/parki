@@ -11,13 +11,11 @@ import { useLanguage } from '../services/languageContext';
 import { fetchCommunityList, getLastSync } from '../services/communityService';
 import { openNotificationAccessSettings, isNotificationAccessGranted } from '../services/monitorService';
 import * as IntentLauncher from 'expo-intent-launcher';
+import { useThemeContext } from '../services/themeContext';
 import RNBluetoothClassic from 'react-native-bluetooth-classic';
 import { setCarDeviceName, getCarDeviceName } from '../services/bluetoothService';
 
 const GREEN = '#00E5A0';
-const BG = '#000000';
-const CARD = '#0D0D0D';
-const BORDER = '#1A1A1A';
 
 const SORTED_LANGUAGES = [...LANGUAGES].sort((a, b) => a.name.localeCompare(b.name));
 
@@ -32,6 +30,8 @@ export default function SettingsScreen() {
   const [btLoading, setBtLoading] = useState(false);
   const [lastSync, setLastSync] = useState<string | null>(null);
   const { t, currentLang, changeLanguage } = useLanguage();
+  const { theme, mode, setMode } = useThemeContext();
+  const styles = useStyles(theme);
 
   useEffect(() => {
     loadState().then(s => {
@@ -102,6 +102,24 @@ export default function SettingsScreen() {
         <Text style={styles.title}>{t('settings')}</Text>
 
         {/* Késleltetés */}
+        {/* Téma */}
+        <View style={styles.card}>
+          <Text style={styles.sectionLabel}>{t('themeAppearance')}</Text>
+          <View style={{ flexDirection: 'row', gap: 8 }}>
+            {(['dark', 'light', 'system'] as const).map(m => (
+              <TouchableOpacity
+                key={m}
+                style={[styles.delayBtn, mode === m && { backgroundColor: GREEN, borderColor: GREEN }]}
+                onPress={() => setMode(m)}
+              >
+                <Text style={[styles.delayBtnText, mode === m && { color: '#000' }]}>
+                  {m === 'dark' ? t('themeDark') : m === 'light' ? t('themeLight') : t('themeAuto')}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </View>
+
         <View style={styles.card}>
           <Text style={styles.sectionLabel}>{t('delay')}</Text>
           <Text style={styles.delayText}>{t('delayText', { delay })}</Text>
@@ -192,13 +210,13 @@ export default function SettingsScreen() {
                 </TouchableOpacity>
               ))}
               {!btLoading && btDevices.length === 0 && (
-                <Text style={{ color: '#666', textAlign: 'center' }}>Nincs párosított eszköz</Text>
+                <Text style={{ color: theme.textMuted, textAlign: 'center' }}>Nincs párosított eszköz</Text>
               )}
               <TouchableOpacity style={[styles.btDeviceBtn, { marginTop: 8 }]} onPress={() => selectBtDevice(null)}>
                 <Text style={{ color: '#ff4444' }}>{t('carDeviceRemove')}</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => setBtModal(false)} style={{ marginTop: 8, alignItems: 'center' }}>
-                <Text style={{ color: '#666' }}>Mégse</Text>
+                <Text style={{ color: theme.textMuted }}>Mégse</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -250,49 +268,49 @@ export default function SettingsScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: BG },
+const useStyles = (theme: any) => StyleSheet.create({
+  container: { flex: 1, backgroundColor: theme.bg },
   scroll: { padding: 24, gap: 16 },
-  title: { fontSize: 22, fontWeight: '800', color: '#fff', marginBottom: 8 },
-  card: { padding: 20, borderRadius: 16, backgroundColor: CARD, borderWidth: 1, borderColor: BORDER, gap: 12 },
-  sectionLabel: { fontSize: 11, fontWeight: '700', letterSpacing: 1.5, color: '#444' },
-  delayText: { color: '#888', fontSize: 15 },
+  title: { fontSize: 22, fontWeight: '800', color: theme.text, marginBottom: 8 },
+  card: { padding: 20, borderRadius: 16, backgroundColor: theme.card, borderWidth: 1, borderColor: theme.border, gap: 12 },
+  sectionLabel: { fontSize: 11, fontWeight: '700', letterSpacing: 1.5, color: theme.textFaint },
+  delayText: { color: theme.textSub, fontSize: 15 },
   delayButtons: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  delayBtn: { paddingHorizontal: 14, paddingVertical: 8, borderRadius: 10, backgroundColor: '#1A1A1A', borderWidth: 1, borderColor: '#222' },
+  delayBtn: { paddingHorizontal: 14, paddingVertical: 8, borderRadius: 10, backgroundColor: theme.border, borderWidth: 1, borderColor: theme.border2 },
   delayBtnActive: { backgroundColor: GREEN, borderColor: GREEN },
-  delayBtnText: { color: '#888', fontSize: 13, fontWeight: '600' },
+  delayBtnText: { color: theme.textSub, fontSize: 13, fontWeight: '600' },
   delayBtnTextActive: { color: '#000' },
-  langSelector: { flexDirection: 'row', alignItems: 'center', padding: 14, borderRadius: 12, backgroundColor: '#111', gap: 12 },
+  langSelector: { flexDirection: 'row', alignItems: 'center', padding: 14, borderRadius: 12, backgroundColor: theme.card2, gap: 12 },
   langFlag: { fontSize: 24 },
-  langName: { flex: 1, color: '#fff', fontSize: 16, fontWeight: '600' },
-  langArrow: { color: '#444', fontSize: 20 },
-  syncText: { fontSize: 12, color: '#444' },
+  langName: { flex: 1, color: theme.text, fontSize: 16, fontWeight: '600' },
+  langArrow: { color: theme.textFaint, fontSize: 20 },
+  syncText: { fontSize: 12, color: theme.textFaint },
   communityBtn: { padding: 14, borderRadius: 12, backgroundColor: GREEN, alignItems: 'center' },
   communityBtnText: { color: '#000', fontWeight: '700', fontSize: 14 },
-  githubLink: { color: '#333', fontSize: 12, textAlign: 'center' },
-  permBtn: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 14, borderRadius: 12, backgroundColor: '#111' },
+  githubLink: { color: theme.textFaintest, fontSize: 12, textAlign: 'center' },
+  permBtn: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 14, borderRadius: 12, backgroundColor: theme.card2 },
   permInfo: { flex: 1 },
-  permTitle: { color: '#fff', fontWeight: '600', fontSize: 14 },
-  permSub: { color: '#444', fontSize: 12, marginTop: 2 },
-  permArrow: { color: '#444', fontSize: 20 },
+  permTitle: { color: theme.text, fontWeight: '600', fontSize: 14 },
+  permSub: { color: theme.textFaint, fontSize: 12, marginTop: 2 },
+  permArrow: { color: theme.textFaint, fontSize: 20 },
   permOk: { color: '#00E5A0', fontSize: 18, fontWeight: '800' },
   permWarn: { color: '#FFB020', fontSize: 18, fontWeight: '800', width: 24, height: 24, textAlign: 'center', borderRadius: 12, borderWidth: 2, borderColor: '#FFB020' },
-  aboutName: { fontSize: 20, fontWeight: '800', color: '#fff' },
-  aboutVersion: { fontSize: 14, color: '#444', fontWeight: '400' },
-  aboutDesc: { color: '#666', fontSize: 14, lineHeight: 20 },
-  aboutPrivacy: { color: '#333', fontSize: 12 },
+  aboutName: { fontSize: 20, fontWeight: '800', color: theme.text },
+  aboutVersion: { fontSize: 14, color: theme.textFaint, fontWeight: '400' },
+  aboutDesc: { color: theme.textMuted, fontSize: 14, lineHeight: 20 },
+  aboutPrivacy: { color: theme.textFaintest, fontSize: 12 },
   modalOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.85)', justifyContent: 'flex-end' },
-  modalCard: { backgroundColor: '#111', borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: 24, maxHeight: '85%' },
-  modalTitle: { color: '#fff', fontSize: 18, fontWeight: '700', marginBottom: 16 },
+  modalCard: { backgroundColor: theme.card2, borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: 24, maxHeight: '85%' },
+  modalTitle: { color: theme.text, fontSize: 18, fontWeight: '700', marginBottom: 16 },
   langGrid: { gap: 8 },
-  langItem: { flex: 1, margin: 4, flexDirection: 'row', alignItems: 'center', padding: 12, borderRadius: 12, backgroundColor: '#1A1A1A', borderWidth: 1, borderColor: '#222', gap: 8 },
+  langItem: { flex: 1, margin: 4, flexDirection: 'row', alignItems: 'center', padding: 12, borderRadius: 12, backgroundColor: theme.border, borderWidth: 1, borderColor: theme.border2, gap: 8 },
   langItemActive: { borderColor: GREEN, backgroundColor: 'rgba(0,229,160,0.08)' },
   langItemFlag: { fontSize: 20 },
-  langItemName: { flex: 1, color: '#888', fontSize: 13, fontWeight: '600' },
+  langItemName: { flex: 1, color: theme.textSub, fontSize: 13, fontWeight: '600' },
   langItemNameActive: { color: GREEN },
   langCheck: { color: GREEN, fontWeight: '700' },
-  modalClose: { marginTop: 16, padding: 16, borderRadius: 12, backgroundColor: '#1A1A1A', alignItems: 'center' },
-  modalCloseText: { color: '#888', fontWeight: '600', fontSize: 15 },
+  modalClose: { marginTop: 16, padding: 16, borderRadius: 12, backgroundColor: theme.border, alignItems: 'center' },
+  modalCloseText: { color: theme.textSub, fontWeight: '600', fontSize: 15 },
   btDeviceBtn: { padding: 14, borderRadius: 10, backgroundColor: "#161616", marginTop: 8 },
   btDeviceName: { color: "#fff", fontSize: 15, fontWeight: "600" },
   btDeviceAddr: { color: "#555", fontSize: 12, marginTop: 2 },

@@ -9,9 +9,6 @@ import { useLanguage } from '../services/languageContext';
 import { submitNewApp, extractPackageFromUrl } from '../services/communityService';
 
 const GREEN = '#00E5A0';
-const BG = '#000000';
-const CARD = '#0D0D0D';
-const BORDER = '#1A1A1A';
 
 const COUNTRIES = ['HU','AT','DE','FR','GB','US','PL','CZ','SK','RO','HR','RS','SI','IT','ES','PT','NL','BE','SE','NO','DK','FI','UA','TR','RU'];
 
@@ -46,6 +43,8 @@ export default function AppsScreen() {
   const [packageName, setPackageName] = useState('');
   const [country, setCountry] = useState('HU');
   const { t, currentLang } = useLanguage();
+  const { theme } = useThemeContext();
+  const styles = useStyles(theme);
 
   useEffect(() => {
     loadState().then(s => setApps(s.watchedApps));
@@ -207,17 +206,17 @@ export default function AppsScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: BG },
+const useStyles = (theme: any) => StyleSheet.create({
+  container: { flex: 1, backgroundColor: theme.bg },
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 20, paddingBottom: 8 },
-  title: { fontSize: 22, fontWeight: '800', color: '#fff' },
-  hint: { fontSize: 12, color: '#333', paddingHorizontal: 20, paddingBottom: 12 },
+  title: { fontSize: 22, fontWeight: '800', color: theme.text },
+  hint: { fontSize: 12, color: theme.textFaintest, paddingHorizontal: 20, paddingBottom: 12 },
   grid: { padding: 12 },
   row: { justifyContent: 'flex-start' },
   gridItem: {
     width: '30%', margin: '1.5%', aspectRatio: 0.85,
-    backgroundColor: CARD, borderRadius: 16,
-    borderWidth: 1, borderColor: BORDER,
+    backgroundColor: theme.card, borderRadius: 16,
+    borderWidth: 1, borderColor: theme.border,
     alignItems: 'center', justifyContent: 'center',
     padding: 12, gap: 8,
   },
@@ -233,8 +232,8 @@ const styles = StyleSheet.create({
     alignItems: 'center', justifyContent: 'center',
   },
   iconImage: { width: '100%', height: '100%' },
-  appName: { fontSize: 12, fontWeight: '600', color: '#fff', textAlign: 'center' },
-  appNameOff: { color: '#444' },
+  appName: { fontSize: 12, fontWeight: '600', color: theme.text, textAlign: 'center' },
+  appNameOff: { color: theme.textFaint },
   activeDot: { width: 6, height: 6, borderRadius: 3, position: 'absolute', top: 10, right: 10 },
   submitFooter: {
     margin: 6, marginTop: 16, padding: 20, borderRadius: 16,
@@ -242,25 +241,25 @@ const styles = StyleSheet.create({
     alignItems: 'center', gap: 4,
   },
   submitFooterText: { color: GREEN, fontWeight: '700', fontSize: 14 },
-  submitFooterSub: { color: '#444', fontSize: 12, textAlign: 'center' },
+  submitFooterSub: { color: theme.textFaint, fontSize: 12, textAlign: 'center' },
   modalOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.85)', justifyContent: 'flex-end' },
-  modalCard: { backgroundColor: '#111', borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: 24, paddingBottom: 24, maxHeight: '90%', gap: 12 },
-  modalTitle: { color: '#fff', fontSize: 18, fontWeight: '700' },
+  modalCard: { backgroundColor: theme.card2, borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: 24, paddingBottom: 24, maxHeight: '90%', gap: 12 },
+  modalTitle: { color: theme.text, fontSize: 18, fontWeight: '700' },
   submitGuide: { color: '#555', fontSize: 13, lineHeight: 22, backgroundColor: '#0A0A0A', padding: 12, borderRadius: 10 },
-  input: { backgroundColor: '#1A1A1A', borderRadius: 12, padding: 14, color: '#fff', fontSize: 14, borderWidth: 1, borderColor: '#222' },
+  input: { backgroundColor: theme.border, borderRadius: 12, padding: 14, color: theme.text, fontSize: 14, borderWidth: 1, borderColor: theme.border2 },
   packageDetected: { flexDirection: 'row', alignItems: 'center', gap: 8, padding: 10, backgroundColor: 'rgba(0,229,160,0.08)', borderRadius: 10 },
   packageDetectedLabel: { color: GREEN, fontSize: 12, fontWeight: '700' },
-  packageDetectedValue: { color: '#fff', fontSize: 12, flex: 1 },
-  countryLabel: { color: '#666', fontSize: 13 },
+  packageDetectedValue: { color: theme.text, fontSize: 12, flex: 1 },
+  countryLabel: { color: theme.textMuted, fontSize: 13 },
   countryScroll: { maxHeight: 44 },
-  countryBtn: { paddingHorizontal: 12, paddingVertical: 8, borderRadius: 8, backgroundColor: '#1A1A1A', marginRight: 6, borderWidth: 1, borderColor: '#222' },
+  countryBtn: { paddingHorizontal: 12, paddingVertical: 8, borderRadius: 8, backgroundColor: theme.border, marginRight: 6, borderWidth: 1, borderColor: theme.border2 },
   countryBtnActive: { backgroundColor: GREEN, borderColor: GREEN },
-  countryBtnText: { color: '#666', fontWeight: '600', fontSize: 12 },
+  countryBtnText: { color: theme.textMuted, fontWeight: '600', fontSize: 12 },
   countryBtnTextActive: { color: '#000' },
-  submitNote: { color: '#333', fontSize: 11, lineHeight: 16, textAlign: 'center' },
+  submitNote: { color: theme.textFaintest, fontSize: 11, lineHeight: 16, textAlign: 'center' },
   modalBtns: { flexDirection: 'row', gap: 12, marginTop: 8 },
-  modalCancelBtn: { flex: 1, padding: 14, borderRadius: 12, backgroundColor: '#1A1A1A', alignItems: 'center' },
-  modalCancelText: { color: '#888', fontWeight: '600' },
+  modalCancelBtn: { flex: 1, padding: 14, borderRadius: 12, backgroundColor: theme.border, alignItems: 'center' },
+  modalCancelText: { color: theme.textSub, fontWeight: '600' },
   modalAddBtn: { flex: 1, padding: 14, borderRadius: 12, backgroundColor: GREEN, alignItems: 'center' },
   modalAddText: { color: '#000', fontWeight: '700' },
 });
