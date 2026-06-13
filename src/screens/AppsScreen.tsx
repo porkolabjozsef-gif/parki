@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { loadState, saveState, WatchedApp } from '../services/storageService';
+import { useThemeContext } from '../services/themeContext';
 import { useLanguage } from '../services/languageContext';
 import { submitNewApp, extractPackageFromUrl } from '../services/communityService';
 

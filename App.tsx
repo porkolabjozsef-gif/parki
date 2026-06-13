@@ -8,6 +8,7 @@ import HomeScreen from './src/screens/HomeScreen';
 import AppsScreen from './src/screens/AppsScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
 import { LanguageProvider, useLanguage } from './src/services/languageContext';
+import { useThemeContext } from './src/services/themeContext';
 import { ThemeProvider } from './src/services/themeContext';
 import { initNotifications } from './src/services/notificationService';
 import { startMonitoring } from './src/services/monitorService';
@@ -19,14 +20,15 @@ const Tab = createBottomTabNavigator();
 function Navigation() {
   const insets = useSafeAreaInsets();
   const { t } = useLanguage();
+  const { theme } = useThemeContext();
 
   return (
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: '#0D0D0D',
-          borderTopColor: '#1A1A1A',
+          backgroundColor: theme.card,
+          borderTopColor: theme.border,
           height: 60 + insets.bottom,
           paddingBottom: insets.bottom,
         },
