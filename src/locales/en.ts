@@ -65,4 +65,5 @@ export default {
   open: 'Open',
   notifAccessWarn: 'Notification access is not enabled — required for monitoring.',
   enable: 'Enable',
+  supportMe: 'Support my work ☕',
 };

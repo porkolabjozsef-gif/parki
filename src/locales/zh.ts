@@ -65,4 +65,5 @@ export default {
   open: '打开',
   notifAccessWarn: '通知访问未启用 — 监控所需。',
   enable: '启用',
+  supportMe: '支持我的工作 ☕',
 };

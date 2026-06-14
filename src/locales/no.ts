@@ -65,4 +65,5 @@ export default {
   open: 'Åpne',
   notifAccessWarn: 'Varseltilgang ikke aktivert — kreves for overvåking.',
   enable: 'Aktiver',
+  supportMe: 'Støtt arbeidet mitt ☕',
 };

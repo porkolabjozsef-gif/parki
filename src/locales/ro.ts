@@ -65,4 +65,5 @@ export default {
   open: 'Deschide',
   notifAccessWarn: 'Accesul la notificări nu este activat — necesar pentru monitorizare.',
   enable: 'Activează',
+  supportMe: 'Susține munca mea ☕',
 };

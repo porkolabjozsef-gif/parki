@@ -65,4 +65,5 @@ export default {
   open: 'Avaa',
   notifAccessWarn: 'Ilmoituspääsy ei ole käytössä — tarvitaan seurantaan.',
   enable: 'Ota käyttöön',
+  supportMe: 'Tue työtäni ☕',
 };

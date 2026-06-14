@@ -65,4 +65,5 @@ export default {
   open: 'Abrir',
   notifAccessWarn: 'Acesso a notificações desativado — necessário para monitorização.',
   enable: 'Ativar',
+  supportMe: 'Apoie meu trabalho ☕',
 };

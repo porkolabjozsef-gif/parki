@@ -65,4 +65,5 @@ export default {
   open: '열기',
   notifAccessWarn: '알림 접근이 비활성화됨 — 모니터링에 필요합니다.',
   enable: '활성화',
+  supportMe: '내 작업을 지원해 주세요 ☕',
 };

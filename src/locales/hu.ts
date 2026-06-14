@@ -65,4 +65,5 @@ export default {
   open: 'Megnyitás',
   notifAccessWarn: 'Az értesítés-hozzáférés nincs engedélyezve — a figyeléshez szükséges.',
   enable: 'Bekapcsolás',
+  supportMe: 'Támogasd a munkám ☕',
 };

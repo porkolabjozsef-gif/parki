@@ -65,4 +65,5 @@ export default {
   open: 'Otvoriť',
   notifAccessWarn: 'Prístup k oznámeniam nie je povolený — potrebný na sledovanie.',
   enable: 'Povoliť',
+  supportMe: 'Podporte moju prácu ☕',
 };

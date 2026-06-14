@@ -65,4 +65,5 @@ export default {
   open: 'Openen',
   notifAccessWarn: 'Meldingstoegang niet ingeschakeld — vereist voor monitoring.',
   enable: 'Inschakelen',
+  supportMe: 'Ondersteun mijn werk ☕',
 };

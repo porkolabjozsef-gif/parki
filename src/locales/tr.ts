@@ -65,4 +65,5 @@ export default {
   open: 'Aç',
   notifAccessWarn: 'Bildirim erişimi etkin değil — izleme için gerekli.',
   enable: 'Etkinleştir',
+  supportMe: 'Çalışmamı destekle ☕',
 };

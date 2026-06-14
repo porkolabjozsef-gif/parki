@@ -65,4 +65,5 @@ export default {
   open: 'Otvori',
   notifAccessWarn: 'Pristup obaveštenjima nije omogućen — potreban za praćenje.',
   enable: 'Omogući',
+  supportMe: 'Podržite moj rad ☕',
 };

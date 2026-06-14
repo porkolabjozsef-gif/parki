@@ -65,4 +65,5 @@ export default {
   open: 'Öppna',
   notifAccessWarn: 'Aviseringsåtkomst inte aktiverad — krävs för övervakning.',
   enable: 'Aktivera',
+  supportMe: 'Stöd mitt arbete ☕',
 };

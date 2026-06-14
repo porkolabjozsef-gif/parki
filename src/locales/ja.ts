@@ -65,4 +65,5 @@ export default {
   open: '開く',
   notifAccessWarn: '通知アクセスが無効です — 監視に必要です。',
   enable: '有効にする',
+  supportMe: '私の仕事を支援してください ☕',
 };

@@ -65,4 +65,5 @@ export default {
   open: 'فتح',
   notifAccessWarn: 'الوصول إلى الإشعارات غير مفعّل — مطلوب للمراقبة.',
   enable: 'تفعيل',
+  supportMe: 'ادعم عملي ☕',
 };

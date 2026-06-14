@@ -65,4 +65,5 @@ export default {
   open: 'Ouvrir',
   notifAccessWarn: 'L\'accès aux notifications n\'est pas activé — requis pour la surveillance.',
   enable: 'Activer',
+  supportMe: 'Soutenez mon travail ☕',
 };

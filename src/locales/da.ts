@@ -65,4 +65,5 @@ export default {
   open: 'Åbn',
   notifAccessWarn: 'Notifikationsadgang ikke aktiveret — kræves til overvågning.',
   enable: 'Aktivér',
+  supportMe: 'Støt mit arbejde ☕',
 };
