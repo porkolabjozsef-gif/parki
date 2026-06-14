@@ -233,6 +233,12 @@ export default function SettingsScreen() {
           </Text>
           <Text style={styles.aboutDesc}>{t('aboutDesc')}</Text>
           <Text style={styles.aboutPrivacy}>{t('privacy')}</Text>
+          <TouchableOpacity
+            style={styles.kofiBtn}
+            onPress={() => Linking.openURL('https://ko-fi.com/parkiapp')}
+          >
+            <Text style={styles.kofiBtnText}>{t('supportMe')}</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
 
@@ -300,6 +306,8 @@ const useStyles = (theme: any) => StyleSheet.create({
   aboutVersion: { fontSize: 14, color: theme.textFaint, fontWeight: '400' },
   aboutDesc: { color: theme.textMuted, fontSize: 14, lineHeight: 20 },
   aboutPrivacy: { color: theme.textFaintest, fontSize: 12 },
+  kofiBtn: { marginTop: 8, padding: 14, borderRadius: 12, backgroundColor: 'rgba(0,229,160,0.1)', borderWidth: 1, borderColor: 'rgba(0,229,160,0.25)', alignItems: 'center' },
+  kofiBtnText: { color: '#00E5A0', fontWeight: '700', fontSize: 14 },
   modalOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.85)', justifyContent: 'flex-end' },
   modalCard: { backgroundColor: theme.card2, borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: 24, maxHeight: '85%' },
   modalTitle: { color: theme.text, fontSize: 18, fontWeight: '700', marginBottom: 16 },
