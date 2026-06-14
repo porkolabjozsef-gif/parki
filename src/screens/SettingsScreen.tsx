@@ -12,6 +12,7 @@ import { fetchCommunityList, getLastSync } from '../services/communityService';
 import { openNotificationAccessSettings, isNotificationAccessGranted } from '../services/monitorService';
 import * as IntentLauncher from 'expo-intent-launcher';
 import { useThemeContext } from '../services/themeContext';
+import appJson from '../../app.json';
 import RNBluetoothClassic from 'react-native-bluetooth-classic';
 import { setCarDeviceName, getCarDeviceName } from '../services/bluetoothService';
 
@@ -105,7 +106,7 @@ export default function SettingsScreen() {
         {/* Téma */}
         <View style={styles.card}>
           <Text style={styles.sectionLabel}>{t('themeAppearance')}</Text>
-          <View style={{ flexDirection: 'row', gap: 8 }}>
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>
             {(['dark', 'light', 'system'] as const).map(m => (
               <TouchableOpacity
                 key={m}
@@ -228,7 +229,7 @@ export default function SettingsScreen() {
           <Text style={styles.aboutName}>
             Par<Text style={{ color: GREEN }}>ki</Text>
             {'  '}
-            <Text style={styles.aboutVersion}>v1.0.0</Text>
+            <Text style={styles.aboutVersion}>v{appJson.expo.version}</Text>
           </Text>
           <Text style={styles.aboutDesc}>{t('aboutDesc')}</Text>
           <Text style={styles.aboutPrivacy}>{t('privacy')}</Text>
