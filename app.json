@@ -2,7 +2,7 @@
   "expo": {
     "name": "Parki",
     "slug": "parki",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
@@ -45,7 +45,7 @@
         "android.permission.BLUETOOTH_CONNECT",
         "android.permission.BLUETOOTH_SCAN"
       ],
-      "versionCode": 2
+      "versionCode": 3
     },
     "plugins": [
       "expo-notifications",
