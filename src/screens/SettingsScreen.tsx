@@ -204,12 +204,14 @@ export default function SettingsScreen() {
             <View style={styles.modalCard}>
               <Text style={styles.modalTitle}>{t('carDeviceSelectTitle')}</Text>
               {btLoading && <ActivityIndicator color={GREEN} />}
+              <ScrollView style={{ maxHeight: 300 }}>
               {btDevices.map(d => (
                 <TouchableOpacity key={d.address} style={styles.btDeviceBtn} onPress={() => selectBtDevice(d.name)}>
                   <Text style={styles.btDeviceName}>{d.name}</Text>
                   <Text style={styles.btDeviceAddr}>{d.address}</Text>
                 </TouchableOpacity>
               ))}
+              </ScrollView>
               {!btLoading && btDevices.length === 0 && (
                 <Text style={{ color: theme.textMuted, textAlign: 'center' }}>Nincs párosított eszköz</Text>
               )}
