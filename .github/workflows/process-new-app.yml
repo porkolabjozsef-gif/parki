@@ -1,0 +1,90 @@
+name: Process New Parking App
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  process:
+    runs-on: ubuntu-latest
+    if: contains(github.event.issue.title, 'New parking app:')
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Extract app info and update JSON
+        run: |
+          BODY="${{ github.event.issue.body }}"
+          
+          # Package name kinyerése
+          PACKAGE=$(echo "$BODY" | grep -oP '(?<=Csomagnév: )[\w.]+')
+          NAME=$(echo "$BODY" | grep -oP '(?<=App neve: ).+')
+          COUNTRY=$(echo "$BODY" | grep -oP '(?<=Ország: ).+')
+          STORE=$(echo "$BODY" | grep -oP '(?<=Play Store: )https://\S+')
+          
+          if [ -z "$PACKAGE" ]; then
+            echo "Package name not found, skipping"
+            exit 0
+          fi
+          
+          # Ország kódok tömbbé alakítása
+          COUNTRY_CODES=$(echo "$COUNTRY" | tr ',' '\n' | sed 's/ //g' | python3 -c "
+          import sys, json
+          codes = [line.strip() for line in sys.stdin if line.strip()]
+          print(json.dumps(codes))
+          ")
+          
+          # JSON frissítése
+          python3 << PYEOF
+          import json
+          
+          with open('parking-apps.json', 'r') as f:
+              data = json.load(f)
+          
+          # Ellenőrzés hogy már létezik-e
+          existing = [a['packageName'] for a in data['apps']]
+          if '$PACKAGE' in existing:
+              print(f"Package $PACKAGE already exists, skipping")
+              exit(0)
+          
+          new_app = {
+              "packageName": "$PACKAGE",
+              "displayName": "$NAME",
+              "country": $COUNTRY_CODES,
+              "storeUrl": "$STORE"
+          }
+          
+          data['apps'].append(new_app)
+          data['updated'] = '$(date +%Y-%m-%d)'
+          data['version'] = data.get('version', 1) + 1
+          
+          with open('parking-apps.json', 'w') as f:
+              json.dump(data, f, indent=2, ensure_ascii=False)
+          
+          print(f"Added: $PACKAGE")
+          PYEOF
+      
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add parking-apps.json
+          git diff --staged --quiet || git commit -m "Add new parking app from issue #${{ github.event.issue.number }}"
+          git push
+      
+      - name: Close issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: '✅ Az alkalmazás sikeresen hozzáadva a listához! A következő szinkronizáláskor megjelenik a Parki appban.'
+            });
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              state: 'closed'
+            });
