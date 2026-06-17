@@ -1,16 +1,119 @@
 {
   "version": 1,
-  "updated": "2026-06-10",
+  "updated": "2026-06-17",
   "apps": [
-    { "packageName": "net.parkl.androidclient", "displayName": "Parkl", "country": ["HU"], "storeUrl": "https://play.google.com/store/apps/details?id=net.parkl.androidclient" },
-    { "packageName": "net.easypark.android", "displayName": "EasyPark", "country": ["HU","SE","NO","DK","DE","FR","GB"], "storeUrl": "https://play.google.com/store/apps/details?id=net.easypark.android" },
-    { "packageName": "com.parkmobile.android", "displayName": "ParkMobile", "country": ["US"], "storeUrl": "https://play.google.com/store/apps/details?id=com.parkmobile.android" },
-    { "packageName": "com.flowbird.android", "displayName": "Flowbird", "country": ["FR","GB"], "storeUrl": "https://play.google.com/store/apps/details?id=com.flowbird.android" },
-    { "packageName": "hu.mol.move", "displayName": "MOL Move", "country": ["HU"], "storeUrl": "https://play.google.com/store/apps/details?id=hu.mol.move" },
-    { "packageName": "com.mypermit.android", "displayName": "MyPermit", "country": ["HU"], "storeUrl": "https://play.google.com/store/apps/details?id=com.mypermit.android" },
-    { "packageName": "com.vodafone.easyrider", "displayName": "One Easy Rider", "country": ["HU"], "storeUrl": "https://play.google.com/store/apps/details?id=com.vodafone.easyrider" },
-    { "packageName": "com.otpmobil.simple.phoenix", "displayName": "Simple", "country": ["HU"], "storeUrl": "https://play.google.com/store/apps/details?id=com.otpmobil.simple.phoenix" },
-    { "packageName": "telekom.hu.android.mobilvasarlas", "displayName": "Telekom", "country": ["HU"], "storeUrl": "https://play.google.com/store/apps/details?id=telekom.hu.android.mobilvasarlas" },
-    { "packageName": "hu.parkinghungary.app", "displayName": "Parking Hungary", "country": ["HU"], "storeUrl": "https://play.google.com/store/apps/details?id=hu.parkinghungary.app" }
+    {
+      "packageName": "net.parkl.androidclient",
+      "displayName": "Parkl",
+      "country": [
+        "HU"
+      ],
+      "storeUrl": "https://play.google.com/store/apps/details?id=net.parkl.androidclient"
+    },
+    {
+      "packageName": "net.easypark.android",
+      "displayName": "EasyPark",
+      "country": [
+        "HU",
+        "SE",
+        "NO",
+        "DK",
+        "DE",
+        "FR",
+        "GB"
+      ],
+      "storeUrl": "https://play.google.com/store/apps/details?id=net.easypark.android"
+    },
+    {
+      "packageName": "com.parkmobile.android",
+      "displayName": "ParkMobile",
+      "country": [
+        "US"
+      ],
+      "storeUrl": "https://play.google.com/store/apps/details?id=com.parkmobile.android"
+    },
+    {
+      "packageName": "com.flowbird.android",
+      "displayName": "Flowbird",
+      "country": [
+        "FR",
+        "GB"
+      ],
+      "storeUrl": "https://play.google.com/store/apps/details?id=com.flowbird.android"
+    },
+    {
+      "packageName": "hu.mol.move",
+      "displayName": "MOL Move",
+      "country": [
+        "HU"
+      ],
+      "storeUrl": "https://play.google.com/store/apps/details?id=hu.mol.move"
+    },
+    {
+      "packageName": "com.mypermit.android",
+      "displayName": "MyPermit",
+      "country": [
+        "HU"
+      ],
+      "storeUrl": "https://play.google.com/store/apps/details?id=com.mypermit.android"
+    },
+    {
+      "packageName": "com.vodafone.easyrider",
+      "displayName": "One Easy Rider",
+      "country": [
+        "HU"
+      ],
+      "storeUrl": "https://play.google.com/store/apps/details?id=com.vodafone.easyrider"
+    },
+    {
+      "packageName": "com.otpmobil.simple.phoenix",
+      "displayName": "Simple",
+      "country": [
+        "HU"
+      ],
+      "storeUrl": "https://play.google.com/store/apps/details?id=com.otpmobil.simple.phoenix"
+    },
+    {
+      "packageName": "telekom.hu.android.mobilvasarlas",
+      "displayName": "Telekom",
+      "country": [
+        "HU"
+      ],
+      "storeUrl": "https://play.google.com/store/apps/details?id=telekom.hu.android.mobilvasarlas"
+    },
+    {
+      "packageName": "hu.parkinghungary.app",
+      "displayName": "Parking Hungary",
+      "country": [
+        "HU"
+      ],
+      "storeUrl": "https://play.google.com/store/apps/details?id=hu.parkinghungary.app"
+    },
+    {
+      "packageName": "co.uk.ringgo.android",
+      "displayName": "RingGo",
+      "country": [
+        "GB"
+      ],
+      "storeUrl": "https://play.google.com/store/apps/details?id=co.uk.ringgo.android"
+    },
+    {
+      "packageName": "se.parkster.client.android",
+      "displayName": "Parkster",
+      "country": [
+        "SE",
+        "GB",
+        "DE"
+      ],
+      "storeUrl": "https://play.google.com/store/apps/details?id=se.parkster.client.android"
+    },
+    {
+      "packageName": "com.mrparkit.twa",
+      "displayName": "MR.PARKIT",
+      "country": [
+        "CZ"
+      ],
+      "storeUrl": "https://play.google.com/store/apps/details?id=com.mrparkit.twa"
+    }
   ]
 }
