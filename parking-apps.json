@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "updated": "2026-06-17",
   "apps": [
     {
@@ -120,6 +120,15 @@
       ],
       "storeUrl": "https://play.google.com/store/apps/details?id=com.mrparkit.twa",
       "iconUrl": "https://play-lh.googleusercontent.com/CZjNfiQ39tWbo1DCmgMVQyom5OLmeuK30-uQ1gcycT-x8v7uCKBpIP7ZNJqc3h4PSrfgyeSLRRs7xgtFvBO0sgY=s96"
+    },
+    {
+      "packageName": "onepark.app",
+      "displayName": "Onepark, Réservez un parking!",
+      "country": [
+        "FR"
+      ],
+      "storeUrl": "https://play.google.com/store/apps/details?id=onepark.app",
+      "iconUrl": "https://play-lh.googleusercontent.com/Iyk71Jbqc6l0SndhxFzMlQk1l2yZ6h_dX73EbfUsQQybjFJDi-kZEXXh7GkTSXOSMSKCtQITmoTPPreL01VEunw=s96"
     }
   ]
 }
