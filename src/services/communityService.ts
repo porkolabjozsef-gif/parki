@@ -10,6 +10,7 @@ export interface CommunityApp {
   displayName: string;
   country: string[];
   storeUrl: string;
+  iconUrl?: string;
 }
 
 export function extractPackageFromUrl(url: string): string | null {
