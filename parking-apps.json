@@ -95,7 +95,8 @@
       "country": [
         "GB"
       ],
-      "storeUrl": "https://play.google.com/store/apps/details?id=co.uk.ringgo.android"
+      "storeUrl": "https://play.google.com/store/apps/details?id=co.uk.ringgo.android",
+      "iconUrl": "https://play-lh.googleusercontent.com/LJC4irqC8bwEProd59BgU6lt0fyfgtASTTGwgZBwQJIK7VJb_8C4pXv1VwiS9NsRixhX7qYmcmSKMubN1lqw=s96"
     },
     {
       "packageName": "se.parkster.client.android",
@@ -105,7 +106,8 @@
         "GB",
         "DE"
       ],
-      "storeUrl": "https://play.google.com/store/apps/details?id=se.parkster.client.android"
+      "storeUrl": "https://play.google.com/store/apps/details?id=se.parkster.client.android",
+      "iconUrl": "https://play-lh.googleusercontent.com/NXvdQltvwxh-DdQT-jjPeNo2mhSuVV1o31GTYFXnwRkuv9HGDs1gV6upNYOrM0cHY3MsLbug0wqh_UjmVXSluw=s96"
     },
     {
       "packageName": "com.mrparkit.twa",
@@ -113,7 +115,8 @@
       "country": [
         "CZ"
       ],
-      "storeUrl": "https://play.google.com/store/apps/details?id=com.mrparkit.twa"
+      "storeUrl": "https://play.google.com/store/apps/details?id=com.mrparkit.twa",
+      "iconUrl": "https://play-lh.googleusercontent.com/CZjNfiQ39tWbo1DCmgMVQyom5OLmeuK30-uQ1gcycT-x8v7uCKBpIP7ZNJqc3h4PSrfgyeSLRRs7xgtFvBO0sgY=s96"
     }
   ]
 }
