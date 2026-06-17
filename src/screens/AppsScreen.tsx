@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import {
-  View, Text, StyleSheet, TouchableOpacity, Image,
+  View, Text, StyleSheet, TouchableOpacity, Image, AppState,
   FlatList, TextInput, Modal, Alert, ScrollView,
 } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { loadState, saveState, WatchedApp } from '../services/storageService';
+import { useAppContext } from '../services/appContext';
 import { useThemeContext } from '../services/themeContext';
 import { useLanguage } from '../services/languageContext';
 import { submitNewApp, extractPackageFromUrl } from '../services/communityService';
@@ -44,12 +45,13 @@ export default function AppsScreen() {
   const [packageName, setPackageName] = useState('');
   const [country, setCountry] = useState('HU');
   const { t, currentLang } = useLanguage();
+  const { watchedApps: contextApps, refreshApps, updateApps } = useAppContext();
   const { theme } = useThemeContext();
   const styles = useStyles(theme);
 
   useEffect(() => {
-    loadState().then(s => setApps(s.watchedApps));
-  }, []);
+    setApps(contextApps);
+  }, [contextApps]);
 
   useEffect(() => {
     const pkg = extractPackageFromUrl(storeUrl);
@@ -57,7 +59,7 @@ export default function AppsScreen() {
   }, [storeUrl]);
 
   const persist = async (updated: WatchedApp[]) => {
-    setApps(updated);
+    await updateApps(updated);
     const state = await loadState();
     await saveState({ ...state, watchedApps: updated });
   };

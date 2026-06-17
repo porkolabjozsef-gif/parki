@@ -9,6 +9,7 @@ import { loadState, saveState } from '../services/storageService';
 import { LANGUAGES } from '../services/i18nService';
 import { useLanguage } from '../services/languageContext';
 import { fetchCommunityList, getLastSync } from '../services/communityService';
+import { useAppContext } from '../services/appContext';
 import { openNotificationAccessSettings, isNotificationAccessGranted } from '../services/monitorService';
 import * as IntentLauncher from 'expo-intent-launcher';
 import { useThemeContext } from '../services/themeContext';
@@ -32,6 +33,7 @@ export default function SettingsScreen() {
   const [lastSync, setLastSync] = useState<string | null>(null);
   const { t, currentLang, changeLanguage } = useLanguage();
   const { theme, mode, setMode } = useThemeContext();
+  const { refreshApps } = useAppContext();
   const styles = useStyles(theme);
 
   useEffect(() => {
@@ -94,6 +96,7 @@ export default function SettingsScreen() {
         .filter(a => !existing.includes(a.packageName))
         .map(a => ({ packageName: a.packageName, displayName: a.displayName, enabled: true, iconUrl: a.iconUrl }));
       await saveState({ ...state, watchedApps: [...updatedApps, ...newApps] });
+      await refreshApps();
       const sync = await getLastSync();
       setLastSync(sync);
       Alert.alert('✓', `${communityApps.length} ${t('syncSuccess')}`);
