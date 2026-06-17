@@ -13,48 +13,46 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Extract app info and update JSON
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: |
-          BODY=$(cat << 'BODYEOF'
-          ${{ github.event.issue.body }}
-          BODYEOF
-          )
+          python3 << 'PYEOF'
+          import os, json, urllib.request, re
+          from datetime import date
 
-          # Markdown bold és sima formátum is támogatott
-          PACKAGE=$(echo "$BODY" | grep -oP '(?<=\*\*Csomagnév:\*\* |(?<=Csomagnév: ))[\w.]+' | head -1)
-          NAME=$(echo "$BODY" | grep -oP '(?<=\*\*App neve:\*\* |(?<=App neve: )).+' | head -1)
-          COUNTRY=$(echo "$BODY" | grep -oP '(?<=\*\*Ország:\*\* |(?<=Ország: )).+' | head -1)
-          STORE=$(echo "$BODY" | grep -oP 'https://play\.google\.com/store/apps/details\?id=[\w.]+' | head -1)
+          body = os.environ.get('ISSUE_BODY', '')
+          print("Body:", body[:200])
 
-          echo "Package: $PACKAGE"
-          echo "Name: $NAME"
-          echo "Country: $COUNTRY"
-          echo "Store: $STORE"
+          # Package name kinyerése
+          pkg_match = re.search(r'\*\*Csomagnév:\*\*\s*([\w.]+)|Csomagnév:\s*([\w.]+)', body)
+          name_match = re.search(r'\*\*App neve:\*\*\s*(.+)|App neve:\s*(.+)', body)
+          country_match = re.search(r'\*\*Ország:\*\*\s*(.+)|Ország:\s*(.+)', body)
+          store_match = re.search(r'https://play\.google\.com/store/apps/details\?id=[\w.]+', body)
 
-          if [ -z "$PACKAGE" ]; then
-            echo "Package name not found, skipping"
-            exit 1
-          fi
+          package = (pkg_match.group(1) or pkg_match.group(2)).strip() if pkg_match else None
+          name = (name_match.group(1) or name_match.group(2)).strip() if name_match else None
+          country_str = (country_match.group(1) or country_match.group(2)).strip() if country_match else 'XX'
+          store = store_match.group(0).strip() if store_match else ''
 
-          COUNTRY_CODES=$(echo "$COUNTRY" | tr ',' '\n' | sed 's/[^A-Z]//g' | grep -v '^$' | python3 -c "
-          import sys, json
-          codes = [line.strip() for line in sys.stdin if line.strip()]
-          print(json.dumps(codes))
-          ")
+          print(f"Package: {package}, Name: {name}, Country: {country_str}")
 
-          python3 << PYEOF
-          import json, urllib.request, re
+          if not package:
+              print("Package not found!")
+              exit(1)
 
           with open('parking-apps.json', 'r') as f:
               data = json.load(f)
 
           existing = [a['packageName'] for a in data['apps']]
-          if '$PACKAGE' in existing:
-              print(f"Package $PACKAGE already exists, skipping")
+          if package in existing:
+              print(f"Already exists: {package}")
               exit(0)
 
+          # Ikon lekérése
           icon_url = None
           try:
-              url = f'https://play.google.com/store/apps/details?id=$PACKAGE&hl=en'
+              url = f'https://play.google.com/store/apps/details?id={package}&hl=en'
               req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
               html = urllib.request.urlopen(req, timeout=10).read().decode('utf-8')
               match = re.search(r'https://play-lh\.googleusercontent\.com/[A-Za-z0-9_\-]+=', html)
@@ -63,23 +61,22 @@ jobs:
           except Exception as e:
               print(f"Icon fetch failed: {e}")
 
-          new_app = {
-              "packageName": "$PACKAGE",
-              "displayName": "$NAME",
-              "country": $COUNTRY_CODES,
-              "storeUrl": "$STORE",
-          }
+          countries = [c.strip() for c in re.split(r'[,\s]+', country_str) if len(c.strip()) == 2]
+          if not countries:
+              countries = ['XX']
+
+          new_app = {"packageName": package, "displayName": name, "country": countries, "storeUrl": store}
           if icon_url:
               new_app["iconUrl"] = icon_url
 
           data['apps'].append(new_app)
-          data['updated'] = '$(date +%Y-%m-%d)'
+          data['updated'] = str(date.today())
           data['version'] = data.get('version', 1) + 1
 
           with open('parking-apps.json', 'w') as f:
               json.dump(data, f, indent=2, ensure_ascii=False)
 
-          print(f"Added: $PACKAGE")
+          print(f"Added: {package}")
           PYEOF
 
       - name: Commit and push
