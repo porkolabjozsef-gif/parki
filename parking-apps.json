@@ -8,7 +8,8 @@
       "country": [
         "HU"
       ],
-      "storeUrl": "https://play.google.com/store/apps/details?id=net.parkl.androidclient"
+      "storeUrl": "https://play.google.com/store/apps/details?id=net.parkl.androidclient",
+      "iconUrl": "https://play-lh.googleusercontent.com/oSe1wqla-5xH75E0_SxzQKYoCFyWtBUdCOjlhMY0G31WvIsBQn_dQ02_SDyCwJbLS47f80nkff6cyuvxBnvLYw=s96"
     },
     {
       "packageName": "net.easypark.android",
@@ -22,7 +23,8 @@
         "FR",
         "GB"
       ],
-      "storeUrl": "https://play.google.com/store/apps/details?id=net.easypark.android"
+      "storeUrl": "https://play.google.com/store/apps/details?id=net.easypark.android",
+      "iconUrl": "https://play-lh.googleusercontent.com/oynrl-CPadmiUoAh4tWftopFVF6U5C9U39UWuo-8cHMBNY5z9vB7JGGyJZkxwMlbN6ypgBQhe9cU_gRmbAO2=s96"
     },
     {
       "packageName": "com.parkmobile",
@@ -49,7 +51,8 @@
       "country": [
         "HU"
       ],
-      "storeUrl": "https://play.google.com/store/apps/details?id=hu.mol.move"
+      "storeUrl": "https://play.google.com/store/apps/details?id=hu.mol.move",
+      "iconUrl": "https://play-lh.googleusercontent.com/p84_-6WHqiKRo6MkWfmdo8R6CJZ-KICp6bjgtD-HagHiMOVTiP2DmECG0CWqocnvHXBz2gJ43RaUjnCWU1Xg_RE=s96"
     },
     {
       "packageName": "com.mipermit.android",
@@ -66,7 +69,8 @@
       "country": [
         "HU"
       ],
-      "storeUrl": "https://play.google.com/store/apps/details?id=com.vodafone.easyrider"
+      "storeUrl": "https://play.google.com/store/apps/details?id=com.vodafone.easyrider",
+      "iconUrl": "https://play-lh.googleusercontent.com/9jHpgy-Ogphxa_dyziscq2kZn7tQVToPvoVQhJy6cFGQ1yytxKnjM5wtQHprEsYuMQPmWdvHH4U1hY6xFZFTAjY=s96"
     },
     {
       "packageName": "com.otpmobil.simple.phoenix",
@@ -74,7 +78,8 @@
       "country": [
         "HU"
       ],
-      "storeUrl": "https://play.google.com/store/apps/details?id=com.otpmobil.simple.phoenix"
+      "storeUrl": "https://play.google.com/store/apps/details?id=com.otpmobil.simple.phoenix",
+      "iconUrl": "https://play-lh.googleusercontent.com/g05jSG0BD5TJQ55tcaIgHxlgEq2osTjTlQXsJmyYwHpFQH8Z-jJ5yGkLrJTho7zM78-qz5hBKBWJa9nCfI8rgpo=s96"
     },
     {
       "packageName": "telekom.hu.android.mobilvasarlas",
@@ -82,7 +87,8 @@
       "country": [
         "HU"
       ],
-      "storeUrl": "https://play.google.com/store/apps/details?id=telekom.hu.android.mobilvasarlas"
+      "storeUrl": "https://play.google.com/store/apps/details?id=telekom.hu.android.mobilvasarlas",
+      "iconUrl": "https://play-lh.googleusercontent.com/HBTMm-l1xq8eQWqSsqtpSGZhOpIIYXXpF1eJo2AXczdUA8kv3WVFIn9zVS42vTiVzPQVQXk51fR6NakLGbjuug=s96"
     },
     {
       "packageName": "hu.parkinghungary.app",
@@ -90,7 +96,8 @@
       "country": [
         "HU"
       ],
-      "storeUrl": "https://play.google.com/store/apps/details?id=hu.parkinghungary.app"
+      "storeUrl": "https://play.google.com/store/apps/details?id=hu.parkinghungary.app",
+      "iconUrl": "https://play-lh.googleusercontent.com/gRSD3NLufk6tJ-iYiGRBb2Nc283jcyDgO4aHgHfRY6FkgBpYnShComW0hITgaBPEVdXjJXuHoxiog0uuVTxHBDo=s96"
     },
     {
       "packageName": "co.uk.ringgo.android",
