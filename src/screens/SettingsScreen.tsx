@@ -77,12 +77,20 @@ export default function SettingsScreen() {
 
   const handleSync = async () => {
     setSyncing(true);
-    const apps = await fetchCommunityList();
+    const communityApps = await fetchCommunityList();
     setSyncing(false);
-    if (apps.length > 0) {
+    if (communityApps.length > 0) {
+      const state = await loadState();
+      const existing = state.watchedApps.map(a => a.packageName);
+      const newApps = communityApps
+        .filter(a => !existing.includes(a.packageName))
+        .map(a => ({ packageName: a.packageName, displayName: a.displayName, enabled: true, iconUrl: undefined }));
+      if (newApps.length > 0) {
+        await saveState({ ...state, watchedApps: [...state.watchedApps, ...newApps] });
+      }
       const sync = await getLastSync();
       setLastSync(sync);
-      Alert.alert('✓', `${apps.length} ${t('syncSuccess')}`);
+      Alert.alert('✓', `${communityApps.length} ${t('syncSuccess')}`);
     } else {
       Alert.alert('', t('syncError'));
     }

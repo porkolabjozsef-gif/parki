@@ -1,45 +1,77 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Text } from 'react-native';
+import PagerView from 'react-native-pager-view';
+import { TouchableOpacity } from 'react-native';
 import HomeScreen from './src/screens/HomeScreen';
 import AppsScreen from './src/screens/AppsScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
 import { LanguageProvider, useLanguage } from './src/services/languageContext';
-import { useThemeContext } from './src/services/themeContext';
-import { ThemeProvider } from './src/services/themeContext';
+import { ThemeProvider, useThemeContext } from './src/services/themeContext';
 import { initNotifications } from './src/services/notificationService';
 import { startMonitoring } from './src/services/monitorService';
 import { startBluetoothMonitor, setCarDeviceName } from './src/services/bluetoothService';
 import { loadState } from './src/services/storageService';
 
-const Tab = createBottomTabNavigator();
-
-function Navigation() {
+function AppContent() {
   const insets = useSafeAreaInsets();
   const { t } = useLanguage();
   const { theme } = useThemeContext();
+  const pagerRef = useRef<PagerView>(null);
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const tabs = [
+    { key: 'home', label: () => t('home'), icon: '🅿️' },
+    { key: 'apps', label: () => t('apps'), icon: '📱' },
+    { key: 'settings', label: () => t('settings'), icon: '⚙️' },
+  ];
 
   return (
-    <Tab.Navigator
-      screenOptions={{
-        headerShown: false,
-        tabBarStyle: {
-          backgroundColor: theme.card,
-          borderTopColor: theme.border,
-          height: 60 + insets.bottom,
-          paddingBottom: insets.bottom,
-        },
-        tabBarActiveTintColor: '#00E5A0',
-        tabBarInactiveTintColor: '#444',
-      }}
-    >
-      <Tab.Screen name="Home" component={HomeScreen} options={{ tabBarLabel: t('home'), tabBarIcon: () => <Text style={{ fontSize: 20 }}>🅿️</Text> }} />
-      <Tab.Screen name="Apps" component={AppsScreen} options={{ tabBarLabel: t('apps'), tabBarIcon: () => <Text style={{ fontSize: 20 }}>📱</Text> }} />
-      <Tab.Screen name="Settings" component={SettingsScreen} options={{ tabBarLabel: t('settings'), tabBarIcon: () => <Text style={{ fontSize: 20 }}>⚙️</Text> }} />
-    </Tab.Navigator>
+    <View style={{ flex: 1, backgroundColor: theme.bg }}>
+      <PagerView
+        ref={pagerRef}
+        style={{ flex: 1 }}
+        initialPage={0}
+        onPageSelected={e => setCurrentPage(e.nativeEvent.position)}
+      >
+        <View key="home" style={{ flex: 1 }}>
+          <HomeScreen />
+        </View>
+        <View key="apps" style={{ flex: 1 }}>
+          <AppsScreen />
+        </View>
+        <View key="settings" style={{ flex: 1 }}>
+          <SettingsScreen />
+        </View>
+      </PagerView>
+
+      {/* Tab bar */}
+      <View style={{
+        flexDirection: 'row',
+        backgroundColor: theme.card,
+        borderTopWidth: 1,
+        borderTopColor: theme.border,
+        paddingBottom: insets.bottom,
+        height: 60 + insets.bottom,
+      }}>
+        {tabs.map((tab, i) => (
+          <TouchableOpacity
+            key={tab.key}
+            style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
+            onPress={() => pagerRef.current?.setPage(i)}
+          >
+            <Text style={{ fontSize: 20 }}>{tab.icon}</Text>
+            <Text style={{
+              fontSize: 11,
+              color: currentPage === i ? theme.accent : theme.textFaint,
+              fontWeight: currentPage === i ? '700' : '400',
+            }}>{tab.label()}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+    </View>
   );
 }
 
@@ -61,12 +93,10 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <ThemeProvider>
-      <LanguageProvider>
-        <StatusBar style="light" />
-        <NavigationContainer>
-          <Navigation />
-        </NavigationContainer>
-      </LanguageProvider>
+        <LanguageProvider>
+          <StatusBar style="auto" />
+          <AppContent />
+        </LanguageProvider>
       </ThemeProvider>
     </SafeAreaProvider>
   );
