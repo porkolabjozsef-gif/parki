@@ -81,13 +81,19 @@ export default function SettingsScreen() {
     setSyncing(false);
     if (communityApps.length > 0) {
       const state = await loadState();
-      const existing = state.watchedApps.map(a => a.packageName);
+      // Meglévő appok iconUrl frissítése + új appok hozzáadása
+      const updatedApps = state.watchedApps.map(app => {
+        const community = communityApps.find(a => a.packageName === app.packageName);
+        if (community?.iconUrl && !app.iconUrl) {
+          return { ...app, iconUrl: community.iconUrl };
+        }
+        return app;
+      });
+      const existing = updatedApps.map(a => a.packageName);
       const newApps = communityApps
         .filter(a => !existing.includes(a.packageName))
-        .map(a => ({ packageName: a.packageName, displayName: a.displayName, enabled: true, iconUrl: undefined }));
-      if (newApps.length > 0) {
-        await saveState({ ...state, watchedApps: [...state.watchedApps, ...newApps] });
-      }
+        .map(a => ({ packageName: a.packageName, displayName: a.displayName, enabled: true, iconUrl: a.iconUrl }));
+      await saveState({ ...state, watchedApps: [...updatedApps, ...newApps] });
       const sync = await getLastSync();
       setLastSync(sync);
       Alert.alert('✓', `${communityApps.length} ${t('syncSuccess')}`);
