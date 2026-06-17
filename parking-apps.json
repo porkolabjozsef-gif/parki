@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "updated": "2026-06-17",
   "apps": [
     {
@@ -129,6 +129,15 @@
       ],
       "storeUrl": "https://play.google.com/store/apps/details?id=onepark.app",
       "iconUrl": "https://play-lh.googleusercontent.com/Iyk71Jbqc6l0SndhxFzMlQk1l2yZ6h_dX73EbfUsQQybjFJDi-kZEXXh7GkTSXOSMSKCtQITmoTPPreL01VEunw=s96"
+    },
+    {
+      "packageName": "it.parkingmycar.parkingmyapp",
+      "displayName": "7ParkingMyCar - App parcheggio",
+      "country": [
+        "IT"
+      ],
+      "storeUrl": "https://play.google.com/store/apps/details?id=it.parkingmycar.parkingmyapp",
+      "iconUrl": "https://play-lh.googleusercontent.com/fCxZbP-X1Ibj4USdp3zNiXy8SG5aeh_PlamL1lS7RngNM0jIgxc786cqeyXNIdTi35DxYtKKRTWDTDEdQSTSBA=s96"
     }
   ]
 }
