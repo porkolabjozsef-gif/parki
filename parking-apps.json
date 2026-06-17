@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "updated": "2026-06-17",
   "apps": [
     {
@@ -145,6 +145,15 @@
       ],
       "storeUrl": "https://play.google.com/store/apps/details?id=it.parkingmycar.parkingmyapp",
       "iconUrl": "https://play-lh.googleusercontent.com/fCxZbP-X1Ibj4USdp3zNiXy8SG5aeh_PlamL1lS7RngNM0jIgxc786cqeyXNIdTi35DxYtKKRTWDTDEdQSTSBA=s96"
+    },
+    {
+      "packageName": "com.paybyphone",
+      "displayName": "PayByPhone",
+      "country": [
+        "US"
+      ],
+      "storeUrl": "https://play.google.com/store/apps/details?id=com.paybyphone",
+      "iconUrl": "https://play-lh.googleusercontent.com/3oCKnsiljMhX4KO-ZDxqCZOB9oLD_iqj7sTNlkzQXdDA5B2dU-mJjHUriudHax_WrlPXrKBe0rVQdm4NbHwj6w=s96"
     }
   ]
 }
