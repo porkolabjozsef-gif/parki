@@ -33,13 +33,14 @@
       "storeUrl": "https://play.google.com/store/apps/details?id=com.parkmobile.android"
     },
     {
-      "packageName": "com.flowbird.android",
+      "packageName": "group.flowbird.mpp",
       "displayName": "Flowbird",
       "country": [
         "FR",
         "GB"
       ],
-      "storeUrl": "https://play.google.com/store/apps/details?id=com.flowbird.android"
+      "storeUrl": "https://play.google.com/store/apps/details?id=group.flowbird.mpp",
+      "iconUrl": "https://play-lh.googleusercontent.com/YCM8LuDou3SDcQ4oTlbdNjVwQJt9f8Q5qSQkp96PULAV27ZyqC3lraxitLxDij8cKIA9TS4NmKE6kfLJG4SE=s96"
     },
     {
       "packageName": "hu.mol.move",
@@ -50,12 +51,13 @@
       "storeUrl": "https://play.google.com/store/apps/details?id=hu.mol.move"
     },
     {
-      "packageName": "com.mypermit.android",
+      "packageName": "com.mipermit.android",
       "displayName": "MyPermit",
       "country": [
         "HU"
       ],
-      "storeUrl": "https://play.google.com/store/apps/details?id=com.mypermit.android"
+      "storeUrl": "https://play.google.com/store/apps/details?id=com.mipermit.android",
+      "iconUrl": "https://play-lh.googleusercontent.com/tqWN-HlwLCJKiu7Kt-2y70l47vFyHvH0gSSVvmPRwosYRburYbAMazyO_8IdQtRdpT10DfzILtriGnZllSyiYA=s96"
     },
     {
       "packageName": "com.vodafone.easyrider",
