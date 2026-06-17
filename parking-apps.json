@@ -1,5 +1,5 @@
 {
-  "version": 4,
+  "version": 5,
   "updated": "2026-06-17",
   "apps": [
     {
@@ -154,6 +154,15 @@
       ],
       "storeUrl": "https://play.google.com/store/apps/details?id=com.paybyphone",
       "iconUrl": "https://play-lh.googleusercontent.com/3oCKnsiljMhX4KO-ZDxqCZOB9oLD_iqj7sTNlkzQXdDA5B2dU-mJjHUriudHax_WrlPXrKBe0rVQdm4NbHwj6w=s96"
+    },
+    {
+      "packageName": "com.passportparking.mobile",
+      "displayName": "Passport Parking",
+      "country": [
+        "US"
+      ],
+      "storeUrl": "https://play.google.com/store/apps/details?id=com.passportparking.mobile",
+      "iconUrl": "https://play-lh.googleusercontent.com/cUhhfND462iFtvJA5ghgGIZFTLGw7VrRqp_9U7TLYZDvQRssVVyV2QLixBeriObTEhNhfb6bkI5fHi48JlwF9A=s96"
     }
   ]
 }
