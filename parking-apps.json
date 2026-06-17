@@ -1,5 +1,5 @@
 {
-  "version": 5,
+  "version": 6,
   "updated": "2026-06-17",
   "apps": [
     {
@@ -163,6 +163,15 @@
       ],
       "storeUrl": "https://play.google.com/store/apps/details?id=com.passportparking.mobile",
       "iconUrl": "https://play-lh.googleusercontent.com/cUhhfND462iFtvJA5ghgGIZFTLGw7VrRqp_9U7TLYZDvQRssVVyV2QLixBeriObTEhNhfb6bkI5fHi48JlwF9A=s96"
+    },
+    {
+      "packageName": "com.spothero.spothero",
+      "displayName": "Spot Hero",
+      "country": [
+        "US"
+      ],
+      "storeUrl": "https://play.google.com/store/apps/details?id=com.spothero.spothero",
+      "iconUrl": "https://play-lh.googleusercontent.com/_8S3pql_BH1av3Dk9jZLJbOB3bQfJFN5X-iTiFdwgRMMSukiulZ37bI_oolg0g9ILUnHimVinueE5OOS5m6qPQ=s96"
     }
   ]
 }
