@@ -14,19 +14,28 @@ jobs:
 
       - name: Extract app info and update JSON
         run: |
-          BODY="${{ github.event.issue.body }}"
+          BODY=$(cat << 'BODYEOF'
+          ${{ github.event.issue.body }}
+          BODYEOF
+          )
 
-          PACKAGE=$(echo "$BODY" | grep -oP '(?<=Csomagnév: )[\w.]+')
-          NAME=$(echo "$BODY" | grep -oP '(?<=App neve: ).+')
-          COUNTRY=$(echo "$BODY" | grep -oP '(?<=Ország: ).+')
-          STORE=$(echo "$BODY" | grep -oP '(?<=Play Store: )https://\S+')
+          # Markdown bold és sima formátum is támogatott
+          PACKAGE=$(echo "$BODY" | grep -oP '(?<=\*\*Csomagnév:\*\* |(?<=Csomagnév: ))[\w.]+' | head -1)
+          NAME=$(echo "$BODY" | grep -oP '(?<=\*\*App neve:\*\* |(?<=App neve: )).+' | head -1)
+          COUNTRY=$(echo "$BODY" | grep -oP '(?<=\*\*Ország:\*\* |(?<=Ország: )).+' | head -1)
+          STORE=$(echo "$BODY" | grep -oP 'https://play\.google\.com/store/apps/details\?id=[\w.]+' | head -1)
+
+          echo "Package: $PACKAGE"
+          echo "Name: $NAME"
+          echo "Country: $COUNTRY"
+          echo "Store: $STORE"
 
           if [ -z "$PACKAGE" ]; then
             echo "Package name not found, skipping"
-            exit 0
+            exit 1
           fi
 
-          COUNTRY_CODES=$(echo "$COUNTRY" | tr ',' '\n' | sed 's/ //g' | python3 -c "
+          COUNTRY_CODES=$(echo "$COUNTRY" | tr ',' '\n' | sed 's/[^A-Z]//g' | grep -v '^$' | python3 -c "
           import sys, json
           codes = [line.strip() for line in sys.stdin if line.strip()]
           print(json.dumps(codes))
@@ -43,7 +52,6 @@ jobs:
               print(f"Package $PACKAGE already exists, skipping")
               exit(0)
 
-          # Ikon lekérése Play Store-ból
           icon_url = None
           try:
               url = f'https://play.google.com/store/apps/details?id=$PACKAGE&hl=en'
@@ -52,7 +60,6 @@ jobs:
               match = re.search(r'https://play-lh\.googleusercontent\.com/[A-Za-z0-9_\-]+=', html)
               if match:
                   icon_url = match.group(0) + 's96'
-                  print(f"Icon found: {icon_url[:60]}")
           except Exception as e:
               print(f"Icon fetch failed: {e}")
 
