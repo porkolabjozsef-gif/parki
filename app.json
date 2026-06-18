@@ -58,7 +58,6 @@
           "isAndroidForegroundServiceEnabled": true
         }
       ],
-      "expo-widgets",
       [
         "react-native-android-widget",
         {
