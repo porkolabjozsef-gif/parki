@@ -45,7 +45,7 @@
         "android.permission.BLUETOOTH_CONNECT",
         "android.permission.BLUETOOTH_SCAN"
       ],
-      "versionCode": 11
+      "versionCode": 12
     },
     "plugins": [
       "expo-notifications",
@@ -56,6 +56,29 @@
           "locationAlwaysAndWhenInUsePermission": "A Parki a h\u00e1tt\u00e9rben figyeli, hogy elhagytad-e a parkol\u00e1s hely\u00e9t.",
           "isAndroidBackgroundLocationEnabled": true,
           "isAndroidForegroundServiceEnabled": true
+        }
+      ],
+      "expo-widgets",
+      [
+        "react-native-android-widget",
+        {
+          "widgets": [
+            {
+              "name": "ParkiWidget",
+              "label": "Parki",
+              "description": "Akt\u00edv parkol\u00e1s mutat\u00e1sa",
+              "previewImage": "./assets/icon.png",
+              "minWidth": "180dp",
+              "minHeight": "110dp",
+              "targetCellWidth": 3,
+              "targetCellHeight": 2,
+              "updatePeriodMillis": 0,
+              "widgetFeatures": [
+                "reconfigurable",
+                "configuration_optional"
+              ]
+            }
+          ]
         }
       ]
     ],

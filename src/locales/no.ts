@@ -36,6 +36,7 @@ export default {
   packageNameLabel: 'Pakkenavn (f.eks. hu.parkl.android)',
   cancel: 'Avbryt',
   add: 'Legg til',
+  deleteYes: 'Ja',
   deleteConfirm: 'Er du sikker på at du vil slette?',
   alreadyExists: 'Finnes allerede',
   home: 'Hjem',

@@ -36,6 +36,7 @@ export default {
   packageNameLabel: 'Paketin nimi (esim. hu.parkl.android)',
   cancel: 'Peruuta',
   add: 'Lisää',
+  deleteYes: 'Kyllä',
   deleteConfirm: 'Haluatko varmasti poistaa?',
   alreadyExists: 'On jo olemassa',
   home: 'Koti',

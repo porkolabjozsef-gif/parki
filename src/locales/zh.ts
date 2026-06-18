@@ -36,6 +36,7 @@ export default {
   packageNameLabel: '包名（例如 hu.parkl.android）',
   cancel: '取消',
   add: '添加',
+  deleteYes: '是',
   deleteConfirm: '确定要删除吗？',
   alreadyExists: '已存在',
   home: '主页',

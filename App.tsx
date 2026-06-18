@@ -15,6 +15,8 @@ import { initNotifications } from './src/services/notificationService';
 import { startMonitoring } from './src/services/monitorService';
 import { startBluetoothMonitor, setCarDeviceName } from './src/services/bluetoothService';
 import { loadState } from './src/services/storageService';
+import { registerWidgetTaskHandler } from 'react-native-android-widget';
+import { widgetTaskHandler } from './widgets/widgetTaskHandler';
 
 function AppContent() {
   const insets = useSafeAreaInsets();
@@ -78,6 +80,7 @@ function AppContent() {
 
 export default function App() {
   useEffect(() => {
+    registerWidgetTaskHandler(widgetTaskHandler);
     (async () => {
       try {
         await initNotifications();

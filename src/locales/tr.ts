@@ -36,6 +36,7 @@ export default {
   packageNameLabel: 'Paket adı (örn. hu.parkl.android)',
   cancel: 'İptal',
   add: 'Ekle',
+  deleteYes: 'Evet',
   deleteConfirm: 'Silmek istediğinizden emin misiniz?',
   alreadyExists: 'Zaten mevcut',
   home: 'Ana Sayfa',

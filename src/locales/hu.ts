@@ -37,6 +37,7 @@ export default {
   cancel: 'Mégse',
   add: 'Hozzáadás',
   deleteConfirm: 'Biztosan törli?',
+  deleteYes: 'Igen',
   alreadyExists: 'Már létezik',
   home: 'Főoldal',
   apps: 'Alkalmazások',

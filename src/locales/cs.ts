@@ -36,6 +36,7 @@ export default {
   packageNameLabel: 'Název balíčku (např. hu.parkl.android)',
   cancel: 'Zrušit',
   add: 'Přidat',
+  deleteYes: 'Ano',
   deleteConfirm: 'Opravdu chcete smazat?',
   alreadyExists: 'Již existuje',
   home: 'Domů',

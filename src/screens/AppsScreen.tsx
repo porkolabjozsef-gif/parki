@@ -74,7 +74,7 @@ export default function AppsScreen() {
   const deleteApp = (pkg: string) => {
     Alert.alert(t('deleteConfirm'), '', [
       { text: t('cancel'), style: 'cancel' },
-      { text: t('deleteConfirm'), style: 'destructive', onPress: async () => {
+      { text: t('deleteYes'), style: 'destructive', onPress: async () => {
         await persist(apps.filter(a => a.packageName !== pkg));
       }},
     ]);

@@ -36,6 +36,7 @@ export default {
   packageNameLabel: 'Pakketnaam (bijv. hu.parkl.android)',
   cancel: 'Annuleren',
   add: 'Toevoegen',
+  deleteYes: 'Ja',
   deleteConfirm: 'Weet u zeker dat u wilt verwijderen?',
   alreadyExists: 'Bestaat al',
   home: 'Startpagina',

@@ -36,6 +36,7 @@ export default {
   packageNameLabel: '패키지 이름 (예: hu.parkl.android)',
   cancel: '취소',
   add: '추가',
+  deleteYes: '예',
   deleteConfirm: '정말 삭제하시겠습니까?',
   alreadyExists: '이미 존재합니다',
   home: '홈',

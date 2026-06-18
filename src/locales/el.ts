@@ -36,6 +36,7 @@ export default {
   packageNameLabel: 'Όνομα πακέτου (π.χ. hu.parkl.android)',
   cancel: 'Ακύρωση',
   add: 'Προσθήκη',
+  deleteYes: 'Ναι',
   deleteConfirm: 'Είστε σίγουροι ότι θέλετε να διαγράψετε;',
   alreadyExists: 'Υπάρχει ήδη',
   home: 'Αρχική',
