@@ -18,6 +18,7 @@ export default {
   themeDark: 'Tmavý',
   themeLight: 'Světlý',
   themeAuto: 'Automaticky (systém)',
+  nearbyAppsBtn: 'Vyberte parkovací aplikaci pro tuto oblast!',
   batteryOptimization: 'Optimalizace baterie',
   carDeviceTitle: 'Bluetooth zarizeni auta',
   carDeviceNotSelected: 'Nevybrano',

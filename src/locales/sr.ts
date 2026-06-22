@@ -18,6 +18,7 @@ export default {
   themeDark: 'Tamno',
   themeLight: 'Svetlo',
   themeAuto: 'Automatski (sistem)',
+  nearbyAppsBtn: 'Izaberite aplikaciju za parkiranje za ovo područje!',
   batteryOptimization: 'Optimizacija baterije',
   carDeviceTitle: 'Bluetooth uredaj automobila',
   carDeviceNotSelected: 'Nije izabrano',

@@ -18,6 +18,7 @@ export default {
   themeDark: 'Sombre',
   themeLight: 'Clair',
   themeAuto: 'Automatique (système)',
+  nearbyAppsBtn: 'Choisissez une appli de stationnement pour cette zone!',
   batteryOptimization: 'Optimisation de la batterie',
   carDeviceTitle: 'Appareil Bluetooth voiture',
   carDeviceNotSelected: 'Non selectionne',

@@ -18,6 +18,7 @@ export default {
   themeDark: 'Mørkt',
   themeLight: 'Lyst',
   themeAuto: 'Automatisk (system)',
+  nearbyAppsBtn: 'Velg en parkeringsapp for dette området!',
   batteryOptimization: 'Batterioptimalisering',
   carDeviceTitle: 'Bilens Bluetooth-enhet',
   carDeviceNotSelected: 'Ikke valgt',

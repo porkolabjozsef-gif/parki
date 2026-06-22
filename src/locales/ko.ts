@@ -18,6 +18,7 @@ export default {
   themeDark: '다크',
   themeLight: '라이트',
   themeAuto: '자동 (시스템)',
+  nearbyAppsBtn: '이 지역의 주차 앱을 선택하세요!',
   batteryOptimization: '배터리 최적화',
   carDeviceTitle: 'Car Bluetooth',
   carDeviceNotSelected: 'Not selected',

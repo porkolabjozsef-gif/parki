@@ -18,6 +18,7 @@ export default {
   themeDark: 'Koyu',
   themeLight: 'Açık',
   themeAuto: 'Otomatik (sistem)',
+  nearbyAppsBtn: 'Bu bölge için park uygulaması seçin!',
   batteryOptimization: 'Pil optimizasyonu',
   carDeviceTitle: 'Arac Bluetooth cihazi',
   carDeviceNotSelected: 'Secilmedi',

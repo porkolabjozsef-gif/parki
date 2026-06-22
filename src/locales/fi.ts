@@ -18,6 +18,7 @@ export default {
   themeDark: 'Tumma',
   themeLight: 'Vaalea',
   themeAuto: 'Automaattinen (järjestelmä)',
+  nearbyAppsBtn: 'Valitse pysäköintisovellus tälle alueelle!',
   batteryOptimization: 'Akun optimointi',
   carDeviceTitle: 'Auton Bluetooth-laite',
   carDeviceNotSelected: 'Ei valittu',

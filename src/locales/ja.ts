@@ -18,6 +18,7 @@ export default {
   themeDark: 'ダーク',
   themeLight: 'ライト',
   themeAuto: '自動（システム）',
+  nearbyAppsBtn: 'このエリアの駐車アプリを選択！',
   batteryOptimization: 'バッテリー最適化',
   carDeviceTitle: 'Car Bluetooth',
   carDeviceNotSelected: 'Not selected',

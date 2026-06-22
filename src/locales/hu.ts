@@ -18,6 +18,7 @@ export default {
   themeDark: 'Sötét',
   themeLight: 'Világos',
   themeAuto: 'Automatikus (rendszer szerint)',
+  nearbyAppsBtn: 'Parkoláshoz válassz a közelben elérhető appok közül!',
   batteryOptimization: 'Akkumulátor optimalizálás',
   carDeviceTitle: 'Auto Bluetooth eszkoz',
   carDeviceNotSelected: 'Nincs kivalasztva',

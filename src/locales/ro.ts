@@ -18,6 +18,7 @@ export default {
   themeDark: 'Întunecat',
   themeLight: 'Luminos',
   themeAuto: 'Automat (sistem)',
+  nearbyAppsBtn: 'Alege o aplicație de parcare pentru această zonă!',
   batteryOptimization: 'Optimizare baterie',
   carDeviceTitle: 'Dispozitiv Bluetooth masina',
   carDeviceNotSelected: 'Neselectat',

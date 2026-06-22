@@ -18,6 +18,7 @@ export default {
   themeDark: 'Σκοτεινό',
   themeLight: 'Φωτεινό',
   themeAuto: 'Αυτόματο (σύστημα)',
+  nearbyAppsBtn: 'Επιλέξτε εφαρμογή στάθμευσης για αυτήν την περιοχή!',
   batteryOptimization: 'Βελτιστοποίηση μπαταρίας',
   carDeviceTitle: 'Car Bluetooth',
   carDeviceNotSelected: 'Not selected',

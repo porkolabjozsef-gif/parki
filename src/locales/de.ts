@@ -18,6 +18,7 @@ export default {
   themeDark: 'Dunkel',
   themeLight: 'Hell',
   themeAuto: 'Automatisch (System)',
+  nearbyAppsBtn: 'Wähle eine Park-App für diese Region!',
   batteryOptimization: 'Akkuoptimierung',
   carDeviceTitle: 'Auto Bluetooth-Gerat',
   carDeviceNotSelected: 'Nicht ausgewahlt',

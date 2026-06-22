@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Animated, TouchableOpacity, AppState } from 'react-native';
+import { View, Text, StyleSheet, Animated, TouchableOpacity, AppState, Modal, FlatList, Alert, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLanguage } from '../services/languageContext';
 import { getActiveParkingInfo, clearActiveParking, isNotificationAccessGranted, openNotificationAccessSettings } from '../services/monitorService';
@@ -7,6 +7,7 @@ import { openParkingApp } from '../services/notificationService';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Location from 'expo-location';
 import ParkingMap from '../components/ParkingMap';
+import { loadState } from '../services/storageService';
 import { useThemeContext } from '../services/themeContext';
 
 const GREEN = '#00E5A0';
@@ -20,6 +21,8 @@ export default function HomeScreen() {
   const { t, currentLang } = useLanguage();
   const { theme } = useThemeContext();
   const styles = useStyles(theme);
+  const [nearbyModal, setNearbyModal] = useState(false);
+  const [nearbyApps, setNearbyApps] = useState<any[]>([]);
   const [parking, setParking] = useState<{ appName: string; startedAt: number; iconUrl?: string; packageName: string; lat: number; lng: number } | null>(null);
   const [, tick] = useState(0);
   const [notifAccess, setNotifAccess] = useState(true);
@@ -67,6 +70,7 @@ export default function HomeScreen() {
   const hasGps = active && (parking!.lat !== 0 || parking!.lng !== 0);
 
   return (
+    <>
     <SafeAreaView style={styles.container}>
       <View style={styles.center}>
         {!notifAccess && (
@@ -85,6 +89,44 @@ export default function HomeScreen() {
               <Text style={[styles.indicatorLabel, { color: GREEN }]}>{t('monitoring')}</Text>
             </Animated.View>
             <Text style={styles.info}>{t('monitoringInfo')}</Text>
+            <TouchableOpacity
+              style={styles.nearbyBtn}
+              onPress={async () => {
+                try {
+                  const { status } = await Location.requestForegroundPermissionsAsync();
+                  if (status !== 'granted') {
+                    Alert.alert('', 'Helyadatok engedély szükséges');
+                    return;
+                  }
+                  const loc = await Location.getCurrentPositionAsync({});
+                  let countryCode = 'HU'; // fallback
+                  try {
+                    const geoRes = await fetch(
+                      `https://nominatim.openstreetmap.org/reverse?lat=${loc.coords.latitude}&lon=${loc.coords.longitude}&format=json`,
+                      { headers: { 'User-Agent': 'Parki/1.0' } }
+                    );
+                    const geo = await geoRes.json();
+                    countryCode = geo.address?.country_code?.toUpperCase() || 'HU';
+                  } catch (_) {}
+                  const communityRes = await fetch('https://raw.githubusercontent.com/porkolabjozsef-gif/parki/main/parking-apps.json');
+                  const communityData = await communityRes.json();
+                  const state = await loadState();
+                  const filtered = state.watchedApps.filter(a => {
+                    if (!a.enabled) return false;
+                    const ca = communityData.apps.find((x: any) => x.packageName === a.packageName);
+                    if (!ca?.country?.length) return true;
+                    return ca.country.includes(countryCode);
+                  });
+                  setNearbyApps(filtered);
+                  setNearbyModal(true);
+                } catch (e: any) {
+                  Alert.alert('Hiba', String(e?.message || e));
+                  setNearbyModal(true);
+                }
+              }}
+            >
+              <Text style={styles.nearbyBtnText}>{t('nearbyAppsBtn')}</Text>
+            </TouchableOpacity>
 
           </>
         )}
@@ -116,6 +158,36 @@ export default function HomeScreen() {
         )}
       </View>
     </SafeAreaView>
+      <Modal visible={nearbyModal} transparent animationType="slide" onDismiss={() => setNearbyApps([])}>
+        <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.85)', justifyContent: 'flex-end' }}>
+          <View style={{ backgroundColor: theme.card, borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: 24, paddingBottom: 32, maxHeight: '75%' }}>
+            <Text style={{ color: theme.text, fontSize: 18, fontWeight: '700', marginBottom: 16 }}>{t('nearbyAppsBtn')}</Text>
+            <FlatList
+              data={nearbyApps}
+              keyExtractor={i => i.packageName}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  style={{ flexDirection: 'row', alignItems: 'center', paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: theme.border, gap: 12 }}
+                  onPress={() => { setNearbyModal(false); openParkingApp(item.packageName); }}
+                >
+                  {item.iconUrl ? (
+                    <Image source={{ uri: item.iconUrl }} style={{ width: 40, height: 40, borderRadius: 10 }} />
+                  ) : (
+                    <View style={{ width: 40, height: 40, borderRadius: 10, backgroundColor: theme.card2, alignItems: 'center', justifyContent: 'center' }}>
+                      <Text style={{ color: theme.text, fontWeight: '700' }}>{item.displayName[0]}</Text>
+                    </View>
+                  )}
+                  <Text style={{ color: theme.text, fontSize: 16, fontWeight: '600' }}>{item.displayName}</Text>
+                </TouchableOpacity>
+              )}
+            />
+            <TouchableOpacity onPress={() => setNearbyModal(false)} style={{ marginTop: 16, paddingVertical: 12, alignItems: 'center', backgroundColor: theme.card2, borderRadius: 12 }}>
+              <Text style={{ color: theme.textMuted, fontWeight: '600' }}>{t('cancel')}</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+    </>
   );
 }
 
@@ -124,7 +196,7 @@ const useStyles = (theme: any) => StyleSheet.create({
   warnBar: { position: 'absolute', top: 10, left: 16, right: 16, backgroundColor: 'rgba(255,176,32,0.12)', borderWidth: 1, borderColor: '#FFB020', borderRadius: 12, padding: 14, gap: 8 },
   warnText: { color: '#FFB020', fontSize: 13, fontWeight: '600', textAlign: 'center' },
   warnBtn: { color: '#000', backgroundColor: theme.orange, fontSize: 13, fontWeight: '800', textAlign: 'center', paddingVertical: 8, borderRadius: 8, overflow: 'hidden' },
-  center: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 20 },
+  center: { flex: 1, alignItems: 'center', justifyContent: 'flex-start', paddingTop: 40, gap: 20 },
   logo: { fontSize: 42, fontWeight: '800', color: theme.text, letterSpacing: -1 },
   accent: { color: GREEN },
   sub: { fontSize: 14, color: theme.textFaint, marginTop: -16 },
@@ -149,4 +221,6 @@ const useStyles = (theme: any) => StyleSheet.create({
   testBtnText: { color: theme.textMuted, fontSize: 12 },
   stopBtn: { backgroundColor: ORANGE, paddingVertical: 16, paddingHorizontal: 40, borderRadius: 14, marginTop: 4 },
   stopBtnText: { color: '#000', fontSize: 16, fontWeight: '800' },
+  nearbyBtn: { marginTop: 16, paddingVertical: 12, paddingHorizontal: 24, borderRadius: 14, backgroundColor: theme.card, borderWidth: 1, borderColor: GREEN },
+  nearbyBtnText: { color: GREEN, fontSize: 13, fontWeight: '700', textAlign: 'center' },
 });

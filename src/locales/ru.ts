@@ -18,6 +18,7 @@ export default {
   themeDark: 'Temnaya',
   themeLight: 'Svetlaya',
   themeAuto: 'Avtomaticheski',
+  nearbyAppsBtn: 'Vyberi prilozhenie dlya parkovki v etom rayone!',
   batteryOptimization: 'Оптимизация батареи',
   carDeviceTitle: 'Bluetooth avto',
   carDeviceNotSelected: 'Ne vybrano',

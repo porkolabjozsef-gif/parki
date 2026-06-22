@@ -18,6 +18,7 @@ export default {
   themeDark: '深色',
   themeLight: '浅色',
   themeAuto: '自动（系统）',
+  nearbyAppsBtn: '为此区域选择停车应用！',
   batteryOptimization: '电池优化',
   carDeviceTitle: 'Car Bluetooth',
   carDeviceNotSelected: 'Not selected',

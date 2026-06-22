@@ -18,6 +18,7 @@ export default {
   themeDark: 'Dark',
   themeLight: 'Light',
   themeAuto: 'Automatic (system)',
+  nearbyAppsBtn: 'Choose a parking app for this area!',
   batteryOptimization: 'Battery optimization',
   carDeviceTitle: 'Car Bluetooth device',
   carDeviceNotSelected: 'Not selected',
