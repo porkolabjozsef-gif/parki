@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import {
-  View, Text, StyleSheet, TouchableOpacity, Image, AppState,
+  View, Text, StyleSheet, TouchableOpacity, Image, AppState, Switch,
   FlatList, TextInput, Modal, Alert, ScrollView,
 } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { loadState, saveState, WatchedApp } from '../services/storageService';
 import { useAppContext } from '../services/appContext';
+import { openParkingApp } from '../services/notificationService';
 import { useThemeContext } from '../services/themeContext';
 import { useLanguage } from '../services/languageContext';
 import { submitNewApp, extractPackageFromUrl } from '../services/communityService';
@@ -96,17 +97,16 @@ export default function AppsScreen() {
   const sortedApps = [...apps].sort((a, b) => a.displayName.localeCompare(b.displayName, 'hu'));
 
   const renderItem = ({ item }: { item: WatchedApp }) => {
-    const color = getAppColor(item.packageName);
     const showIcon = item.iconUrl && !failedIcons[item.packageName];
     return (
       <TouchableOpacity
         style={[styles.gridItem, !item.enabled && styles.gridItemDisabled]}
-        onPress={() => toggleApp(item.packageName)}
+        onPress={() => openParkingApp(item.packageName)}
         onLongPress={() => deleteApp(item.packageName)}
         activeOpacity={0.7}
       >
         {showIcon ? (
-          <View style={[styles.iconImageWrap, { borderColor: item.enabled ? color : '#222' }]}>
+          <View style={[styles.iconImageWrap, { borderColor: item.enabled ? '#00E5A0' : theme.border2 }]}>
             <Image
               source={{ uri: item.iconUrl }}
               style={styles.iconImage}
@@ -114,8 +114,8 @@ export default function AppsScreen() {
             />
           </View>
         ) : (
-          <View style={[styles.iconCircle, { backgroundColor: item.enabled ? color + '22' : '#111', borderColor: item.enabled ? color : '#222' }]}>
-            <Text style={[styles.iconText, { color: item.enabled ? color : '#444' }]}>
+          <View style={[styles.iconCircle, { backgroundColor: item.enabled ? '#00E5A022' : theme.card2, borderColor: item.enabled ? '#00E5A0' : theme.border2 }]}>
+            <Text style={[styles.iconText, { color: item.enabled ? '#00E5A0' : theme.textFaint }]}>
               {getAppInitials(item.displayName)}
             </Text>
           </View>
@@ -123,7 +123,13 @@ export default function AppsScreen() {
         <Text style={[styles.appName, !item.enabled && styles.appNameOff]} numberOfLines={2}>
           {item.displayName}
         </Text>
-        {item.enabled && <View style={[styles.activeDot, { backgroundColor: color }]} />}
+        <Switch
+          value={item.enabled}
+          onValueChange={() => toggleApp(item.packageName)}
+          trackColor={{ false: theme.border2, true: '#00E5A044' }}
+          thumbColor={item.enabled ? '#00E5A0' : theme.textFaint}
+          style={styles.appSwitch}
+        />
       </TouchableOpacity>
     );
   };
@@ -236,6 +242,7 @@ const useStyles = (theme: any) => StyleSheet.create({
   },
   iconImage: { width: '100%', height: '100%' },
   appName: { fontSize: 12, fontWeight: '600', color: theme.text, textAlign: 'center' },
+  appSwitch: { transform: [{ scaleX: 0.75 }, { scaleY: 0.75 }] },
   appNameOff: { color: theme.textFaint },
   activeDot: { width: 6, height: 6, borderRadius: 3, position: 'absolute', top: 10, right: 10 },
   submitFooter: {

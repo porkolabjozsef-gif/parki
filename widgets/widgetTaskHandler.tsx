@@ -1,3 +1,4 @@
+import React from 'react';
 import { WidgetTaskHandlerProps } from 'react-native-android-widget';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
