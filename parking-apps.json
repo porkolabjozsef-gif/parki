@@ -241,6 +241,15 @@
       ],
       "storeUrl": "https://play.google.com/store/apps/details?id=hr.infoart.epk",
       "iconUrl": "https://play-lh.googleusercontent.com/7wdSGLr6JcWzHLC7pgABClHEBBxO6yyXlqSqeQj0otrYAedksh6ftEz8HfiGn4-8RluTglQFADi-vFSszKyR=s96"
+    },
+    {
+      "packageName": "eu.innovaapps.tpark.ro",
+      "displayName": "TPARK",
+      "country": [
+        "RO"
+      ],
+      "storeUrl": "https://play.google.com/store/apps/details?id=eu.innovaapps.tpark.ro",
+      "iconUrl": "https://play-lh.googleusercontent.com/mUQ1WGCN8N0JDGwUe8UiVPKn1I0MoozZr9fQSXZc9fwxPLgxu3KtwwK5yOLrETWRV3wjdv-Ndk345f_ApI-M8w=s96"
     }
   ]
 }
