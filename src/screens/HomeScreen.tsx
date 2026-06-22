@@ -23,6 +23,8 @@ export default function HomeScreen() {
   const styles = useStyles(theme);
   const [nearbyModal, setNearbyModal] = useState(false);
   const [nearbyApps, setNearbyApps] = useState<any[]>([]);
+  const [nearbyKey, setNearbyKey] = useState(0);
+  const [cachedCountry, setCachedCountry] = useState<string | null>(null);
   const [parking, setParking] = useState<{ appName: string; startedAt: number; iconUrl?: string; packageName: string; lat: number; lng: number } | null>(null);
   const [, tick] = useState(0);
   const [notifAccess, setNotifAccess] = useState(true);
@@ -50,7 +52,10 @@ export default function HomeScreen() {
 
   useEffect(() => {
     const sub = AppState.addEventListener('change', state => {
-      if (state === 'active') refresh();
+      if (state === 'active') {
+        refresh();
+        setCachedCountry(null); // GPS újralekérdezés előtérbe kerüléskor
+      }
     });
     return () => sub.remove();
   }, []);
@@ -90,6 +95,7 @@ export default function HomeScreen() {
             </Animated.View>
             <Text style={styles.info}>{t('monitoringInfo')}</Text>
             <TouchableOpacity
+              key={nearbyKey}
               style={styles.nearbyBtn}
               onPress={async () => {
                 try {
@@ -98,16 +104,19 @@ export default function HomeScreen() {
                     Alert.alert('', 'Helyadatok engedély szükséges');
                     return;
                   }
-                  const loc = await Location.getCurrentPositionAsync({});
-                  let countryCode = 'HU'; // fallback
-                  try {
-                    const geoRes = await fetch(
-                      `https://nominatim.openstreetmap.org/reverse?lat=${loc.coords.latitude}&lon=${loc.coords.longitude}&format=json`,
-                      { headers: { 'User-Agent': 'Parki/1.0' } }
-                    );
-                    const geo = await geoRes.json();
-                    countryCode = geo.address?.country_code?.toUpperCase() || 'HU';
-                  } catch (_) {}
+                  let countryCode = cachedCountry || 'HU';
+                  if (!cachedCountry) {
+                    try {
+                      const loc = await Location.getCurrentPositionAsync({});
+                      const geoRes = await fetch(
+                        `https://nominatim.openstreetmap.org/reverse?lat=${loc.coords.latitude}&lon=${loc.coords.longitude}&format=json`,
+                        { headers: { 'User-Agent': 'Parki/1.0' } }
+                      );
+                      const geo = await geoRes.json();
+                      countryCode = geo.address?.country_code?.toUpperCase() || 'HU';
+                      setCachedCountry(countryCode);
+                    } catch (_) {}
+                  }
                   const communityRes = await fetch('https://raw.githubusercontent.com/porkolabjozsef-gif/parki/main/parking-apps.json');
                   const communityData = await communityRes.json();
                   const state = await loadState();
@@ -158,7 +167,7 @@ export default function HomeScreen() {
         )}
       </View>
     </SafeAreaView>
-      <Modal visible={nearbyModal} transparent animationType="slide" onDismiss={() => setNearbyApps([])}>
+      <Modal visible={nearbyModal} transparent animationType="slide">
         <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.85)', justifyContent: 'flex-end' }}>
           <View style={{ backgroundColor: theme.card, borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: 24, paddingBottom: 32, maxHeight: '75%' }}>
             <Text style={{ color: theme.text, fontSize: 18, fontWeight: '700', marginBottom: 16 }}>{t('nearbyAppsBtn')}</Text>
@@ -181,7 +190,7 @@ export default function HomeScreen() {
                 </TouchableOpacity>
               )}
             />
-            <TouchableOpacity onPress={() => setNearbyModal(false)} style={{ marginTop: 16, paddingVertical: 12, alignItems: 'center', backgroundColor: theme.card2, borderRadius: 12 }}>
+            <TouchableOpacity onPress={() => { setNearbyModal(false); setTimeout(() => setNearbyKey(k => k + 1), 300); }} style={{ marginTop: 16, paddingVertical: 12, alignItems: 'center', backgroundColor: theme.card2, borderRadius: 12 }}>
               <Text style={{ color: theme.textMuted, fontWeight: '600' }}>{t('cancel')}</Text>
             </TouchableOpacity>
           </View>

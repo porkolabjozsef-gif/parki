@@ -1,5 +1,14 @@
 import RNBluetoothClassic, { BluetoothEventType } from 'react-native-bluetooth-classic';
-import { getActiveParking, clearActiveParking } from './monitorService';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const PARKING_KEY = 'parki_active_parking';
+async function getActiveParkingBT() {
+  const raw = await AsyncStorage.getItem(PARKING_KEY);
+  return raw ? JSON.parse(raw) : null;
+}
+async function clearActiveParkingBT() {
+  await AsyncStorage.removeItem(PARKING_KEY);
+}
 import * as Notifications from 'expo-notifications';
 
 // Az autó BT eszköz neve/címe — a Beállításokban konfigurálható
@@ -25,7 +34,7 @@ export function startBluetoothMonitor() {
     if (!name.toLowerCase().includes(carDeviceName.toLowerCase())) return;
 
     // Autó BT csatlakozva → figyelmeztető értesítés ha aktív parkolás van
-    const parking = await getActiveParking();
+    const parking = await getActiveParkingBT();
     if (!parking) return;
 
     await Notifications.scheduleNotificationAsync({
