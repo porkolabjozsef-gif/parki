@@ -45,7 +45,7 @@
         "android.permission.BLUETOOTH_CONNECT",
         "android.permission.BLUETOOTH_SCAN"
       ],
-      "versionCode": 12
+      "versionCode": 13
     },
     "plugins": [
       "expo-notifications",

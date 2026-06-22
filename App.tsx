@@ -15,6 +15,7 @@ import { initNotifications } from './src/services/notificationService';
 import { startMonitoring } from './src/services/monitorService';
 import { startBluetoothMonitor, setCarDeviceName } from './src/services/bluetoothService';
 import { loadState } from './src/services/storageService';
+import * as NavigationBar from 'expo-navigation-bar';
 import { registerWidgetTaskHandler } from 'react-native-android-widget';
 import { widgetTaskHandler } from './widgets/widgetTaskHandler';
 
@@ -81,6 +82,8 @@ function AppContent() {
 export default function App() {
   useEffect(() => {
     registerWidgetTaskHandler(widgetTaskHandler);
+    NavigationBar.setVisibilityAsync('hidden');
+    NavigationBar.setBehaviorAsync('overlay-swipe');
     (async () => {
       try {
         await initNotifications();
