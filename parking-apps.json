@@ -15,13 +15,31 @@
       "packageName": "net.easypark.android",
       "displayName": "EasyPark",
       "country": [
-        "HU",
-        "SE",
-        "NO",
+        "AT",
+        "BE",
         "DK",
-        "DE",
+        "FI",
         "FR",
-        "GB"
+        "DE",
+        "HU",
+        "IS",
+        "IT",
+        "LI",
+        "ME",
+        "NL",
+        "NO",
+        "PT",
+        "RS",
+        "SI",
+        "ES",
+        "SE",
+        "CH",
+        "AU",
+        "CA",
+        "NZ",
+        "US",
+        "PL",
+        "CZ"
       ],
       "storeUrl": "https://play.google.com/store/apps/details?id=net.easypark.android",
       "iconUrl": "https://play-lh.googleusercontent.com/oynrl-CPadmiUoAh4tWftopFVF6U5C9U39UWuo-8cHMBNY5z9vB7JGGyJZkxwMlbN6ypgBQhe9cU_gRmbAO2=s96"
@@ -30,7 +48,8 @@
       "packageName": "com.parkmobile",
       "displayName": "ParkMobile",
       "country": [
-        "US"
+        "US",
+        "CA"
       ],
       "storeUrl": "https://play.google.com/store/apps/details?id=com.parkmobile",
       "iconUrl": "https://play-lh.googleusercontent.com/mrg5W1AXP6mipsRteyZGy-RreM6yF43zllUJBm-7999n7KR9F1SpbykmYzJWxl9jG3zJZ4Q6ZgiaghJMe_Kb=s96"
@@ -39,8 +58,14 @@
       "packageName": "group.flowbird.mpp",
       "displayName": "Flowbird",
       "country": [
+        "US",
+        "GB",
         "FR",
-        "GB"
+        "BE",
+        "NL",
+        "AU",
+        "NZ",
+        "CA"
       ],
       "storeUrl": "https://play.google.com/store/apps/details?id=group.flowbird.mpp",
       "iconUrl": "https://play-lh.googleusercontent.com/YCM8LuDou3SDcQ4oTlbdNjVwQJt9f8Q5qSQkp96PULAV27ZyqC3lraxitLxDij8cKIA9TS4NmKE6kfLJG4SE=s96"
@@ -58,7 +83,8 @@
       "packageName": "com.mipermit.android",
       "displayName": "MyPermit",
       "country": [
-        "HU"
+        "GB",
+        "IE"
       ],
       "storeUrl": "https://play.google.com/store/apps/details?id=com.mipermit.android",
       "iconUrl": "https://play-lh.googleusercontent.com/tqWN-HlwLCJKiu7Kt-2y70l47vFyHvH0gSSVvmPRwosYRburYbAMazyO_8IdQtRdpT10DfzILtriGnZllSyiYA=s96"
@@ -103,7 +129,8 @@
       "packageName": "co.uk.ringgo.android",
       "displayName": "RingGo",
       "country": [
-        "GB"
+        "GB",
+        "IE"
       ],
       "storeUrl": "https://play.google.com/store/apps/details?id=co.uk.ringgo.android",
       "iconUrl": "https://play-lh.googleusercontent.com/LJC4irqC8bwEProd59BgU6lt0fyfgtASTTGwgZBwQJIK7VJb_8C4pXv1VwiS9NsRixhX7qYmcmSKMubN1lqw=s96"
@@ -113,8 +140,8 @@
       "displayName": "Parkster",
       "country": [
         "SE",
-        "GB",
-        "DE"
+        "DE",
+        "AT"
       ],
       "storeUrl": "https://play.google.com/store/apps/details?id=se.parkster.client.android",
       "iconUrl": "https://play-lh.googleusercontent.com/NXvdQltvwxh-DdQT-jjPeNo2mhSuVV1o31GTYFXnwRkuv9HGDs1gV6upNYOrM0cHY3MsLbug0wqh_UjmVXSluw=s96"
@@ -123,7 +150,8 @@
       "packageName": "com.mrparkit.twa",
       "displayName": "MR.PARKIT",
       "country": [
-        "CZ"
+        "CZ",
+        "SK"
       ],
       "storeUrl": "https://play.google.com/store/apps/details?id=com.mrparkit.twa",
       "iconUrl": "https://play-lh.googleusercontent.com/CZjNfiQ39tWbo1DCmgMVQyom5OLmeuK30-uQ1gcycT-x8v7uCKBpIP7ZNJqc3h4PSrfgyeSLRRs7xgtFvBO0sgY=s96"
@@ -132,7 +160,9 @@
       "packageName": "onepark.app",
       "displayName": "Onepark, Réservez un parking!",
       "country": [
-        "FR"
+        "FR",
+        "BE",
+        "LU"
       ],
       "storeUrl": "https://play.google.com/store/apps/details?id=onepark.app",
       "iconUrl": "https://play-lh.googleusercontent.com/Iyk71Jbqc6l0SndhxFzMlQk1l2yZ6h_dX73EbfUsQQybjFJDi-kZEXXh7GkTSXOSMSKCtQITmoTPPreL01VEunw=s96"
