@@ -180,7 +180,13 @@
       "packageName": "com.paybyphone",
       "displayName": "PayByPhone",
       "country": [
-        "US"
+        "US",
+        "CA",
+        "GB",
+        "AU",
+        "NZ",
+        "FR",
+        "CH"
       ],
       "storeUrl": "https://play.google.com/store/apps/details?id=com.paybyphone",
       "iconUrl": "https://play-lh.googleusercontent.com/3oCKnsiljMhX4KO-ZDxqCZOB9oLD_iqj7sTNlkzQXdDA5B2dU-mJjHUriudHax_WrlPXrKBe0rVQdm4NbHwj6w=s96"
@@ -198,7 +204,8 @@
       "packageName": "com.spothero.spothero",
       "displayName": "Spot Hero",
       "country": [
-        "US"
+        "US",
+        "CA"
       ],
       "storeUrl": "https://play.google.com/store/apps/details?id=com.spothero.spothero",
       "iconUrl": "https://play-lh.googleusercontent.com/_8S3pql_BH1av3Dk9jZLJbOB3bQfJFN5X-iTiFdwgRMMSukiulZ37bI_oolg0g9ILUnHimVinueE5OOS5m6qPQ=s96"
