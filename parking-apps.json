@@ -209,6 +209,28 @@
       ],
       "storeUrl": "https://play.google.com/store/apps/details?id=com.spothero.spothero",
       "iconUrl": "https://play-lh.googleusercontent.com/_8S3pql_BH1av3Dk9jZLJbOB3bQfJFN5X-iTiFdwgRMMSukiulZ37bI_oolg0g9ILUnHimVinueE5OOS5m6qPQ=s96"
+    },
+    {
+      "packageName": "at.mobilkom.android.handyparken",
+      "displayName": "Handyparken",
+      "country": [
+        "AT"
+      ],
+      "storeUrl": "https://play.google.com/store/apps/details?id=at.mobilkom.android.handyparken",
+      "iconUrl": "https://play-lh.googleusercontent.com/36JWG8ApfNuXQ1npAAPHTy-hqzJvfJRKdXqhzkrX3wiu4_63PranlatFcx3p_eLAdnca4XdB8Qe3xPlOD95sUA=s96"
+    },
+    {
+      "packageName": "com.apcoaflow.consumer",
+      "displayName": "APCOA FLOW",
+      "country": [
+        "DE",
+        "IT",
+        "SE",
+        "AT",
+        "PL"
+      ],
+      "storeUrl": "https://play.google.com/store/apps/details?id=com.apcoaflow.consumer",
+      "iconUrl": "https://play-lh.googleusercontent.com/EBlRzcGDphzCOtn4sNJFiSCTE2tyTDUwZ5aLyrBHfsnuZlu2fmH_ZWjbilTNtKi1tCeB7LY43pt2QmlNqv9cIA=s96"
     }
   ]
 }
