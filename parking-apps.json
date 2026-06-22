@@ -231,6 +231,16 @@
       ],
       "storeUrl": "https://play.google.com/store/apps/details?id=com.apcoaflow.consumer",
       "iconUrl": "https://play-lh.googleusercontent.com/EBlRzcGDphzCOtn4sNJFiSCTE2tyTDUwZ5aLyrBHfsnuZlu2fmH_ZWjbilTNtKi1tCeB7LY43pt2QmlNqv9cIA=s96"
+    },
+    {
+      "packageName": "hr.infoart.epk",
+      "displayName": "Bmove",
+      "country": [
+        "HR",
+        "SK"
+      ],
+      "storeUrl": "https://play.google.com/store/apps/details?id=hr.infoart.epk",
+      "iconUrl": "https://play-lh.googleusercontent.com/7wdSGLr6JcWzHLC7pgABClHEBBxO6yyXlqSqeQj0otrYAedksh6ftEz8HfiGn4-8RluTglQFADi-vFSszKyR=s96"
     }
   ]
 }
