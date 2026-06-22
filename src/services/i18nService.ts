@@ -27,8 +27,9 @@ import uk from '../locales/uk';
 import fi from '../locales/fi';
 import no from '../locales/no';
 import da from '../locales/da';
+import he from '../locales/he';
 
-const i18n = new I18n({ hu, en, de, es, it, tr, zh, ja, ko, fr, pt, pl, nl, sv, ru, ar, ro, sk, cs, sr, hr, el, uk, fi, no, da });
+const i18n = new I18n({ hu, en, de, es, it, tr, zh, ja, ko, fr, pt, pl, nl, sv, ru, ar, ro, sk, cs, sr, hr, el, uk, fi, no, da, he });
 
 i18n.enableFallback = true;
 i18n.defaultLocale = 'en';
@@ -45,6 +46,7 @@ export const LANGUAGES = [
   { code: 'sv', name: 'Svenska', flag: '🇸🇪' },
   { code: 'no', name: 'Norsk', flag: '🇳🇴' },
   { code: 'da', name: 'Dansk', flag: '🇩🇰' },
+  { code: 'he', name: 'עברית', flag: '🇮🇱' },
   { code: 'fi', name: 'Suomi', flag: '🇫🇮' },
   { code: 'pl', name: 'Polski', flag: '🇵🇱' },
   { code: 'cs', name: 'Čeština', flag: '🇨🇿' },
