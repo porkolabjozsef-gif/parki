@@ -250,6 +250,24 @@
       ],
       "storeUrl": "https://play.google.com/store/apps/details?id=eu.innovaapps.tpark.ro",
       "iconUrl": "https://play-lh.googleusercontent.com/mUQ1WGCN8N0JDGwUe8UiVPKn1I0MoozZr9fQSXZc9fwxPLgxu3KtwwK5yOLrETWRV3wjdv-Ndk345f_ApI-M8w=s96"
+    },
+    {
+      "packageName": "com.unicell.pangoandroid",
+      "displayName": "Pango",
+      "country": [
+        "IL"
+      ],
+      "storeUrl": "https://play.google.com/store/apps/details?id=com.unicell.pangoandroid",
+      "iconUrl": "https://play-lh.googleusercontent.com/oS1tExZr3WnRDtAyRBZRdunpaOUkpqeA1KuMKdtiHlSh4YiEkroci6bnJoPVbjnRoJaTd6qRNENCF3HPUu5kog=s96"
+    },
+    {
+      "packageName": "air.com.cellogroup.Cellopark",
+      "displayName": "Cello",
+      "country": [
+        "IL"
+      ],
+      "storeUrl": "https://play.google.com/store/apps/details?id=air.com.cellogroup.Cellopark",
+      "iconUrl": "https://play-lh.googleusercontent.com/1eKNY0yq3iMltMo4K85exnc7FXOv-wFVTQeopjM-MrEg-1AQXG6qqlKb0hFP2zgjJYE2BqOe1ZOO5Sm1VQNDcoo=s96"
     }
   ]
 }
