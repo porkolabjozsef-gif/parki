@@ -50,6 +50,7 @@ export default {
   restorePurchase: 'שחזר רכישה',
   processing: 'מעבד...',
   purchaseNotAvailable: 'הרכישה זמינה רק בגרסת Play Store.',
+  proOnly: 'תכונה זו זמינה בגרסת Pro.',
   error: 'שגיאה',
   purchaseError: 'הרכישה נכשלה',
   purchaseNotFound: 'לא נמצאה רכישה קודמת',

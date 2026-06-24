@@ -72,6 +72,7 @@ export default {
   restorePurchase: 'Επαναφορά αγοράς',
   processing: 'Επεξεργασία...',
   purchaseNotAvailable: 'Η αγορά είναι διαθέσιμη μόνο στην έκδοση Play Store.',
+  proOnly: 'Αυτή η λειτουργία είναι διαθέσιμη στην έκδοση Pro.',
   error: 'Σφάλμα',
   purchaseError: 'Η αγορά απέτυχε',
   purchaseNotFound: 'Δεν βρέθηκε προηγούμενη αγορά',

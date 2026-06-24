@@ -74,6 +74,7 @@ export default {
   processing: 'Processing...',
   purchaseNotAvailable: 'Purchase is only available in the Play Store version.',
   error: 'Error',
+  proOnly: 'This feature is available in the Pro version.',
   purchaseError: 'Purchase failed',
   purchaseNotFound: 'No previous purchase found',
 };

@@ -72,6 +72,7 @@ export default {
   restorePurchase: 'Kauf wiederherstellen',
   processing: 'Verarbeitung...',
   purchaseNotAvailable: 'Kauf ist nur in der Play Store Version verfügbar.',
+  proOnly: 'Diese Funktion ist in der Pro-Version verfügbar.',
   error: 'Fehler',
   purchaseError: 'Kauf fehlgeschlagen',
   purchaseNotFound: 'Kein früherer Kauf gefunden',

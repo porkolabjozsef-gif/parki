@@ -72,6 +72,7 @@ export default {
   restorePurchase: 'Vrati kupovinu',
   processing: 'Obrađuje se...',
   purchaseNotAvailable: 'Kupovina je dostupna samo u Play Store verziji.',
+  proOnly: 'Ova funkcija je dostupna u Pro verziji.',
   error: 'Greška',
   purchaseError: 'Kupovina neuspešna',
   purchaseNotFound: 'Nije pronađena prethodna kupovina',

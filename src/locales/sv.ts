@@ -72,6 +72,7 @@ export default {
   restorePurchase: 'Återställ köp',
   processing: 'Bearbetar...',
   purchaseNotAvailable: 'Köp är endast tillgängligt i Play Store-versionen.',
+  proOnly: 'Den här funktionen är tillgänglig i Pro-versionen.',
   error: 'Fel',
   purchaseError: 'Köp misslyckades',
   purchaseNotFound: 'Inget tidigare köp hittades',

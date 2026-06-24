@@ -72,6 +72,7 @@ export default {
   restorePurchase: 'Aankoop herstellen',
   processing: 'Verwerken...',
   purchaseNotAvailable: 'Aankoop is alleen beschikbaar in de Play Store versie.',
+  proOnly: 'Deze functie is beschikbaar in de Pro-versie.',
   error: 'Fout',
   purchaseError: 'Aankoop mislukt',
   purchaseNotFound: 'Geen eerdere aankoop gevonden',

@@ -72,6 +72,7 @@ export default {
   restorePurchase: 'Palauta ostos',
   processing: 'Käsitellään...',
   purchaseNotAvailable: 'Ostos on saatavilla vain Play Store -versiossa.',
+  proOnly: 'Tämä ominaisuus on saatavilla Pro-versiossa.',
   error: 'Virhe',
   purchaseError: 'Ostos epäonnistui',
   purchaseNotFound: 'Aiempaa ostosta ei löydy',

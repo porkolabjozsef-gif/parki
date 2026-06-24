@@ -72,6 +72,7 @@ export default {
   restorePurchase: '恢复购买',
   processing: '处理中...',
   purchaseNotAvailable: '购买仅在 Play Store 版本中可用。',
+  proOnly: '此功能在专业版中可用。',
   error: '错误',
   purchaseError: '购买失败',
   purchaseNotFound: '未找到之前的购买记录',

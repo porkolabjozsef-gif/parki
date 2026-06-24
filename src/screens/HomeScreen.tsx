@@ -101,7 +101,7 @@ export default function HomeScreen() {
               style={styles.nearbyBtn}
               onPress={async () => {
                 if (!isPro) {
-                  Alert.alert('Pro', 'Ez a funkció Pro verzióban érhető el.');
+                  Alert.alert('Pro', t('proOnly'));
                   return;
                 }
                 try {

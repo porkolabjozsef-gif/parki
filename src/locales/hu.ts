@@ -74,6 +74,7 @@ export default {
   processing: 'Feldolgozás...',
   purchaseNotAvailable: 'A vásárlás csak a Play Store verzióban érhető el.',
   error: 'Hiba',
+  proOnly: 'Ez a funkció Pro verzióban érhető el.',
   purchaseError: 'Vásárlás sikertelen',
   purchaseNotFound: 'Nem található korábbi vásárlás',
 };

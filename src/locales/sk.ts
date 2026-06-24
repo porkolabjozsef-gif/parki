@@ -72,6 +72,7 @@ export default {
   restorePurchase: 'Obnoviť nákup',
   processing: 'Spracováva sa...',
   purchaseNotAvailable: 'Nákup je dostupný iba v Play Store verzii.',
+  proOnly: 'Táto funkcia je dostupná v Pro verzii.',
   error: 'Chyba',
   purchaseError: 'Nákup zlyhal',
   purchaseNotFound: 'Nenašiel sa žiadny predchádzajúci nákup',

@@ -50,6 +50,7 @@ export default {
   restorePurchase: 'खरीद पुनर्स्थापित करें',
   processing: 'प्रसंस्करण...',
   purchaseNotAvailable: 'खरीद केवल Play Store संस्करण में उपलब्ध है।',
+  proOnly: 'यह सुविधा Pro संस्करण में उपलब्ध है।',
   error: 'त्रुटि',
   purchaseError: 'खरीद विफल',
   purchaseNotFound: 'कोई पिछली खरीद नहीं मिली',

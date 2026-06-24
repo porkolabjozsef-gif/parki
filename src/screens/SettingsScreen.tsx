@@ -209,7 +209,7 @@ export default function SettingsScreen() {
 
           {/* Autó Bluetooth eszköz */}
           {Platform.OS === 'android' && (
-            <TouchableOpacity style={[styles.permBtn, { marginTop: 8 }]} onPress={isPro ? openBtPicker : () => Alert.alert('Pro', 'Ez a funkció Pro verzióban érhető el.')}>
+            <TouchableOpacity style={[styles.permBtn, { marginTop: 8 }]} onPress={isPro ? openBtPicker : () => Alert.alert('Pro', t('proOnly'))}>
               <View style={styles.permInfo}>
                 <Text style={styles.permTitle}>{t('carDeviceTitle')}</Text>
                 <Text style={styles.permSub}>{carDevice ?? t('carDeviceNotSelected')}</Text>

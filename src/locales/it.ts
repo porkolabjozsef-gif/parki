@@ -72,6 +72,7 @@ export default {
   restorePurchase: 'Ripristina acquisto',
   processing: 'Elaborazione...',
   purchaseNotAvailable: 'L'acquisto è disponibile solo nella versione Play Store.',
+  proOnly: 'Questa funzione è disponibile nella versione Pro.',
   error: 'Errore',
   purchaseError: 'Acquisto fallito',
   purchaseNotFound: 'Nessun acquisto precedente trovato',

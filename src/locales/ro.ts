@@ -72,6 +72,7 @@ export default {
   restorePurchase: 'Restaurează achiziția',
   processing: 'Se procesează...',
   purchaseNotAvailable: 'Achiziția este disponibilă doar în versiunea Play Store.',
+  proOnly: 'Această funcție este disponibilă în versiunea Pro.',
   error: 'Eroare',
   purchaseError: 'Achiziție eșuată',
   purchaseNotFound: 'Nu s-a găsit nicio achiziție anterioară',

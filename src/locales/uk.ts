@@ -72,6 +72,7 @@ export default {
   restorePurchase: 'Відновити покупку',
   processing: 'Обробка...',
   purchaseNotAvailable: 'Покупка доступна лише у версії Play Store.',
+  proOnly: 'Ця функція доступна у версії Pro.',
   error: 'Помилка',
   purchaseError: 'Покупка не вдалася',
   purchaseNotFound: 'Попередню покупку не знайдено',

@@ -72,6 +72,7 @@ export default {
   restorePurchase: '購入を復元',
   processing: '処理中...',
   purchaseNotAvailable: '購入はPlay Storeバージョンでのみ利用可能です。',
+  proOnly: 'この機能はProバージョンで利用できます。',
   error: 'エラー',
   purchaseError: '購入に失敗しました',
   purchaseNotFound: '以前の購入が見つかりません',

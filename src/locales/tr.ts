@@ -72,6 +72,7 @@ export default {
   restorePurchase: 'Satın almayı geri yükle',
   processing: 'İşleniyor...',
   purchaseNotAvailable: 'Satın alma yalnızca Play Store sürümünde mevcuttur.',
+  proOnly: 'Bu özellik Pro sürümünde mevcuttur.',
   error: 'Hata',
   purchaseError: 'Satın alma başarısız',
   purchaseNotFound: 'Önceki satın alma bulunamadı',
