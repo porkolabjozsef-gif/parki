@@ -273,7 +273,7 @@ export default function SettingsScreen() {
                 disabled={purchasing}
               >
                 <Text style={{ color: '#000', fontWeight: '700', fontSize: 15 }}>
-                  {purchasing ? 'Feldolgozás...' : 'Pro megvásárlása – $0.99'}
+                  {purchasing ? 'Feldolgozás...' : 'Pro megvásárlása – $1.99'}
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
