@@ -266,7 +266,11 @@ export default function SettingsScreen() {
                     const ok = await purchasePro();
                     if (ok) await refreshPro();
                   } catch (e: any) {
-                    Alert.alert('Hiba', e.message || 'Vásárlás sikertelen');
+                    if (e.message?.includes('undefined is not a function')) {
+                      Alert.alert('', 'A vásárlás csak a Play Store verzióban érhető el.');
+                    } else {
+                      Alert.alert('Hiba', e.message || 'Vásárlás sikertelen');
+                    }
                   }
                   setPurchasing(false);
                 }}
