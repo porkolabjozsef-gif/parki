@@ -270,12 +270,13 @@
       "iconUrl": "https://play-lh.googleusercontent.com/1eKNY0yq3iMltMo4K85exnc7FXOv-wFVTQeopjM-MrEg-1AQXG6qqlKb0hFP2zgjJYE2BqOe1ZOO5Sm1VQNDcoo=s96"
     },
     {
-      "packageName": "com.parkplus",
+      "packageName": "com.ovunque.parkwheels",
       "displayName": "Park+",
       "country": [
         "IN"
       ],
-      "storeUrl": "https://play.google.com/store/apps/details?id=com.parkplus"
+      "storeUrl": "https://play.google.com/store/apps/details?id=com.ovunque.parkwheels",
+      "iconUrl": "https://play-lh.googleusercontent.com/w2N18HzREzw9-eDO2mTXq7U0Wpr3L0dTV-kDGeizMOrJt_Jolqmmh72gzzdyhEuN4N0FrdiQ2qJDRMLkp482=s96"
     }
   ]
 }
