@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as RNIap from 'react-native-iap';
 
 const PRO_KEY = 'parki_pro_purchased';
-const PRODUCT_ID = 'pro_upgrade';
+const PRODUCT_ID = 'pro';
 
 export async function isProUser(): Promise<boolean> {
   try {
