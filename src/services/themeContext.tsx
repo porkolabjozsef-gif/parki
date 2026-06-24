@@ -35,7 +35,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   };
 
   const theme = mode === 'system'
-    ? (systemScheme === 'light' ? lightTheme : darkTheme)
+    ? (systemScheme === 'dark' ? darkTheme : lightTheme)
     : (mode === 'light' ? lightTheme : darkTheme);
 
   return (
