@@ -18,6 +18,7 @@ export default {
   themeDark: 'Donker',
   themeLight: 'Licht',
   themeAuto: 'Automatisch (systeem)',
+  proDesc: 'Bluetooth-trigger en GPS-gebaseerde app-suggesties.',
   nearbyAppsBtn: 'Kies een parkeer-app voor dit gebied!',
   batteryOptimization: 'Batterijoptimalisatie',
   carDeviceTitle: 'Auto Bluetooth-apparaat',

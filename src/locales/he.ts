@@ -41,6 +41,7 @@ export default {
   carDeviceNotSelected: 'לא נבחר',
   carDeviceSelectTitle: 'בחר התקן Bluetooth',
   carDeviceRemove: 'הסר / כבה',
+  proDesc: 'טריגר Bluetooth והצעות אפליקציות מבוססות GPS.',
   nearbyAppsBtn: 'בחר אפליקציית חניה לאזור זה!',
   open: 'פתח',
   notifAccessWarn: 'גישה להתראות אינה מופעלת — נדרש לניטור.',

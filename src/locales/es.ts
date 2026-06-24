@@ -18,6 +18,7 @@ export default {
   themeDark: 'Oscuro',
   themeLight: 'Claro',
   themeAuto: 'Automático (sistema)',
+  proDesc: 'Activador Bluetooth y sugerencias de apps por GPS.',
   nearbyAppsBtn: '¡Elige una app de aparcamiento para esta zona!',
   batteryOptimization: 'Optimización de batería',
   carDeviceTitle: 'Dispositivo Bluetooth del coche',

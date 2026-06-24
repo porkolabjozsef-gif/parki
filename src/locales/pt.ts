@@ -18,6 +18,7 @@ export default {
   themeDark: 'Escuro',
   themeLight: 'Claro',
   themeAuto: 'Automático (sistema)',
+  proDesc: 'Gatilho Bluetooth e sugestões de apps por GPS.',
   nearbyAppsBtn: 'Escolha um app de estacionamento para esta área!',
   batteryOptimization: 'Otimização de bateria',
   carDeviceTitle: 'Dispositivo Bluetooth do carro',

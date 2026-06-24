@@ -18,6 +18,7 @@ export default {
   themeDark: 'Tmavý',
   themeLight: 'Světlý',
   themeAuto: 'Automaticky (systém)',
+  proDesc: 'Bluetooth spouštěč a návrhy aplikací na základě GPS.',
   nearbyAppsBtn: 'Vyberte parkovací aplikaci pro tuto oblast!',
   batteryOptimization: 'Optimalizace baterie',
   carDeviceTitle: 'Bluetooth zarizeni auta',

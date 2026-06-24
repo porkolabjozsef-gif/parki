@@ -18,6 +18,7 @@ export default {
   themeDark: 'Koyu',
   themeLight: 'Açık',
   themeAuto: 'Otomatik (sistem)',
+  proDesc: 'Bluetooth tetikleyici ve GPS tabanlı uygulama önerileri.',
   nearbyAppsBtn: 'Bu bölge için park uygulaması seçin!',
   batteryOptimization: 'Pil optimizasyonu',
   carDeviceTitle: 'Arac Bluetooth cihazi',

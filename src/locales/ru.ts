@@ -18,6 +18,7 @@ export default {
   themeDark: 'Temnaya',
   themeLight: 'Svetlaya',
   themeAuto: 'Avtomaticheski',
+  proDesc: 'Bluetooth триггер и предложения приложений на основе GPS.',
   nearbyAppsBtn: 'Vyberi prilozhenie dlya parkovki v etom rayone!',
   batteryOptimization: 'Оптимизация батареи',
   carDeviceTitle: 'Bluetooth avto',

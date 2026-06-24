@@ -18,6 +18,7 @@ export default {
   themeDark: 'Dunkel',
   themeLight: 'Hell',
   themeAuto: 'Automatisch (System)',
+  proDesc: 'Bluetooth-Trigger und GPS-basierte App-Vorschläge.',
   nearbyAppsBtn: 'Wähle eine Park-App für diese Region!',
   batteryOptimization: 'Akkuoptimierung',
   carDeviceTitle: 'Auto Bluetooth-Gerat',

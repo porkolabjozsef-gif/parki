@@ -18,6 +18,7 @@ export default {
   themeDark: 'Tumma',
   themeLight: 'Vaalea',
   themeAuto: 'Automaattinen (järjestelmä)',
+  proDesc: 'Bluetooth-laukaisin ja GPS-pohjaiset sovellusehdotukset.',
   nearbyAppsBtn: 'Valitse pysäköintisovellus tälle alueelle!',
   batteryOptimization: 'Akun optimointi',
   carDeviceTitle: 'Auton Bluetooth-laite',

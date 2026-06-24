@@ -18,6 +18,7 @@ export default {
   themeDark: 'Sötét',
   themeLight: 'Világos',
   themeAuto: 'Automatikus (rendszer szerint)',
+  proDesc: 'Bluetooth trigger és GPS alapú app ajánlás funkciók.',
   nearbyAppsBtn: 'Parkoláshoz válassz a közelben elérhető appok közül!',
   batteryOptimization: 'Akkumulátor optimalizálás',
   carDeviceTitle: 'Auto Bluetooth eszkoz',

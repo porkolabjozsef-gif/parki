@@ -18,6 +18,7 @@ export default {
   themeDark: 'Mörkt',
   themeLight: 'Ljust',
   themeAuto: 'Automatisk (system)',
+  proDesc: 'Bluetooth-trigger och GPS-baserade appförslag.',
   nearbyAppsBtn: 'Välj en parkeringsapp för det här området!',
   batteryOptimization: 'Batterioptimering',
   carDeviceTitle: 'Bilens Bluetooth-enhet',

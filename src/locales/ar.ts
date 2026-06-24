@@ -18,6 +18,7 @@ export default {
   themeDark: 'داكن',
   themeLight: 'فاتح',
   themeAuto: 'تلقائي (النظام)',
+  proDesc: 'مشغل Bluetooth واقتراحات التطبيقات المستندة إلى GPS.',
   nearbyAppsBtn: 'اختر تطبيق ركن السيارات لهذه المنطقة!',
   batteryOptimization: 'تحسين البطارية',
   carDeviceTitle: 'Car Bluetooth',

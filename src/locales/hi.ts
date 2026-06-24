@@ -41,6 +41,7 @@ export default {
   carDeviceNotSelected: 'चुना नहीं गया',
   carDeviceSelectTitle: 'Bluetooth डिवाइस चुनें',
   carDeviceRemove: 'हटाएं / बंद करें',
+  proDesc: 'ब्लूटूथ ट्रिगर और GPS-आधारित ऐप सुझाव।',
   nearbyAppsBtn: 'इस क्षेत्र के लिए पार्किंग ऐप चुनें!',
   open: 'खोलें',
   notifAccessWarn: 'नोटिफिकेशन एक्सेस सक्षम नहीं है — मॉनिटरिंग के लिए आवश्यक।',

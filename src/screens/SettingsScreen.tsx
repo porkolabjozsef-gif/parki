@@ -256,7 +256,7 @@ export default function SettingsScreen() {
           ) : (
             <>
               <Text style={{ color: theme.textSub, fontSize: 13, marginBottom: 8 }}>
-                Bluetooth trigger és GPS alapú app ajánlás funkciók.
+                {t('proDesc')}
               </Text>
               <TouchableOpacity
                 style={{ backgroundColor: GREEN, paddingVertical: 12, borderRadius: 12, alignItems: 'center' }}
