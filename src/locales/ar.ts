@@ -68,5 +68,12 @@ export default {
   open: 'فتح',
   notifAccessWarn: 'الوصول إلى الإشعارات غير مفعّل — مطلوب للمراقبة.',
   enable: 'تفعيل',
+  buyPro: 'شراء Pro – $1.99',
+  restorePurchase: 'استعادة الشراء',
+  processing: 'جارٍ المعالجة...',
+  purchaseNotAvailable: 'الشراء متاح فقط في إصدار Play Store.',
+  error: 'خطأ',
+  purchaseError: 'فشل الشراء',
+  purchaseNotFound: 'لم يتم العثور على شراء سابق',
   supportMe: 'ادعم عملي ☕',
 };

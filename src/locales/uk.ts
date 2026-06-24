@@ -68,5 +68,12 @@ export default {
   open: 'Відкрити',
   notifAccessWarn: 'Доступ до сповіщень вимкнено — потрібен для моніторингу.',
   enable: 'Увімкнути',
+  buyPro: 'Купити Pro – $1.99',
+  restorePurchase: 'Відновити покупку',
+  processing: 'Обробка...',
+  purchaseNotAvailable: 'Покупка доступна лише у версії Play Store.',
+  error: 'Помилка',
+  purchaseError: 'Покупка не вдалася',
+  purchaseNotFound: 'Попередню покупку не знайдено',
   supportMe: 'Підтримайте мою роботу ☕',
 };

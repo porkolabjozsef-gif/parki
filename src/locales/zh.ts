@@ -68,5 +68,12 @@ export default {
   open: '打开',
   notifAccessWarn: '通知访问未启用 — 监控所需。',
   enable: '启用',
+  buyPro: '购买专业版 – $1.99',
+  restorePurchase: '恢复购买',
+  processing: '处理中...',
+  purchaseNotAvailable: '购买仅在 Play Store 版本中可用。',
+  error: '错误',
+  purchaseError: '购买失败',
+  purchaseNotFound: '未找到之前的购买记录',
   supportMe: '支持我的工作 ☕',
 };

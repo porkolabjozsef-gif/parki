@@ -68,5 +68,12 @@ export default {
   open: 'Åpne',
   notifAccessWarn: 'Varseltilgang ikke aktivert — kreves for overvåking.',
   enable: 'Aktiver',
+  buyPro: 'Kjøp Pro – $1.99',
+  restorePurchase: 'Gjenopprett kjøp',
+  processing: 'Behandler...',
+  purchaseNotAvailable: 'Kjøp er kun tilgjengelig i Play Store-versjonen.',
+  error: 'Feil',
+  purchaseError: 'Kjøp mislyktes',
+  purchaseNotFound: 'Ingen tidligere kjøp funnet',
   supportMe: 'Støtt arbeidet mitt ☕',
 };

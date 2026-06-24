@@ -68,5 +68,12 @@ export default {
   open: 'Abrir',
   notifAccessWarn: 'Acesso a notificações desativado — necessário para monitorização.',
   enable: 'Ativar',
+  buyPro: 'Comprar Pro – $1.99',
+  restorePurchase: 'Restaurar compra',
+  processing: 'Processando...',
+  purchaseNotAvailable: 'A compra está disponível apenas na versão da Play Store.',
+  error: 'Erro',
+  purchaseError: 'Compra falhou',
+  purchaseNotFound: 'Nenhuma compra anterior encontrada',
   supportMe: 'Apoie meu trabalho ☕',
 };

@@ -69,4 +69,11 @@ export default {
   notifAccessWarn: 'Az értesítés-hozzáférés nincs engedélyezve — a figyeléshez szükséges.',
   enable: 'Bekapcsolás',
   supportMe: 'Támogasd a munkám ☕',
+  buyPro: 'Pro megvásárlása – $1.99',
+  restorePurchase: 'Vásárlás visszaállítása',
+  processing: 'Feldolgozás...',
+  purchaseNotAvailable: 'A vásárlás csak a Play Store verzióban érhető el.',
+  error: 'Hiba',
+  purchaseError: 'Vásárlás sikertelen',
+  purchaseNotFound: 'Nem található korábbi vásárlás',
 };

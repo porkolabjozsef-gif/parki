@@ -68,5 +68,12 @@ export default {
   open: 'Openen',
   notifAccessWarn: 'Meldingstoegang niet ingeschakeld — vereist voor monitoring.',
   enable: 'Inschakelen',
+  buyPro: 'Pro kopen – $1.99',
+  restorePurchase: 'Aankoop herstellen',
+  processing: 'Verwerken...',
+  purchaseNotAvailable: 'Aankoop is alleen beschikbaar in de Play Store versie.',
+  error: 'Fout',
+  purchaseError: 'Aankoop mislukt',
+  purchaseNotFound: 'Geen eerdere aankoop gevonden',
   supportMe: 'Ondersteun mijn werk ☕',
 };

@@ -68,5 +68,12 @@ export default {
   open: '열기',
   notifAccessWarn: '알림 접근이 비활성화됨 — 모니터링에 필요합니다.',
   enable: '활성화',
+  buyPro: 'Pro 구매 – $1.99',
+  restorePurchase: '구매 복원',
+  processing: '처리 중...',
+  purchaseNotAvailable: '구매는 Play Store 버전에서만 가능합니다.',
+  error: '오류',
+  purchaseError: '구매 실패',
+  purchaseNotFound: '이전 구매를 찾을 수 없습니다',
   supportMe: '내 작업을 지원해 주세요 ☕',
 };

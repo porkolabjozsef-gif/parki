@@ -267,9 +267,9 @@ export default function SettingsScreen() {
                     if (ok) await refreshPro();
                   } catch (e: any) {
                     if (e.message?.includes('undefined is not a function')) {
-                      Alert.alert('', 'A vásárlás csak a Play Store verzióban érhető el.');
+                      Alert.alert('', t('purchaseNotAvailable'));
                     } else {
-                      Alert.alert('Hiba', e.message || 'Vásárlás sikertelen');
+                      Alert.alert(t('error'), e.message || t('purchaseError'));
                     }
                   }
                   setPurchasing(false);
@@ -277,7 +277,7 @@ export default function SettingsScreen() {
                 disabled={purchasing}
               >
                 <Text style={{ color: '#000', fontWeight: '700', fontSize: 15 }}>
-                  {purchasing ? 'Feldolgozás...' : 'Pro megvásárlása – $1.99'}
+                  {purchasing ? t('processing') : t('buyPro')}
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
@@ -285,10 +285,10 @@ export default function SettingsScreen() {
                 onPress={async () => {
                   const ok = await restorePro();
                   if (ok) await refreshPro();
-                  else Alert.alert('', 'Nem található korábbi vásárlás');
+                  else Alert.alert('', t('purchaseNotFound'));
                 }}
               >
-                <Text style={{ color: theme.textMuted, fontSize: 13 }}>Vásárlás visszaállítása</Text>
+                <Text style={{ color: theme.textMuted, fontSize: 13 }}>{t('restorePurchase')}</Text>
               </TouchableOpacity>
             </>
           )}

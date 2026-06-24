@@ -68,5 +68,12 @@ export default {
   open: '開く',
   notifAccessWarn: '通知アクセスが無効です — 監視に必要です。',
   enable: '有効にする',
+  buyPro: 'Proを購入 – $1.99',
+  restorePurchase: '購入を復元',
+  processing: '処理中...',
+  purchaseNotAvailable: '購入はPlay Storeバージョンでのみ利用可能です。',
+  error: 'エラー',
+  purchaseError: '購入に失敗しました',
+  purchaseNotFound: '以前の購入が見つかりません',
   supportMe: '私の仕事を支援してください ☕',
 };

@@ -68,5 +68,12 @@ export default {
   open: 'Deschide',
   notifAccessWarn: 'Accesul la notificări nu este activat — necesar pentru monitorizare.',
   enable: 'Activează',
+  buyPro: 'Cumpără Pro – $1.99',
+  restorePurchase: 'Restaurează achiziția',
+  processing: 'Se procesează...',
+  purchaseNotAvailable: 'Achiziția este disponibilă doar în versiunea Play Store.',
+  error: 'Eroare',
+  purchaseError: 'Achiziție eșuată',
+  purchaseNotFound: 'Nu s-a găsit nicio achiziție anterioară',
   supportMe: 'Susține munca mea ☕',
 };

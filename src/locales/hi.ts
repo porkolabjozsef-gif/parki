@@ -46,5 +46,12 @@ export default {
   open: 'खोलें',
   notifAccessWarn: 'नोटिफिकेशन एक्सेस सक्षम नहीं है — मॉनिटरिंग के लिए आवश्यक।',
   enable: 'सक्षम करें',
+  buyPro: 'Pro खरीदें – $1.99',
+  restorePurchase: 'खरीद पुनर्स्थापित करें',
+  processing: 'प्रसंस्करण...',
+  purchaseNotAvailable: 'खरीद केवल Play Store संस्करण में उपलब्ध है।',
+  error: 'त्रुटि',
+  purchaseError: 'खरीद विफल',
+  purchaseNotFound: 'कोई पिछली खरीद नहीं मिली',
   supportMe: 'मेरे काम का समर्थन करें ☕',
 };

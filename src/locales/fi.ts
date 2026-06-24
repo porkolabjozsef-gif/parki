@@ -68,5 +68,12 @@ export default {
   open: 'Avaa',
   notifAccessWarn: 'Ilmoituspääsy ei ole käytössä — tarvitaan seurantaan.',
   enable: 'Ota käyttöön',
+  buyPro: 'Osta Pro – $1.99',
+  restorePurchase: 'Palauta ostos',
+  processing: 'Käsitellään...',
+  purchaseNotAvailable: 'Ostos on saatavilla vain Play Store -versiossa.',
+  error: 'Virhe',
+  purchaseError: 'Ostos epäonnistui',
+  purchaseNotFound: 'Aiempaa ostosta ei löydy',
   supportMe: 'Tue työtäni ☕',
 };

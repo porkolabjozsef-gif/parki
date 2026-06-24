@@ -68,5 +68,12 @@ export default {
   open: 'Aç',
   notifAccessWarn: 'Bildirim erişimi etkin değil — izleme için gerekli.',
   enable: 'Etkinleştir',
+  buyPro: 'Pro Satın Al – $1.99',
+  restorePurchase: 'Satın almayı geri yükle',
+  processing: 'İşleniyor...',
+  purchaseNotAvailable: 'Satın alma yalnızca Play Store sürümünde mevcuttur.',
+  error: 'Hata',
+  purchaseError: 'Satın alma başarısız',
+  purchaseNotFound: 'Önceki satın alma bulunamadı',
   supportMe: 'Çalışmamı destekle ☕',
 };

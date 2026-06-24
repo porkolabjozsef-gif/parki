@@ -68,5 +68,12 @@ export default {
   open: 'Åbn',
   notifAccessWarn: 'Notifikationsadgang ikke aktiveret — kræves til overvågning.',
   enable: 'Aktivér',
+  buyPro: 'Køb Pro – $1.99',
+  restorePurchase: 'Gendan køb',
+  processing: 'Behandler...',
+  purchaseNotAvailable: 'Køb er kun tilgængeligt i Play Store-versionen.',
+  error: 'Fejl',
+  purchaseError: 'Køb mislykkedes',
+  purchaseNotFound: 'Ingen tidligere køb fundet',
   supportMe: 'Støt mit arbejde ☕',
 };

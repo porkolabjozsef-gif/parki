@@ -68,5 +68,12 @@ export default {
   open: 'Öffnen',
   notifAccessWarn: 'Benachrichtigungszugriff nicht aktiviert — für die Überwachung erforderlich.',
   enable: 'Aktivieren',
+  buyPro: 'Pro kaufen – $1.99',
+  restorePurchase: 'Kauf wiederherstellen',
+  processing: 'Verarbeitung...',
+  purchaseNotAvailable: 'Kauf ist nur in der Play Store Version verfügbar.',
+  error: 'Fehler',
+  purchaseError: 'Kauf fehlgeschlagen',
+  purchaseNotFound: 'Kein früherer Kauf gefunden',
   supportMe: 'Unterstütze meine Arbeit ☕',
 };

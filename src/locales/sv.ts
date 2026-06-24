@@ -68,5 +68,12 @@ export default {
   open: 'Öppna',
   notifAccessWarn: 'Aviseringsåtkomst inte aktiverad — krävs för övervakning.',
   enable: 'Aktivera',
+  buyPro: 'Köp Pro – $1.99',
+  restorePurchase: 'Återställ köp',
+  processing: 'Bearbetar...',
+  purchaseNotAvailable: 'Köp är endast tillgängligt i Play Store-versionen.',
+  error: 'Fel',
+  purchaseError: 'Köp misslyckades',
+  purchaseNotFound: 'Inget tidigare köp hittades',
   supportMe: 'Stöd mitt arbete ☕',
 };

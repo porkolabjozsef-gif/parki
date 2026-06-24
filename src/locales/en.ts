@@ -69,4 +69,11 @@ export default {
   notifAccessWarn: 'Notification access is not enabled — required for monitoring.',
   enable: 'Enable',
   supportMe: 'Support my work ☕',
+  buyPro: 'Buy Pro – $1.99',
+  restorePurchase: 'Restore purchase',
+  processing: 'Processing...',
+  purchaseNotAvailable: 'Purchase is only available in the Play Store version.',
+  error: 'Error',
+  purchaseError: 'Purchase failed',
+  purchaseNotFound: 'No previous purchase found',
 };

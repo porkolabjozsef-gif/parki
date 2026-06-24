@@ -68,5 +68,12 @@ export default {
   open: 'Otevřít',
   notifAccessWarn: 'Přístup k oznámením není povolen — nutný pro sledování.',
   enable: 'Povolit',
+  buyPro: 'Koupit Pro – $1.99',
+  restorePurchase: 'Obnovit nákup',
+  processing: 'Zpracovává se...',
+  purchaseNotAvailable: 'Nákup je dostupný pouze ve verzi Play Store.',
+  error: 'Chyba',
+  purchaseError: 'Nákup selhal',
+  purchaseNotFound: 'Nebyl nalezen žádný předchozí nákup',
   supportMe: 'Podpořte moji práci ☕',
 };

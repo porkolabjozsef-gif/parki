@@ -46,5 +46,12 @@ export default {
   open: 'פתח',
   notifAccessWarn: 'גישה להתראות אינה מופעלת — נדרש לניטור.',
   enable: 'הפעל',
+  buyPro: 'רכוש Pro – $1.99',
+  restorePurchase: 'שחזר רכישה',
+  processing: 'מעבד...',
+  purchaseNotAvailable: 'הרכישה זמינה רק בגרסת Play Store.',
+  error: 'שגיאה',
+  purchaseError: 'הרכישה נכשלה',
+  purchaseNotFound: 'לא נמצאה רכישה קודמת',
   supportMe: 'תמוך בעבודתי ☕',
 };

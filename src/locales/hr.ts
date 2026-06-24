@@ -68,5 +68,12 @@ export default {
   open: 'Otvori',
   notifAccessWarn: 'Pristup obavijestima nije omogućen — potreban za praćenje.',
   enable: 'Omogući',
+  buyPro: 'Kupi Pro – $1.99',
+  restorePurchase: 'Vrati kupnju',
+  processing: 'Obrađuje se...',
+  purchaseNotAvailable: 'Kupnja je dostupna samo u Play Store verziji.',
+  error: 'Greška',
+  purchaseError: 'Kupnja neuspješna',
+  purchaseNotFound: 'Nije pronađena prethodna kupnja',
   supportMe: 'Podržite moj rad ☕',
 };

@@ -68,5 +68,12 @@ export default {
   open: 'Άνοιγμα',
   notifAccessWarn: 'Η πρόσβαση ειδοποιήσεων δεν είναι ενεργή — απαιτείται για την παρακολούθηση.',
   enable: 'Ενεργοποίηση',
+  buyPro: 'Αγορά Pro – $1.99',
+  restorePurchase: 'Επαναφορά αγοράς',
+  processing: 'Επεξεργασία...',
+  purchaseNotAvailable: 'Η αγορά είναι διαθέσιμη μόνο στην έκδοση Play Store.',
+  error: 'Σφάλμα',
+  purchaseError: 'Η αγορά απέτυχε',
+  purchaseNotFound: 'Δεν βρέθηκε προηγούμενη αγορά',
   supportMe: 'Υποστήριξε τη δουλειά μου ☕',
 };
