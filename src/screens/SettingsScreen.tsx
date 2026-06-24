@@ -13,6 +13,8 @@ import { useAppContext } from '../services/appContext';
 import { openNotificationAccessSettings, isNotificationAccessGranted } from '../services/monitorService';
 import * as IntentLauncher from 'expo-intent-launcher';
 import { useThemeContext } from '../services/themeContext';
+import { useProContext } from '../services/proContext';
+import { purchasePro, restorePro } from '../services/proService';
 import appJson from '../../app.json';
 import RNBluetoothClassic from 'react-native-bluetooth-classic';
 import { setCarDeviceName, getCarDeviceName } from '../services/bluetoothService';
@@ -34,6 +36,8 @@ export default function SettingsScreen() {
   const { t, currentLang, changeLanguage } = useLanguage();
   const { theme, mode, setMode } = useThemeContext();
   const { refreshApps } = useAppContext();
+  const { isPro, refreshPro } = useProContext();
+  const [purchasing, setPurchasing] = useState(false);
   const styles = useStyles(theme);
 
   useEffect(() => {
@@ -205,7 +209,7 @@ export default function SettingsScreen() {
 
           {/* Autó Bluetooth eszköz */}
           {Platform.OS === 'android' && (
-            <TouchableOpacity style={[styles.permBtn, { marginTop: 8 }]} onPress={openBtPicker}>
+            <TouchableOpacity style={[styles.permBtn, { marginTop: 8 }]} onPress={isPro ? openBtPicker : () => Alert.alert('Pro', 'Ez a funkció Pro verzióban érhető el.')}>
               <View style={styles.permInfo}>
                 <Text style={styles.permTitle}>{t('carDeviceTitle')}</Text>
                 <Text style={styles.permSub}>{carDevice ?? t('carDeviceNotSelected')}</Text>
@@ -241,6 +245,50 @@ export default function SettingsScreen() {
             </View>
           </View>
         </Modal>
+
+        {/* Pro verzió */}
+        <View style={styles.card}>
+          <Text style={styles.sectionLabel}>PRO</Text>
+          {isPro ? (
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+              <Text style={{ color: GREEN, fontSize: 16, fontWeight: '700' }}>✓ Pro verzió aktív</Text>
+            </View>
+          ) : (
+            <>
+              <Text style={{ color: theme.textSub, fontSize: 13, marginBottom: 8 }}>
+                Bluetooth trigger és GPS alapú app ajánlás funkciók.
+              </Text>
+              <TouchableOpacity
+                style={{ backgroundColor: GREEN, paddingVertical: 12, borderRadius: 12, alignItems: 'center' }}
+                onPress={async () => {
+                  setPurchasing(true);
+                  try {
+                    const ok = await purchasePro();
+                    if (ok) await refreshPro();
+                  } catch (e: any) {
+                    Alert.alert('Hiba', e.message || 'Vásárlás sikertelen');
+                  }
+                  setPurchasing(false);
+                }}
+                disabled={purchasing}
+              >
+                <Text style={{ color: '#000', fontWeight: '700', fontSize: 15 }}>
+                  {purchasing ? 'Feldolgozás...' : 'Pro megvásárlása – $0.99'}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{ alignItems: 'center', marginTop: 8 }}
+                onPress={async () => {
+                  const ok = await restorePro();
+                  if (ok) await refreshPro();
+                  else Alert.alert('', 'Nem található korábbi vásárlás');
+                }}
+              >
+                <Text style={{ color: theme.textMuted, fontSize: 13 }}>Vásárlás visszaállítása</Text>
+              </TouchableOpacity>
+            </>
+          )}
+        </View>
 
         {/* Névjegy */}
         <View style={styles.card}>

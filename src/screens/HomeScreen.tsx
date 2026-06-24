@@ -9,6 +9,7 @@ import * as Location from 'expo-location';
 import ParkingMap from '../components/ParkingMap';
 import { loadState } from '../services/storageService';
 import { useThemeContext } from '../services/themeContext';
+import { useProContext } from '../services/proContext';
 
 const GREEN = '#00E5A0';
 const ORANGE = '#FF9500';
@@ -21,6 +22,7 @@ export default function HomeScreen() {
   const { t, currentLang } = useLanguage();
   const { theme } = useThemeContext();
   const styles = useStyles(theme);
+  const { isPro } = useProContext();
   const [nearbyModal, setNearbyModal] = useState(false);
   const [nearbyApps, setNearbyApps] = useState<any[]>([]);
   const [nearbyKey, setNearbyKey] = useState(0);
@@ -98,6 +100,10 @@ export default function HomeScreen() {
               key={nearbyKey}
               style={styles.nearbyBtn}
               onPress={async () => {
+                if (!isPro) {
+                  Alert.alert('Pro', 'Ez a funkció Pro verzióban érhető el.');
+                  return;
+                }
                 try {
                   const { status } = await Location.requestForegroundPermissionsAsync();
                   if (status !== 'granted') {

@@ -11,6 +11,7 @@ import SettingsScreen from './src/screens/SettingsScreen';
 import { LanguageProvider, useLanguage } from './src/services/languageContext';
 import { ThemeProvider, useThemeContext } from './src/services/themeContext';
 import { AppProvider } from './src/services/appContext';
+import { ProProvider } from './src/services/proContext';
 import { initNotifications } from './src/services/notificationService';
 import { startMonitoring } from './src/services/monitorService';
 import { startBluetoothMonitor, setCarDeviceName } from './src/services/bluetoothService';
@@ -101,10 +102,12 @@ export default function App() {
     <SafeAreaProvider>
       <ThemeProvider>
         <AppProvider>
+        <ProProvider>
         <LanguageProvider>
           <StatusBar style="auto" />
           <AppContent />
         </LanguageProvider>
+        </ProProvider>
         </AppProvider>
       </ThemeProvider>
     </SafeAreaProvider>
