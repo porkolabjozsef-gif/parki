@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import * as RNIap from 'react-native-iap';
+import { initConnection, getProducts, requestPurchase, getAvailablePurchases, ProductType } from 'react-native-iap';
 
 const PRO_KEY = 'parki_pro_purchased';
 const PRODUCT_ID = 'pro';
@@ -15,10 +15,14 @@ export async function isProUser(): Promise<boolean> {
 
 export async function purchasePro(): Promise<boolean> {
   try {
-    await RNIap.initConnection();
-    const products = await RNIap.getProducts({ skus: [PRODUCT_ID] });
-    if (!products.length) return false;
-    await RNIap.requestPurchase({ sku: PRODUCT_ID });
+    await initConnection();
+    const products = await getProducts({ skus: [PRODUCT_ID] });
+    if (!products.length) throw new Error('Termék nem található');
+    await requestPurchase({
+      sku: PRODUCT_ID,
+      andDangerouslyFinishTransactionAutomaticallyIOS: false,
+    });
+    await AsyncStorage.setItem(PRO_KEY, 'true');
     return true;
   } catch (e: any) {
     if (e.code === 'E_USER_CANCELLED') return false;
@@ -28,8 +32,8 @@ export async function purchasePro(): Promise<boolean> {
 
 export async function restorePro(): Promise<boolean> {
   try {
-    await RNIap.initConnection();
-    const purchases = await RNIap.getAvailablePurchases();
+    await initConnection();
+    const purchases = await getAvailablePurchases();
     const hasPro = purchases.some(p => p.productId === PRODUCT_ID);
     if (hasPro) {
       await AsyncStorage.setItem(PRO_KEY, 'true');
