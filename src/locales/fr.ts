@@ -69,7 +69,7 @@ export default {
   notifAccessWarn: 'L\'accès aux notifications n\'est pas activé — requis pour la surveillance.',
   enable: 'Activer',
   buyPro: 'Acheter Pro – $1.99',
-  restorePurchase: 'Restaurer l'achat',
+  restorePurchase: 'Restaurer l\'achat',
   processing: 'Traitement...',
   purchaseNotAvailable: 'L\'achat est disponible uniquement dans la version Play Store.',
   proOnly: 'Cette fonctionnalité est disponible dans la version Pro.',
