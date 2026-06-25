@@ -71,7 +71,7 @@ export default {
   buyPro: 'Acquista Pro – $1.99',
   restorePurchase: 'Ripristina acquisto',
   processing: 'Elaborazione...',
-  purchaseNotAvailable: 'L'acquisto è disponibile solo nella versione Play Store.',
+  purchaseNotAvailable: 'L\'acquisto è disponibile solo nella versione Play Store.',
   proOnly: 'Questa funzione è disponibile nella versione Pro.',
   error: 'Errore',
   purchaseError: 'Acquisto fallito',
