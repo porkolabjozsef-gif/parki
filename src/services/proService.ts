@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { initConnection, getProducts, requestPurchase, getAvailablePurchases } from 'react-native-iap';
+import * as ExpoIAP from 'expo-iap';
 
 const PRO_KEY = 'parki_pro_purchased';
 const PRODUCT_ID = 'pro';
@@ -15,15 +15,10 @@ export async function isProUser(): Promise<boolean> {
 
 export async function purchasePro(): Promise<boolean> {
   try {
-    await initConnection();
-    const products = await getProducts({ skus: [PRODUCT_ID] });
+    await ExpoIAP.connectAsync();
+    const products = await ExpoIAP.getProductsAsync([PRODUCT_ID]);
     if (!products.length) throw new Error('Termék nem található');
-    await requestPurchase({
-      request: {
-        google: { skus: [PRODUCT_ID] },
-      },
-      type: 'in-app',
-    });
+    await ExpoIAP.purchaseItemAsync(PRODUCT_ID);
     await AsyncStorage.setItem(PRO_KEY, 'true');
     return true;
   } catch (e: any) {
@@ -34,8 +29,8 @@ export async function purchasePro(): Promise<boolean> {
 
 export async function restorePro(): Promise<boolean> {
   try {
-    await initConnection();
-    const purchases = await getAvailablePurchases();
+    await ExpoIAP.connectAsync();
+    const purchases = await ExpoIAP.getPurchaseHistoryAsync();
     const hasPro = purchases.some((p: any) => p.productId === PRODUCT_ID);
     if (hasPro) {
       await AsyncStorage.setItem(PRO_KEY, 'true');
