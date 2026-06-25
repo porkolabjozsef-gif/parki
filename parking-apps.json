@@ -1,6 +1,6 @@
 {
-  "version": 6,
-  "updated": "2026-06-17",
+  "version": 7,
+  "updated": "2026-06-25",
   "apps": [
     {
       "packageName": "net.parkl.androidclient",
@@ -277,6 +277,15 @@
       ],
       "storeUrl": "https://play.google.com/store/apps/details?id=com.ovunque.parkwheels",
       "iconUrl": "https://play-lh.googleusercontent.com/w2N18HzREzw9-eDO2mTXq7U0Wpr3L0dTV-kDGeizMOrJt_Jolqmmh72gzzdyhEuN4N0FrdiQ2qJDRMLkp482=s96"
+    },
+    {
+      "packageName": "hu.voxinfo.voxpay",
+      "displayName": "VoxPay",
+      "country": [
+        "HU"
+      ],
+      "storeUrl": "https://play.google.com/store/apps/details?id=hu.voxinfo.voxpay",
+      "iconUrl": "https://play-lh.googleusercontent.com/e-0VpdwoBU1CrPVgszwp55Us7JnexYF2u0nTGUVAUPfa_MPz4Mx-d7RcgdWg2Im1Jiz6NvkM2XOFySIcLEZfew=s96"
     }
   ]
 }
