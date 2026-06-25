@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { AppState } from 'react-native';
 import {
   View, Text, StyleSheet, Linking, Platform,
   TouchableOpacity, ScrollView, FlatList, Modal,
@@ -49,6 +50,13 @@ export default function SettingsScreen() {
     });
     getLastSync().then(setLastSync);
     try { setNotifAccess(isNotificationAccessGranted()); } catch (_) {}
+
+    const subscription = AppState.addEventListener('change', (nextState) => {
+      if (nextState === 'active') {
+        try { setNotifAccess(isNotificationAccessGranted()); } catch (_) {}
+      }
+    });
+    return () => subscription.remove();
   }, []);
 
   const openBtPicker = async () => {
