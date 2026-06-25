@@ -18,7 +18,12 @@ export async function purchasePro(): Promise<boolean> {
     await initConnection();
     const products = await getProducts({ skus: [PRODUCT_ID] });
     if (!products.length) throw new Error('Termék nem található');
-    await requestPurchase({ sku: PRODUCT_ID });
+    await requestPurchase({
+      request: {
+        google: { skus: [PRODUCT_ID] },
+      },
+      type: 'in-app',
+    });
     await AsyncStorage.setItem(PRO_KEY, 'true');
     return true;
   } catch (e: any) {
