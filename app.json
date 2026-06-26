@@ -2,7 +2,7 @@
   "expo": {
     "name": "Parki",
     "slug": "parki",
-    "version": "1.1.4",
+    "version": "1.1.12",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
@@ -13,9 +13,9 @@
       "supportsTablet": false,
       "bundleIdentifier": "com.porki.parki",
       "infoPlist": {
-        "NSMotionUsageDescription": "A Parki az aut\u00f3s mozg\u00e1s \u00e9rz\u00e9kel\u00e9s\u00e9re haszn\u00e1lja.",
-        "NSLocationWhenInUseUsageDescription": "A Parki a parkol\u00e1s hely\u00e9nek r\u00f6gz\u00edt\u00e9s\u00e9re haszn\u00e1lja a helyadatokat.",
-        "NSLocationAlwaysAndWhenInUseUsageDescription": "A Parki a h\u00e1tt\u00e9rben figyeli, hogy elhagytad-e a parkol\u00e1s hely\u00e9t.",
+        "NSMotionUsageDescription": "A Parki az autós mozgás érzékelésére használja.",
+        "NSLocationWhenInUseUsageDescription": "A Parki a parkolás helyének rögzítésére használja a helyadatokat.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "A Parki a háttérben figyeli, hogy elhagytad-e a parkolás helyét.",
         "UIBackgroundModes": [
           "fetch",
           "location",
@@ -53,7 +53,7 @@
       [
         "expo-location",
         {
-          "locationAlwaysAndWhenInUsePermission": "A Parki a h\u00e1tt\u00e9rben figyeli, hogy elhagytad-e a parkol\u00e1s hely\u00e9t.",
+          "locationAlwaysAndWhenInUsePermission": "A Parki a háttérben figyeli, hogy elhagytad-e a parkolás helyét.",
           "isAndroidBackgroundLocationEnabled": true,
           "isAndroidForegroundServiceEnabled": true
         }
@@ -65,7 +65,7 @@
             {
               "name": "ParkiWidget",
               "label": "Parki",
-              "description": "Akt\u00edv parkol\u00e1s mutat\u00e1sa",
+              "description": "Aktív parkolás mutatása",
               "previewImage": "./assets/icon.png",
               "minWidth": "180dp",
               "minHeight": "110dp",
