@@ -1,11 +1,11 @@
 #!/bin/bash
 
 echo "📦 versionCode és versionName növelése..."
-python3 << 'PYEOF'
+python3 - << PYEOF
 import re, json
 
-gradle_path = '/data/data/com.termux/files/home/parki/android/app/build.gradle'
-appjson_path = '/data/data/com.termux/files/home/parki/app.json'
+gradle_path = '/home/porki/parki/android/app/build.gradle'
+appjson_path = '/home/porki/parki/app.json'
 
 with open(gradle_path, 'r') as f:
     content = f.read()
@@ -24,7 +24,6 @@ if match_name:
     new_name = f'{major}.{minor}.{patch + 1}'
     content = content.replace(f'versionName "{old_name}"', f'versionName "{new_name}"')
     print(f"versionName: {old_name} → {new_name}")
-
     with open(appjson_path, 'r') as f:
         appjson = json.load(f)
     appjson['expo']['version'] = new_name
@@ -37,5 +36,9 @@ with open(gradle_path, 'w') as f:
 PYEOF
 
 echo "🔨 Build indítása..."
-cd ~/parki/android
+cd /home/porki/parki/android
 ./gradlew bundleRelease
+
+echo ""
+echo "✅ Töltsd fel a Play Console-ba, majd commitold:"
+echo "cd /home/porki/parki && git add android/app/build.gradle app.json && git commit -m bump && git push"
