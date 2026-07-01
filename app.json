@@ -2,7 +2,7 @@
   "expo": {
     "name": "Parki",
     "slug": "parki",
-    "version": "1.1.13",
+    "version": "1.1.14",
     "orientation": "default",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
